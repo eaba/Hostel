@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  owner.web:
+    image: ${DOCKER_REGISTRY}ownerweb
+    build:
+      context: .
+      dockerfile: Presentation\Owner\Owner.Web\Dockerfile
