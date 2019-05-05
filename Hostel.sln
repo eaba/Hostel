@@ -25,9 +25,9 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Hostel", "Database\Hostel\H
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sensor.Command", "Domain\Commands\Sensor.Commands\Sensor.Command.csproj", "{9465A424-3174-4EF6-B736-62F9E84DF49C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.Command", "Domain\Commands\Job.Commands\Reminder.Command.csproj", "{DE7AF795-C7CB-492F-B52F-90001E9126D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.Command", "Domain\Commands\Reminder.Commands\Reminder.Command.csproj", "{DE7AF795-C7CB-492F-B52F-90001E9126D2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifier.Command", "Domain\Commands\Notification.Commands\Notifier.Command.csproj", "{4DDB63D9-AB17-4BC1-8021-EC4367B010D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifier.Command", "Domain\Commands\Notifier.Commands\Notifier.Command.csproj", "{4DDB63D9-AB17-4BC1-8021-EC4367B010D3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Owner.Event", "Domain\Events\Owner.Events\Owner.Event.csproj", "{28F28602-5BBE-4D08-B7E5-000A8AEB496C}"
 EndProject
@@ -35,9 +35,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hostel.Event", "Domain\Even
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{34FE38CA-6427-4CF8-944D-688001129EDD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.Event", "Domain\Events\Job.Events\Reminder.Event.csproj", "{C80C410E-5264-4173-93CD-424FF0711CAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.Event", "Domain\Events\Reminder.Events\Reminder.Event.csproj", "{C80C410E-5264-4173-93CD-424FF0711CAD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifier.Event", "Domain\Events\Notification.Events\Notifier.Event.csproj", "{9074C141-98D9-4954-A36D-F0AB84B8D643}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifier.Event", "Domain\Events\Notifier.Events\Notifier.Event.csproj", "{9074C141-98D9-4954-A36D-F0AB84B8D643}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sensor.Event", "Domain\Events\Sensor.Events\Sensor.Event.csproj", "{E90B1FFB-7BBB-4033-AA5E-3A53F5D31AE8}"
 EndProject
@@ -45,9 +45,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tenant.Event", "Domain\Even
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hostel.Entity", "Domain\Entities\Hostel.Entities\Hostel.Entity.csproj", "{AC4EDFB4-45C4-43CD-BEE8-9CA18B5D4989}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.Entity", "Domain\Entities\Job.Entities\Reminder.Entity.csproj", "{75BDD554-DB65-49D9-9338-34AEBE41313C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.Entity", "Domain\Entities\Reminder.Entities\Reminder.Entity.csproj", "{75BDD554-DB65-49D9-9338-34AEBE41313C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifier.Entity", "Domain\Entities\Notification.Entity\Notifier.Entity.csproj", "{90BE353C-A5C1-4F12-8EC4-CE4EC7A89C76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifier.Entity", "Domain\Entities\Notifier.Entity\Notifier.Entity.csproj", "{90BE353C-A5C1-4F12-8EC4-CE4EC7A89C76}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Owner.Entity", "Domain\Entities\Owner.Entity\Owner.Entity.csproj", "{D6F4E003-B44B-415E-928A-69334F953D34}"
 EndProject
@@ -59,9 +59,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Queries", "Queries", "{95F0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hostel.Model", "Domain\Models\Hostel.Model\Hostel.Model.csproj", "{285FBC1E-F5DA-42CC-8A6E-198BD73FBD33}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.Model", "Domain\Models\Job.Model\Reminder.Model.csproj", "{F9AC1362-2BE7-4DC4-BDCF-FB29E228E466}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.Model", "Domain\Models\Reminder.Model\Reminder.Model.csproj", "{F9AC1362-2BE7-4DC4-BDCF-FB29E228E466}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifier.Model", "Domain\Models\Notification.Model\Notifier.Model.csproj", "{7EB4A626-BA6C-4999-8C6C-88BDF1E37930}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifier.Model", "Domain\Models\Notifier.Model\Notifier.Model.csproj", "{7EB4A626-BA6C-4999-8C6C-88BDF1E37930}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Owner.Model", "Domain\Models\Owner.Model\Owner.Model.csproj", "{2D3ADDE1-1AF9-48D0-B30E-B85E236B6F97}"
 EndProject
@@ -71,7 +71,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tenant.Model", "Domain\Mode
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hostel.Query", "Domain\Queries\Hostel.Query\Hostel.Query.csproj", "{377B171A-6475-4B04-BAB2-E62C128849D5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.Query", "Domain\Queries\Job.Query\Reminder.Query.csproj", "{301D1097-7448-4598-8D63-71B3ADF8AB5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reminder.Query", "Domain\Queries\Reminder.Query\Reminder.Query.csproj", "{301D1097-7448-4598-8D63-71B3ADF8AB5E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifier.Query", "Domain\Queries\Notifier.Query\Notifier.Query.csproj", "{0B43812F-46AB-4252-AF3A-F7A5CFDA1297}"
 EndProject
@@ -181,6 +181,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		Links.txt = Links.txt
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IoT SIMS", "IoT SIMS", "{C71E9923-6EFB-49B9-91FA-3A9FA3D79ABA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoT.Simulations", "IoT\IoT.Simulations\IoT.Simulations.csproj", "{D3721EA3-1680-4635-BA84-76BC30F44CCA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Loggers", "Loggers", "{8E073AC0-E70D-444E-AB8D-41FF2227102A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Akka.MassTransit.Logger", "Logger\AkkaDotNet.MassTransit.Azure.Logger\Akka.MassTransit.Logger.csproj", "{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1954,6 +1962,54 @@ Global
 		{5ACFAE4F-839B-4437-9A0E-66FF244E7F34}.Release|iPhone.Build.0 = Release|Any CPU
 		{5ACFAE4F-839B-4437-9A0E-66FF244E7F34}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{5ACFAE4F-839B-4437-9A0E-66FF244E7F34}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.Ad-Hoc|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.Ad-Hoc|Any CPU.Build.0 = Debug|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.Ad-Hoc|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.AppStore|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.AppStore|Any CPU.Build.0 = Debug|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.AppStore|iPhone.Build.0 = Debug|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.AppStore|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.Release|iPhone.Build.0 = Release|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.Ad-Hoc|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.Ad-Hoc|Any CPU.Build.0 = Debug|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.Ad-Hoc|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.AppStore|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.AppStore|Any CPU.Build.0 = Debug|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.AppStore|iPhone.Build.0 = Debug|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.AppStore|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.Release|iPhone.Build.0 = Release|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2040,6 +2096,8 @@ Global
 		{93C462BC-335E-46AF-94C4-A03F6EB203E0} = {FFB560CA-7144-41B3-AD2A-5DC6FAF940CD}
 		{1448876B-131A-487F-827C-1FA606441ECD} = {FFB560CA-7144-41B3-AD2A-5DC6FAF940CD}
 		{5ACFAE4F-839B-4437-9A0E-66FF244E7F34} = {FFB560CA-7144-41B3-AD2A-5DC6FAF940CD}
+		{D3721EA3-1680-4635-BA84-76BC30F44CCA} = {C71E9923-6EFB-49B9-91FA-3A9FA3D79ABA}
+		{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286} = {8E073AC0-E70D-444E-AB8D-41FF2227102A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE01501B-F26C-43D9-9F7E-90553088D107}
