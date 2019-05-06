@@ -12,7 +12,6 @@
     <ProjectReference Include="..\..\Queries\Hostel.Query\Hostel.Query.csproj" />
     <ProjectReference Include="..\..\Repositories\Hostel.Repository\Hostel.Repository.csproj" />
     <ProjectReference Include="..\..\States\Hostel.State\Hostel.State.csproj" />
-    <ProjectReference Include="..\Sensor.Entity\Sensor.Entity.csproj" />
   </ItemGroup>
 
 </Project>

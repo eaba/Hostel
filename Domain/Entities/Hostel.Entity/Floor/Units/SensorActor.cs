@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sensor.Entity
+namespace Hostel.Entity.Floor.Units
 {
     class SensorActor
     {

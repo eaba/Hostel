@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Shared.csproj" />
-    <ProjectReference Include="..\..\Models\Sensor.Model\Sensor.Model.csproj" />
   </ItemGroup>
 
 </Project>
