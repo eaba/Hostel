@@ -188,7 +188,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoT.Simulations", "IoT\IoT.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Loggers", "Loggers", "{8E073AC0-E70D-444E-AB8D-41FF2227102A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Akka.MassTransit.Logger", "Logger\AkkaDotNet.MassTransit.Azure.Logger\Akka.MassTransit.Logger.csproj", "{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Akka.MassTransit.Logger", "Logger\AkkaDotNet.MassTransit.Logger\Akka.MassTransit.Logger.csproj", "{BBEFC1CF-39AF-4BD1-A7A5-BE66AD944286}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
