@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Hostel.Entity
+namespace Hostel.State.Floor.Units
 {
-    public class HostelManagerActor
+    class BathRoomState
     {
     }
 }

@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Shared.csproj" />
-    <ProjectReference Include="..\..\Events\Hostel.Events\Hostel.Event.csproj" />
+    <ProjectReference Include="..\..\Events\Hostel.Event\Hostel.Event.csproj" />
   </ItemGroup>
 
 </Project>

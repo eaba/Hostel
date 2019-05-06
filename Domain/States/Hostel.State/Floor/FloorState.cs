@@ -1,15 +1,17 @@
 ﻿using Hostel.Event;
+using Hostel.State.Floor.Units;
 using Shared;
 using System;
 using System.Collections.Generic;
 
-namespace Hostel.State
+namespace Hostel.State.Floor
 {
     public class FloorState: Message, IState<FloorState>
     {
         public Guid FloorId { get; }
         public string Tag { get; }
         public int Rooms { get; }
+        public IEnumerable<RoomState> RoomState;
         public List<Dictionary<string, string>> OccupiedRooms;
         public FloorState(Guid floorId, string tag, int rooms, List<Dictionary<string, string>> occupied)
         {
