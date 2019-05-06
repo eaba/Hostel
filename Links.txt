@@ -4,3 +4,4 @@ http://www.figarosensor.com/
 https://electronza.com/hydrogen-sulfide-sensing-arduino-due/2/
 https://electronza.com/h2s-sensing-revisited-tutorial-arduino-uno/
 https://acadpubl.eu/hub/2018-119-14/articles/1/67.pdf
+https://stackoverflow.com/questions/6041811/close-all-tabs-in-visual-studio
