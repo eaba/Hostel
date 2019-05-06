@@ -1,9 +1,6 @@
 ﻿using Shared;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Sensor.Command
+namespace Hostel.Command
 {
     public class InstallSensor: Message, ICommand
     {

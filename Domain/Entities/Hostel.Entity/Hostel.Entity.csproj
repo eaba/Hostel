@@ -6,12 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Shared.csproj" />
-    <ProjectReference Include="..\..\Commands\Hostel.Commands\Hostel.Command.csproj" />
-    <ProjectReference Include="..\..\Events\Hostel.Events\Hostel.Event.csproj" />
-    <ProjectReference Include="..\..\Models\Hostel.Model\Hostel.Model.csproj" />
-    <ProjectReference Include="..\..\Queries\Hostel.Query\Hostel.Query.csproj" />
-    <ProjectReference Include="..\..\Repositories\Hostel.Repository\Hostel.Repository.csproj" />
-    <ProjectReference Include="..\..\States\Hostel.State\Hostel.State.csproj" />
   </ItemGroup>
 
 </Project>
