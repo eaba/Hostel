@@ -5,7 +5,6 @@
     [Value] NVARCHAR(50) NOT NULL, 
     [TimeStamp] BIGINT NOT NULL, 
     CONSTRAINT [PK_Hostel_Floor_Kitchen_Sensor] PRIMARY KEY CLUSTERED ([KitchenSensor] ASC),
-    CONSTRAINT [FK_Hostel_Floor_Kitchen_Sensor_Hostel_Floor_Kitchen] FOREIGN KEY ([KitchenId]) REFERENCES [dbo].[Hostel_Floor_Kitchen] ([KitchenId]),
-    CONSTRAINT [FK_Hostel_Floor_Kitchen_Sensor_Hostel_Sensors] FOREIGN KEY ([SensorId]) REFERENCES [dbo].[Hostel_Sensors] ([SensorId])
+    CONSTRAINT [FK_Hostel_Floor_Kitchen_Sensor_Hostel_Floor_Kitchen] FOREIGN KEY ([KitchenId]) REFERENCES [dbo].[Hostel_Floor_Kitchen] ([KitchenId])
 );
 

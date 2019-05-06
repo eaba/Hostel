@@ -6,6 +6,5 @@
     [TimeStamp] BIGINT NOT NULL, 
     CONSTRAINT [PK_Hostel_Floor_Toilets_Sensor] PRIMARY KEY CLUSTERED ([ToiletSensorId] ASC),
     CONSTRAINT [FK_Hostel_Floor_Toilets_Sensor_Hostel_Floor_Toilets] FOREIGN KEY ([ToiletId]) REFERENCES [dbo].[Hostel_Floor_Toilets] ([ToiletId]),
-    CONSTRAINT [FK_Hostel_Floor_Toilets_Sensor_Hostel_Sensors] FOREIGN KEY ([SensorId]) REFERENCES [dbo].[Hostel_Sensors] ([SensorId])
 );
 
