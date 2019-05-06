@@ -10,7 +10,9 @@ The Owner currently is facing these problems: Water scarcity, Poor Hygienity, No
 # Solution
 Various types of IoT sensors will be installed as follows: Sonic Sensor for Water and Septic Tank, Dirt and Smell detection for Toilets, Bathrooms and Kitchens and Noise detection Sensor installed at strategic locations!
 
-Hostel will help this Owner monitor readings coming from the sensors and automate rent expiration notification. Birthday notification will be a bonus tool to add
+Hostel will help this Owner monitor readings coming from the sensors and automate rent expiration notification. Birthday notification will be a bonus tool to add!
+
+The Owner also desires to know which one of the toilets are used the most, so we will be tracking flush!
 
 # Tool-Set
 <b>Akka.NET<br/> 
