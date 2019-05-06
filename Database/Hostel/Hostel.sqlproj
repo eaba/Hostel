@@ -61,13 +61,12 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Hostel_Floor_Kitchen_Sensor.sql" />
     <Build Include="dbo\Tables\Hostel_Septic_Tank_Sensor.sql" />
     <Build Include="dbo\Tables\Hostel_Water_Reservoir_Sensor.sql" />
-    <Build Include="dbo\Tables\Hostel_Floor_Rooms_Tenancy.sql" />
-    <Build Include="dbo\Tables\Hostel_Floor_Room_Tenancy_Duration.sql" />
     <Build Include="dbo\Tables\Hostel_Roles.sql" />
     <Build Include="dbo\Tables\Hostel_Persons.sql" />
     <Build Include="dbo\Tables\Hostel.sql" />
@@ -83,5 +82,9 @@
     <Build Include="dbo\Tables\Hostel_Floor_Rooms_Sensors.sql" />
     <Build Include="dbo\Tables\Hostel_Floor_Toilets_Sensor.sql" />
     <Build Include="dbo\Tables\Hostel_Sensor_Reading_Types.sql" />
+    <Build Include="dbo\Tables\Hostel_Persons_Birthday.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Hostel.refactorlog" />
   </ItemGroup>
 </Project>

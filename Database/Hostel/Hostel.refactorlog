@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="8fe65529-03d2-480b-a7a9-16fa564d52d6" ChangeDateTime="05/06/2019 14:36:25">
+    <Property Name="ElementName" Value="[dbo].[Hostel_Persons_Birthday].[FirstName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Hostel_Persons_Birthday]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Day" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4b8c9348-6bec-4495-8851-1715b5ae6701" ChangeDateTime="05/06/2019 14:36:40">
+    <Property Name="ElementName" Value="[dbo].[Hostel_Persons_Birthday].[LastName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Hostel_Persons_Birthday]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Month" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="24243d83-f254-4806-ba3d-f86f71fcf420" ChangeDateTime="05/06/2019 14:36:47">
+    <Property Name="ElementName" Value="[dbo].[Hostel_Persons_Birthday].[PhoneNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Hostel_Persons_Birthday]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Year" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="016fd29e-96eb-4122-9e28-bba6d524c42b" ChangeDateTime="05/06/2019 14:40:38">
+    <Property Name="ElementName" Value="[dbo].[Hostel_Persons].[PhoneNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Hostel_Persons]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Phone" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4423df87-44c3-4277-a821-7c3cfff66abf" ChangeDateTime="05/06/2019 14:44:00">
+    <Property Name="ElementName" Value="[dbo].[Hostel_Floor_Rooms].[RoomTag]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Hostel_Floor_Rooms]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Tag" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b305e5ca-45b4-406e-a04e-94dbdd8de566" ChangeDateTime="05/06/2019 14:46:15">
+    <Property Name="ElementName" Value="[dbo].[Hostel_Floor_Toilets].[ToiletTag]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Hostel_Floor_Toilets]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Tag" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="24d7160f-b3c7-4353-8c35-3eb6a8189106" ChangeDateTime="05/06/2019 14:50:48">
+    <Property Name="ElementName" Value="[dbo].[Hostel_Bath_Room].[BathTag]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Hostel_Bath_Room]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Tag" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="099edaaf-e4d5-4f29-b667-7bc226d93fdf" ChangeDateTime="05/06/2019 14:51:54">
+    <Property Name="ElementName" Value="[dbo].[Hostel_Floor_Kitchen].[KitchenTag]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Hostel_Floor_Kitchen]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Tag" />
+  </Operation>
+</Operations>
