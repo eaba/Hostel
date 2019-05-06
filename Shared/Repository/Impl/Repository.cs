@@ -19,8 +19,7 @@ namespace Shared.Repository.Impl
             _connection = new SqlConnection(connStringName);
             _connection.Open();
             _success = new List<int>();
-        }       
-       
+        }              
         public IEnumerable<Dictionary<string, string>> Read(IDbProperties properties)
         {
             using (var cmd = new SqlCommand(properties.StoredProcedureName, _connection))
