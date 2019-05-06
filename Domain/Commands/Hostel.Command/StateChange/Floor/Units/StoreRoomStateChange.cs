@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
+using Shared;
 
 namespace Hostel.Command.StateChange.Floor.Units
 {
-    class StoreRoomStateChange
+    public class StoreRoomStateChange : Message, ICommand
     {
     }
 }
