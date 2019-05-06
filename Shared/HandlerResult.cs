@@ -24,8 +24,7 @@ namespace Shared
             WasHandled = true;
         }
 
-        public HandlerResult(IEvent evnt)
-            : this(Enumerable.Empty<string>())
+        public HandlerResult(IEvent evnt): this(Enumerable.Empty<string>())
         {
             Event = evnt;
             Success = true;
