@@ -1,5 +1,5 @@
 ﻿
-namespace Sensor.Model
+namespace Hostel.Model
 {
     public class Sensor
     {

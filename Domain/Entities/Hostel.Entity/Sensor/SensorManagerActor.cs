@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Hostel.State
+namespace Hostel.Entity.Sensor
 {
-    class WaterReservoirState
+    class SensorManagerActor
     {
     }
 }

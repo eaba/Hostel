@@ -5,7 +5,6 @@ using Shared.Actors;
 using Shared.Repository;
 
 namespace Hostel.Entity
-{
     public class WaterReservoirActor: HostelActor<SepticTankState>
     {
         public WaterReservoirActor(ICommandHandler<SepticTankState> handler, SepticTankState defaultState, string persistenceId, IRepository<IDbProperties> repository)
