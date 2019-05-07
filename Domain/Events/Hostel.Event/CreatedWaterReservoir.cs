@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Hostel.State
+namespace Hostel.Event
 {
-    class SepticTankState
+    public class CreatedWaterReservoir
     {
     }
 }

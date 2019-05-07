@@ -56,4 +56,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Tag" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="bcb6cd2b-b451-4e54-849b-bb0af578e55e" ChangeDateTime="05/07/2019 18:13:46">
+    <Property Name="ElementName" Value="[dbo].[Hostel_Septic_Tank].[Capacity]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Hostel_Septic_Tank]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Height" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="787eacdc-74e9-45bf-b247-1b2a4e7f17b3" ChangeDateTime="05/07/2019 18:14:43">
+    <Property Name="ElementName" Value="[dbo].[Hostel_Water_Reservoir].[Capacity]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Hostel_Water_Reservoir]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Height" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="39c22297-b340-4306-8c62-9dec1ed97df3" ChangeDateTime="05/07/2019 18:22:05">
+    <Property Name="ElementName" Value="[dbo].[Hostel_Sensors].[SensorTag]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Hostel_Sensors]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Tag" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0380ea3c-ca1b-4e9c-8ba3-b6b6b353db6d" ChangeDateTime="05/07/2019 18:39:17">
+    <Property Name="ElementName" Value="[dbo].[Hostel_Bath_Room_Sensor].[BathRoomId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Hostel_Bath_Room_Sensor]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="BathroomSensorId" />
+  </Operation>
 </Operations>

@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace Sensor.Model
 {
     public class Sensor
     {
-        public readonly Dictionary<string, string> Device;
-        public Sensor(Dictionary<string, string> device)
+        public string SensorId { get; }
+        public string Role { get; }
+        public string Tag { get; }
+        public Sensor(string id, string role, string tag)
         {
-            Device = device;
+            SensorId = id;
+            Tag = tag;
+            Role = role;
         }
     }
 }

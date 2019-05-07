@@ -25,10 +25,15 @@ namespace Hostel.Entity
                     var construct = build.Construction;
                     foreach(var floor in construct.Floors)
                     {
-                        var flr = new Model.Floor(Guid.NewGuid(), floor.Tag);
-                        var createFloor = new CreateFloor(flr, string.Empty, string.Empty);
+                        var createFloor = new CreateFloor(floor);
                         Self.Tell(createFloor);
                     }
+                    var tank = construct.SepticTank;
+                    var reservoir = construct.Reservoir;
+                    var septic = new CreateSepticTank(tank.Tag, tank.Height, tank.Sensors);
+                    var water = new CreateWaterReservoir(reservoir.Tag, reservoir.Height, reservoir.Sensors);
+                    Self.Tell(septic);
+                    Self.Tell(water);
                 }
             });
             Command<StoreFloorStateChange>(state => 
@@ -88,13 +93,7 @@ namespace Hostel.Entity
         {
             switch(command.Command.ToLower())
             {
-                case "createfloor":
-                    {
-                        var floor = new Model.Floor(Guid.NewGuid(), $"Floor_{command.Payload["Tag"]}");
-                        var createFloor = new CreateFloor(floor, command.Commander, command.CommandId);
-                        Self.Tell(createFloor, Self);
-                    }
-                    break;
+               
             }
         }
     }

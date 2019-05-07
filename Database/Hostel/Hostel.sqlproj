@@ -64,9 +64,9 @@
     <Folder Include="dbo\Procedures" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Hostel_Floor_Kitchen_Sensor.sql" />
-    <Build Include="dbo\Tables\Hostel_Septic_Tank_Sensor.sql" />
-    <Build Include="dbo\Tables\Hostel_Water_Reservoir_Sensor.sql" />
+    <Build Include="dbo\Tables\Hostel_Floor_Kitchen_Sensors_Reading.sql" />
+    <Build Include="dbo\Tables\Hostel_Septic_Tank_Sensors_Reading.sql" />
+    <Build Include="dbo\Tables\Hostel_Water_Reservoir_Sensor_Reading.sql" />
     <Build Include="dbo\Tables\Hostel_Roles.sql" />
     <Build Include="dbo\Tables\Hostel_Persons.sql" />
     <Build Include="dbo\Tables\Hostel.sql" />
@@ -78,12 +78,15 @@
     <Build Include="dbo\Tables\Hostel_Floor_Kitchen.sql" />
     <Build Include="dbo\Tables\Hostel_Floor_Rooms.sql" />
     <Build Include="dbo\Tables\Hostel_Sensors.sql" />
-    <Build Include="dbo\Tables\Hostel_Bath_Room_Sensor.sql" />
+    <Build Include="dbo\Tables\Hostel_Bath_Room_Sensors_Reading.sql" />
     <Build Include="dbo\Tables\Hostel_Floor_Rooms_Sensors.sql" />
-    <Build Include="dbo\Tables\Hostel_Floor_Toilets_Sensor.sql" />
+    <Build Include="dbo\Tables\Hostel_Floor_Toilets_Sensors_Reading.sql" />
     <Build Include="dbo\Tables\Hostel_Sensor_Reading_Types.sql" />
     <Build Include="dbo\Tables\Hostel_Persons_Birthday.sql" />
     <Build Include="dbo\Procedures\CreateFloor.sql" />
+    <Build Include="dbo\Tables\Hostel_Bath_Room_Sensors.sql" />
+    <Build Include="dbo\Tables\Hostel_Floor_Kitchen_Sensors.sql" />
+    <Build Include="dbo\Tables\Hostel_Floor_Toilets_Sensors.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Hostel.refactorlog" />
