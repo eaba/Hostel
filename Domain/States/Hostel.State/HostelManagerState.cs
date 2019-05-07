@@ -9,10 +9,12 @@ namespace Hostel.State
     public class HostelManagerState : Message, IState<HostelManagerState>
     {
         public IEnumerable<FloorState> FloorStates;
-        public static readonly HostelManagerState Empty = new HostelManagerState(Enumerable.Empty<FloorState>());
-        public HostelManagerState(IEnumerable<FloorState> floors)
+        public bool Constructed;
+        public static readonly HostelManagerState Empty = new HostelManagerState(Enumerable.Empty<FloorState>(), false);
+        public HostelManagerState(IEnumerable<FloorState> floors, bool constructed)
         {
             FloorStates = floors;
+            Constructed = false;
         }
         public HostelManagerState Update(IEvent evnt)
         {
@@ -21,7 +23,7 @@ namespace Hostel.State
                 case CreatedFloor createdFloor:
                     {
                         var floor = createdFloor.Floor;
-                        return new HostelManagerState(FloorStates);
+                        return new HostelManagerState(FloorStates, true);
                     }
                 default: return this;
             }

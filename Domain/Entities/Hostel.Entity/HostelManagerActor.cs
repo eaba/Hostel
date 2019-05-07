@@ -3,6 +3,7 @@ using Hostel.Command;
 using Hostel.Command.StateChange.Floor;
 using Hostel.Entity.Floor;
 using Hostel.Entity.Handler;
+using Hostel.Event;
 using Hostel.State;
 using Hostel.State.Floor;
 using Shared;
@@ -17,12 +18,17 @@ namespace Hostel.Entity
         public HostelManagerActor(ICommandHandler<HostelManagerState> handler, HostelManagerState defaultState, string persistenceId, string connectionstring)
             : base(handler, defaultState, persistenceId, new Shared.Repository.Impl.Repository(connectionstring))
         {
-            Command<CreateFloor>(floor => 
+            Command<ConstructHostel>(build =>
             {
-                var tag = floor.Floor.Tag;
-                if(Context.Child(tag).IsNobody())
+                if(!State.Constructed)
                 {
-                    Context.ActorOf(FloorActor.Prop(new FloorHandler(), FloorState.Empty, tag, Repo), tag);
+                    var construct = build.Construction;
+                    foreach(var floor in construct.Floors)
+                    {
+                        var flr = new Model.Floor(Guid.NewGuid(), floor.Tag);
+                        var createFloor = new CreateFloor(flr, string.Empty, string.Empty);
+                        Self.Tell(createFloor);
+                    }
                 }
             });
             Command<StoreFloorStateChange>(state => 
@@ -49,6 +55,22 @@ namespace Hostel.Entity
                 }
             }
             base.OnRecoverComplete();
+        }
+        protected override void OnPersist(IEvent persistedEvent)
+        {
+            switch(persistedEvent)
+            {
+                case CreatedFloor createdFloor:
+                    {
+                        var tag = createdFloor.Floor.Tag;
+                        if (Context.Child(tag).IsNobody())
+                        {
+                            Context.ActorOf(FloorActor.Prop(new FloorHandler(), FloorState.Empty, tag, Repo), tag);
+                        }
+                    }
+                    break;
+            }
+            base.OnPersist(persistedEvent);
         }
         public static Props Prop(ICommandHandler<HostelManagerState> handler, HostelManagerState defaultState, string persistenceId, string connectionstring)
         {

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Hostel.State;
+using Shared.Actors;
 
 namespace Hostel.Entity
 {
-    class WaterReservoirActor
+    public class WaterReservoirActor: HostelActor<WaterReservoirState>
     {
     }
 }

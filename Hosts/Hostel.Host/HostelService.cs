@@ -1,9 +1,11 @@
 ﻿using Akka.Actor;
 using Akka.Configuration;
 using Akka.MassTransit.Logger;
+using Hostel.Command;
 using Hostel.Entity;
 using Hostel.Entity.Handler;
 using Hostel.Host.Observers;
+using Hostel.Model;
 using Hostel.State;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -35,6 +37,7 @@ namespace Hostel.Host
             await BusCreator.BusControl.StartAsync(cancellationToken);
             AkkaService.Bus = BusCreator.BusControl;
             HostActorRef.ActorRef = _actorSystem.ActorOf(HostelManagerActor.Prop(new HostelManagerHandler(), HostelManagerState.Empty, "HostelManager", _configuration.GetConnectionString("Database")), "HostelManager");
+            HostActorRef.ActorRef.Tell(Construct());
             HostActorRef.ActorIsReady = true;
             HostActorRef.ProcessCached();
         }
@@ -50,6 +53,16 @@ namespace Hostel.Host
             }
             catch { }
             return Task.CompletedTask;
+        }
+        private ConstructHostel Construct()
+        {
+            var construction = new Construction()
+                .WithFloor("Ground-Floor","", 20, "", 2, "T", 2, "B", "K")
+                .WithFloor("First-Floor", "1", 22, "1", 3, "T1", 2, "B", "K")
+                .WithFloor("Second-Floor", "1", 23, "1", 3, "T1", 2, "B", "K")
+                .WithSepticTank("Septic", 100)
+                .WithReservoir("Reservoir", 500);
+            return new ConstructHostel(construction);
         }
     }
 }
