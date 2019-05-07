@@ -4,10 +4,7 @@ using Hostel.Repository;
 using Hostel.State.Floor;
 using Shared;
 using Shared.Repository;
-using Shared.Repository.Impl;
 using System;
-using System.Collections.Generic;
-using System.Data;
 
 namespace Hostel.Entity.Handler
 {
@@ -17,16 +14,8 @@ namespace Hostel.Entity.Handler
         {
             switch(command)
             {
-                case CreateFloor creatFloor:
-                    {
-                        var floor = creatFloor;
-                        if(repository.CreateFloor(floor, out var id))
-                        {
-                            return new HandlerResult(new CreatedFloor(new Model.Floor(Guid.Parse(id), floor.Floor.Tag)));
-                        }
-                        return new HandlerResult($"Floor {floor.Floor.Tag} could not be created at this time!");
-                    }
-                default: return HandlerResult.NotHandled(command);
+                
+                default: return HandlerResult.NotHandled(command, command.Commander, command.CommandId);
             }
         }
     }
