@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+using System;
 
 namespace Hostel.Host
 {
@@ -6,7 +8,14 @@ namespace Hostel.Host
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var host = WebHost.CreateDefaultBuilder(args)
+            .ConfigureAppConfiguration((context, config) =>
+            {
+                var configuration = config.Build();
+            })
+            .UseStartup<Startup>()
+            .Build();
+            host.Run();
         }
     }
 }

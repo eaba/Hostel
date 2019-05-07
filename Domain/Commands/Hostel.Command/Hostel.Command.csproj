@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Shared.csproj" />
     <ProjectReference Include="..\..\Models\Hostel.Model\Hostel.Model.csproj" />
+    <ProjectReference Include="..\..\States\Hostel.State\Hostel.State.csproj" />
   </ItemGroup>
 
 </Project>

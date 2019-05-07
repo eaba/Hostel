@@ -25,6 +25,7 @@ namespace Hostel.State
                     }
                 default: return this;
             }
-        }        
+        }
+        
     }
 }

@@ -4,7 +4,6 @@ using MassTransit;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using v2.Message.Buses;
 
 namespace Akka.MassTransit.Logger
 {

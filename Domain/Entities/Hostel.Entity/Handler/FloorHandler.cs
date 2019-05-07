@@ -1,7 +1,4 @@
-﻿using Hostel.Command;
-using Hostel.Event;
-using Hostel.Repository;
-using Hostel.State.Floor;
+﻿using Hostel.State.Floor;
 using Shared;
 using Shared.Repository;
 using System;

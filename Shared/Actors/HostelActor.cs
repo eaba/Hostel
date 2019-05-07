@@ -1,4 +1,5 @@
 ﻿using Akka.Persistence;
+using Shared.Repository;
 using System;
 
 namespace Shared.Actors
@@ -6,25 +7,23 @@ namespace Shared.Actors
     public class HostelActor<TState> : ReceivePersistentActor  where TState : class, IState<TState>
     {
         public override string PersistenceId { get; }
+        public IRepository<IDbProperties> Repo;
         private int _eventCount = 0;
         private int _snapShotAfter = 100;
         protected TState State { get; private set; }
 
-        public HostelActor(ICommandHandler<TState> handler, TState defaultState,string persistenceId)
+        public HostelActor(ICommandHandler<TState> handler, TState defaultState,string persistenceId, IRepository<IDbProperties> repository)
         {
             PersistenceId = persistenceId;
+            Repo = repository;
             _handler = handler ?? throw new ArgumentNullException(nameof(handler));
             State = defaultState ?? throw new ArgumentNullException(nameof(defaultState));
             Command<ICommand>(command => 
             {
-                var handlerResult = _handler.Handle(State, command);
+                var handlerResult = _handler.Handle(State, command, repository);
                 if (handlerResult.Success)
                 {
                     Persist(handlerResult.Event, OnPersist);
-                }
-                else
-                {
-
                 }
             });
             Recover<IEvent>(evnt => { State = State.Update(evnt); });

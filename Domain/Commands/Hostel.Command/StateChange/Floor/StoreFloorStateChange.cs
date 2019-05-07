@@ -1,10 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
+using Hostel.State.Floor;
+using Shared;
 
 namespace Hostel.Command.StateChange.Floor
 {
-    class StoreFloorStateChange
+    public class StoreFloorStateChange : Message, ICommand
     {
+        public readonly FloorState State;
+        public string Commander { get; }
+        public string CommandId { get; }
+        public StoreFloorStateChange(FloorState state)
+        {
+            State = state;
+        }
     }
 }
