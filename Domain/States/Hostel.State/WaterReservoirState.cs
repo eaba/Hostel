@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Hostel.State
 {
-    class WaterReservoirState
+    public class WaterReservoirState
     {
     }
 }

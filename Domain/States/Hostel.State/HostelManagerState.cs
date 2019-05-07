@@ -8,7 +8,9 @@ namespace Hostel.State
 {
     public class HostelManagerState : Message, IState<HostelManagerState>
     {
-        public IEnumerable<FloorState> FloorStates;
+        public IEnumerable<FloorState> FloorStates { get; }
+        public SepticTankState SepticTankState { get; }
+        public WaterReservoirState WaterReservoirState { get; }
         public bool Constructed;
         public static readonly HostelManagerState Empty = new HostelManagerState(Enumerable.Empty<FloorState>(), false);
         public HostelManagerState(IEnumerable<FloorState> floors, bool constructed)
