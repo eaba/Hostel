@@ -1,5 +1,6 @@
 ﻿using Hostel.Command;
 using Hostel.Event;
+using Hostel.Repository;
 using Hostel.State.Floor;
 using Shared;
 using Shared.Repository;
@@ -16,21 +17,14 @@ namespace Hostel.Entity.Handler
         {
             switch(command)
             {
-                case CreateFloor createdFloor:
+                case CreateFloor creatFloor:
                     {
-                        var floor = createdFloor.Floor;
-                        var dataTypes = new List<IDataTypes>
+                        var floor = creatFloor;
+                        if(repository.CreateFloor(floor, out var id))
                         {
-                            new DataTypes("@tag", SqlDbType.NVarChar, 50, floor.Tag, ParameterDirection.Input, false, false, ""),
-                            new DataTypes("@floor", SqlDbType.UniqueIdentifier, 0, string.Empty, ParameterDirection.Output, false, false, "@floor")
-                        };
-                        var repos = new DbProperties("CreateFloor", dataTypes, string.Empty, true, "@floor");
-                        var result = repository.Update(new[] { repos });
-                        if(result > 0)
-                        {
-                            return new HandlerResult(new CreatedFloor(new Model.Floor(Guid.Parse(repos.Id), floor.Tag)));
+                            return new HandlerResult(new CreatedFloor(new Model.Floor(Guid.Parse(id), floor.Floor.Tag)));
                         }
-                        return new HandlerResult($"Floor {floor.Tag} could not be created at this time!");
+                        return new HandlerResult($"Floor {floor.Floor.Tag} could not be created at this time!");
                     }
                 default: return HandlerResult.NotHandled(command);
             }

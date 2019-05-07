@@ -7,9 +7,13 @@ namespace Hostel.Command
     public class RentOutRoom : Message, ICommand
     {
         public readonly RentOut RentOut;
-        public RentOutRoom(RentOut rentOut)
+        public string Commander { get; }
+        public string CommandId { get; }
+        public RentOutRoom(RentOut rentOut, string commander, string commandid)
         {
             RentOut = rentOut;
-        }
+            Commander = commander;
+            CommandId = commandid;
+        }        
     }
 }
