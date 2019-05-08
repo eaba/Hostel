@@ -1,10 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Akka.Actor;
+using Hostel.State.Sensor;
+using Shared;
+using Shared.Actors;
 
 namespace Hostel.Entity.Sensor
 {
-    class SensorActor
+    public class SensorActor:HostelActor<SensorState>
     {
+        public SensorActor(ICommandHandler<SensorState> handler, SensorState defaultState, string persistenceId, string connectionString)
+            : base(handler, defaultState, persistenceId, new Shared.Repository.Impl.Repository(connectionString))
+        {
+        }
+        public static Props Prop(ICommandHandler<SensorState> handler, SensorState defaultState, string persistenceId, string connectionString)
+        {
+            return Props.Create(() => new SensorActor(handler, defaultState, persistenceId, connectionString));
+        }
+        
     }
 }

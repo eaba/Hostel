@@ -9,23 +9,26 @@ namespace Hostel.Entity.Floor
 {
     public class FloorActor : HostelActor<FloorState>
     {
+        private string _connectionString;
         private FloorSpec _floorSpec;
         public FloorActor(ICommandHandler<FloorState> handler, FloorSpec spec, FloorState defaultState, string persistenceId, string connectionString)
             : base(handler, defaultState, persistenceId, new Shared.Repository.Impl.Repository(connectionString))
         {
+            _connectionString = connectionString;
             _floorSpec = spec;
         }
         protected override void PreStart()
         {
-            var BathId = $"{_floorSpec.Tag}-BathManager";
-            var child = Context.Child(BathId);
+            var bathId = $"{_floorSpec.Tag}-BathManager";
+            var child = Context.Child(bathId);
             if (child.IsNobody())
             {
-                Context.ActorOf(BathRoomManagerActor.Prop(new BathRoomManagerHandler(), _floorSpec.BathRooms, FloorState.Empty, tag, _connectionString), tag);
+                Context.ActorOf(BathRoomManagerActor.Prop(new BathRoomManagerHandler(), _floorSpec.BathRooms, BathRoomManagerState.Empty, bathId, _connectionString), bathId);
             }
             var bathrooms = _floorSpec.BathRooms;
-            foreach(var bath in bathrooms)
+            foreach (var bath in bathrooms)
             {
+            }
                 
             var toilets = _floorSpec.Toilets;
             var rooms = _floorSpec.Rooms;
