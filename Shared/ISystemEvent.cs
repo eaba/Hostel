@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Shared
 {
-    public interface ISystemEvent
+    public interface IEvent
     {
     }
 }

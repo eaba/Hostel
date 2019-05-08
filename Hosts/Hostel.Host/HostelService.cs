@@ -13,6 +13,7 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using static Hostel.Model.Construction;
 
 namespace Hostel.Host
 {
@@ -56,7 +57,7 @@ namespace Hostel.Host
         }
         private ConstructHostel Construct()
         {
-            var construction = new Construction()
+            var construction = new Construction(new HostelDetail("Baafog", "Onikolobo Abeokuta, Ogun, Nigeria"))
                 .WithFloor("Ground-Floor","", 20, "", 2, "T", 2, "B", "K")
                 .WithFloor("First-Floor", "1", 22, "1", 3, "T1", 2, "B", "K")
                 .WithFloor("Second-Floor", "1", 23, "1", 3, "T1", 2, "B", "K")

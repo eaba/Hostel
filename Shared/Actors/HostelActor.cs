@@ -34,12 +34,13 @@ namespace Shared.Actors
         
         protected virtual void OnRecoverComplete()
         {
-
+            
         }
 
         protected virtual void OnPersist(IEvent persistedEvent)
         {
             State = State.Update(persistedEvent);
+            SaveSnapshotIfNecessary();
         }
         private void SaveSnapshotIfNecessary()
         {

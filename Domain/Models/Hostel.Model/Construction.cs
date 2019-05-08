@@ -5,12 +5,25 @@ namespace Hostel.Model
 {
     public class Construction
     {
+        public HostelDetail Detail { get; }
         public List<FloorSpec> Floors;
         public SepticTankSpec SepticTank;
         public ReservoirSpec Reservoir;
-        public Construction()
+        public Construction(HostelDetail detail)
         {
+            Detail = detail;
             Floors = new List<FloorSpec>();
+        }
+        public class HostelDetail
+        {
+            public string HostelId;
+            public string Name { get; }
+            public string Address { get; }
+            public HostelDetail(string name, string address)
+            {
+                Name = name;
+                Address = address;
+            }
         }
         public Construction WithFloor(string floorTag, string floor, int room, string roomprefix, int toilet, string toiletprefix, int baths, string bathprefix, string kitTag)
         {
