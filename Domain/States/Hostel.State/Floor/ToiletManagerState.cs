@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Hostel.Entity.Handler
+namespace Hostel.State.Floor
 {
-    class BathRoomManagerHandler
+    class ToiletManagerState
     {
     }
 }

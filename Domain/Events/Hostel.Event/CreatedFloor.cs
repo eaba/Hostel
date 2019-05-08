@@ -1,17 +1,18 @@
-﻿using Shared;
+﻿using Hostel.Model;
+using Shared;
 
 namespace Hostel.Event
 {
     public class CreatedFloor:IEvent
     {
-        public readonly Model.Floor Floor;
+        public readonly FloorSpec Floor;
         public string Commander { get; }
         public string CommandId { get; }
-        public CreatedFloor(Model.Floor floor, string commander, string commandid)
+        public CreatedFloor(FloorSpec floor)
         {
             Floor = floor;
-            Commander = commander;
-            CommandId = commandid;
+            Commander = string.Empty;
+            CommandId = string.Empty;
         }        
     }
 }

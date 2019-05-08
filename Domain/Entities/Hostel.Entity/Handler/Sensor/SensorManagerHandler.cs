@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Hostel.Entity.Handler
+namespace Hostel.Entity.Handler.Sensor
 {
-    class BathRoomHandler
+    public class SensorManagerHandler
     {
     }
 }

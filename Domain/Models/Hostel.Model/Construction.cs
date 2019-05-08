@@ -94,6 +94,7 @@ namespace Hostel.Model
     }
     public class FloorSpec
     {
+        public string FloorId;
         public string Tag { get; }
         public IEnumerable<RoomSpecs> Rooms { get; }
         public IEnumerable<ToiletSpec> Toilets { get; }

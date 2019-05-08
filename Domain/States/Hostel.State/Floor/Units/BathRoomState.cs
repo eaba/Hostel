@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Shared;
 
 namespace Hostel.State.Floor.Units
 {
-    class BathRoomState
+    public class BathRoomState : Message, IState<BathRoomState>
     {
+        public BathRoomState Update(IEvent evnt)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

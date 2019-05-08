@@ -15,9 +15,11 @@ namespace Hostel.Entity
 {
     public class HostelManagerActor:HostelActor<HostelManagerState>
     {
+        private string _connectionString;
         public HostelManagerActor(ICommandHandler<HostelManagerState> handler, HostelManagerState defaultState, string persistenceId, string connectionstring)
             : base(handler, defaultState, persistenceId, new Shared.Repository.Impl.Repository(connectionstring))
         {
+            _connectionString = connectionstring;
             Command<ConstructHostel>(build =>
             {
                 if(!State.Constructed)
@@ -56,7 +58,7 @@ namespace Hostel.Entity
                 var child = Context.Child(tag);
                 if(child.IsNobody())
                 {
-                    Context.ActorOf(FloorActor.Prop(new FloorHandler(), FloorState.Empty, tag, Repo), tag);
+                    //Context.ActorOf(FloorActor.Prop(new FloorHandler(), floor., FloorState.Empty, tag, _connectionString), tag);
                 }
             }
             base.OnRecoverComplete();
@@ -70,7 +72,7 @@ namespace Hostel.Entity
                         var tag = createdFloor.Floor.Tag;
                         if (Context.Child(tag).IsNobody())
                         {
-                            Context.ActorOf(FloorActor.Prop(new FloorHandler(), FloorState.Empty, tag, Repo), tag);
+                            Context.ActorOf(FloorActor.Prop(new FloorHandler(), createdFloor.Floor, FloorState.Empty, tag, _connectionString), tag);
                         }
                     }
                     break;
