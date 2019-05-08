@@ -1,10 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Hostel.State.Sensor;
+using Shared;
 
 namespace Hostel.State
 {
-    public class WaterReservoirState
+    public class WaterReservoirState : Message, IState<WaterReservoirState>
     {
+        public int Height { get; }
+        public Reading Previous { get; }
+        public Reading Current { get; }
+        public int AlertHeight { get; }
+
+        public WaterReservoirState Update(IEvent evnt)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

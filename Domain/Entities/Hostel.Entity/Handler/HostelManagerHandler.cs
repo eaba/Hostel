@@ -26,6 +26,15 @@ namespace Hostel.Entity.Handler
                         }
                         return new HandlerResult($"Hostel {hostel.Detail.Name} alread exist. Did the government demonish your hostel?", string.Empty, string.Empty);
                     }
+                case CreateFloor createFloor:
+                    {
+                        var floor = createFloor.Floor;
+                        if (repository.CreateFloor(floor))
+                        {
+                            return new HandlerResult(new CreatedFloor(floor));
+                        }
+                        return new HandlerResult($"Floor {floor.Tag} could not be created at this time!", createFloor.Commander, createFloor.CommandId);
+                    }
                 default: return HandlerResult.NotHandled(command, command.Commander, command.CommandId);
             }
         }

@@ -1,6 +1,5 @@
 ﻿using Akka.Actor;
 using Hostel.Command;
-using Hostel.Command.StateChange.Floor;
 using Hostel.Entity.Floor;
 using Hostel.Entity.Handler;
 using Hostel.Event;
@@ -8,8 +7,6 @@ using Hostel.State;
 using Hostel.State.Floor;
 using Shared;
 using Shared.Actors;
-using System;
-using System.Linq;
 
 namespace Hostel.Entity
 {
@@ -19,29 +16,14 @@ namespace Hostel.Entity
         public HostelManagerActor(ICommandHandler<HostelManagerState> handler, HostelManagerState defaultState, string persistenceId, string connectionstring)
             : base(handler, defaultState, persistenceId, new Shared.Repository.Impl.Repository(connectionstring))
         {
-            _connectionString = connectionstring;            
-            Command<StoreFloorStateChange>(state => 
-            {
-                var floorStates = State.FloorStates.ToList();
-                var floor = floorStates.FirstOrDefault(x => x.Tag == state.State.Tag);
-                var index = floorStates.IndexOf(floor);
-                floorStates.RemoveAt(index);
-                floorStates.Add(state.State);
-                State.FloorStates = floorStates;
-                SaveSnapshot(State);
-            });
+            _connectionString = connectionstring;  
         }
         protected override void OnRecoverComplete()
         {
-            var floors = State.FloorStates.ToList();
-            foreach(var floor in floors)
+            if (State.Constructed)
             {
-                var tag = floor.Tag;
-                var child = Context.Child(tag);
-                if(child.IsNobody())
-                {
-                    //Context.ActorOf(FloorActor.Prop(new FloorHandler(), floor., FloorState.Empty, tag, _connectionString), tag);
-                }
+                var hostel = State.ConstructionRecord;
+                Self.Tell(new ConstructHostel(hostel));
             }
             base.OnRecoverComplete();
         }
@@ -63,6 +45,13 @@ namespace Hostel.Entity
                         var water = new CreateWaterReservoir(reservoir.Tag, reservoir.Height, reservoir.Sensors);
                         Self.Tell(septic);
                         Self.Tell(water);
+                    }
+                    break;
+                case CreatedFloor createdFloor:
+                    {
+                        var floor = createdFloor.Floor;
+                        floor.HostelId = State.ConstructionRecord.Detail.HostelId;
+                        Context.ActorOf(FloorActor.Prop(new FloorHandler(), floor, FloorState.Empty, floor.Tag, _connectionString), floor.Tag);
                     }
                     break;
             }

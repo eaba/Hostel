@@ -1,11 +1,8 @@
-﻿
-using Hostel.Command;
-using Hostel.Model;
+﻿using Hostel.Model;
 using Shared.Repository;
 using Shared.Repository.Impl;
 using System.Collections.Generic;
 using System.Data;
-using static Hostel.Model.Construction;
 
 namespace Hostel.Repository
 {
@@ -16,6 +13,7 @@ namespace Hostel.Repository
             var floor = spec;
             var dataTypes = new List<IDataTypes>
                         {
+                            new DataTypes("@hostel", SqlDbType.UniqueIdentifier, 0, spec.HostelId, ParameterDirection.Input, false, false, ""),
                             new DataTypes("@tag", SqlDbType.NVarChar, 50, floor.Tag, ParameterDirection.Input, false, false, ""),
                             new DataTypes("@floor", SqlDbType.UniqueIdentifier, 0, string.Empty, ParameterDirection.Output, false, false, "@floor")
                         };

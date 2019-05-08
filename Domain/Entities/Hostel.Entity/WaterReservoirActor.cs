@@ -2,19 +2,27 @@
 using Hostel.State;
 using Shared;
 using Shared.Actors;
-using Shared.Repository;
 
 namespace Hostel.Entity
-    public class WaterReservoirActor: HostelActor<SepticTankState>
+{ 
+    public class WaterReservoirActor: HostelActor<WaterReservoirState>
     {
-        public WaterReservoirActor(ICommandHandler<SepticTankState> handler, SepticTankState defaultState, string persistenceId, IRepository<IDbProperties> repository)
-            : base(handler, defaultState, persistenceId, repository)
+        public WaterReservoirActor(ICommandHandler<WaterReservoirState> handler, WaterReservoirState defaultState, string persistenceId, string connectionstring)
+            : base(handler, defaultState, persistenceId, new Shared.Repository.Impl.Repository(connectionstring))
         {
 
         }
-        public static Props Prop(ICommandHandler<SepticTankState> handler, SepticTankState defaultState, string persistenceId, IRepository<IDbProperties> repository)
+        public static Props Prop(ICommandHandler<WaterReservoirState> handler, WaterReservoirState defaultState, string persistenceId, string connectionstring)
         {
-            return Props.Create(() => new WaterReservoirActor(handler, defaultState, persistenceId, repository));
+            return Props.Create(() => new WaterReservoirActor(handler, defaultState, persistenceId, connectionstring));
+        }
+        protected override SupervisorStrategy SupervisorStrategy()
+        {
+            return new OneForOneStrategy(maxNrOfRetries: 100, withinTimeMilliseconds: 1000, loggingEnabled: true,
+                decider: Decider.From(x =>
+                {
+                    return Directive.Restart;
+                }));
         }
     }
 }
