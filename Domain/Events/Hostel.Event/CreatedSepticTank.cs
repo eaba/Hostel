@@ -1,14 +1,16 @@
-﻿using Shared;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Hostel.Model;
+using Shared;
 
 namespace Hostel.Event
 {
     public class CreatedSepticTank : IEvent
     {
-        public string Commander => throw new NotImplementedException();
-
-        public string CommandId => throw new NotImplementedException();
+        public SepticTankSpec SepticTankSpec { get; }
+        public string Commander => string.Empty;
+        public string CommandId => string.Empty;
+        public CreatedSepticTank(SepticTankSpec spec)
+        {
+            SepticTankSpec = spec;
+        }
     }
 }

@@ -36,13 +36,16 @@ namespace Hostel.Entity
                         var construct = hostel.Construction;
                         foreach (var floor in construct.Floors)
                         {
+                            floor.HostelId = hostel.Construction.Detail.HostelId;
                             var createFloor = new CreateFloor(floor);
                             Self.Tell(createFloor);
                         }
-                        var tank = construct.SepticTank;
-                        var reservoir = construct.Reservoir;
-                        var septic = new CreateSepticTank(tank.Tag, tank.Height, tank.Sensors);
-                        var water = new CreateWaterReservoir(reservoir.Tag, reservoir.Height, reservoir.Sensors);
+                        var septicSpec = construct.SepticTank;
+                        septicSpec.HostelId = hostel.Construction.Detail.HostelId;
+                        var septic = new CreateSepticTank(septicSpec);
+                        var waterSpec = construct.Reservoir;
+                        waterSpec.HostelId = hostel.Construction.Detail.HostelId; ;
+                        var water = new CreateWaterReservoir(waterSpec);
                         Self.Tell(septic);
                         Self.Tell(water);
                     }
