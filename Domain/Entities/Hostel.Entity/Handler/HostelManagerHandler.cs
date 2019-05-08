@@ -14,15 +14,7 @@ namespace Hostel.Entity.Handler
         {
             switch (command)
             {
-                case CreateFloor createFloor:
-                    {
-                        var floor = createFloor.Floor;
-                        if (repository.CreateFloor(floor))
-                        {
-                            return new HandlerResult(new CreatedFloor(floor));
-                        }
-                        return new HandlerResult($"Floor {floor.Tag} could not be created at this time!", createFloor.Commander, createFloor.CommandId);
-                    }
+                
                 default: return HandlerResult.NotHandled(command, command.Commander, command.CommandId);
             }
         }

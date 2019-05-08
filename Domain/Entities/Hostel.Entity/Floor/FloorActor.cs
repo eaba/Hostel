@@ -1,5 +1,6 @@
 ﻿using Akka.Actor;
 using Hostel.Entity.Handler.Floor;
+using Hostel.Event;
 using Hostel.Model;
 using Hostel.State.Floor;
 using Shared;
@@ -10,34 +11,35 @@ namespace Hostel.Entity.Floor
     public class FloorActor : HostelActor<FloorState>
     {
         private string _connectionString;
-        private FloorSpec _floorSpec;
-        public FloorActor(ICommandHandler<FloorState> handler, FloorSpec spec, FloorState defaultState, string persistenceId, string connectionString)
+        public FloorActor(ICommandHandler<FloorState> handler, FloorState defaultState, string persistenceId, string connectionString)
             : base(handler, defaultState, persistenceId, new Shared.Repository.Impl.Repository(connectionString))
         {
             _connectionString = connectionString;
-            _floorSpec = spec;
         }
         protected override void PreStart()
         {
-            var bathId = $"{_floorSpec.Tag}-BathManager";
-            var child = Context.Child(bathId);
-            if (child.IsNobody())
-            {
-                Context.ActorOf(BathRoomManagerActor.Prop(new BathRoomManagerHandler(), _floorSpec.BathRooms, BathRoomManagerState.Empty, bathId, _connectionString), bathId);
-            }
-            var bathrooms = _floorSpec.BathRooms;
-            foreach (var bath in bathrooms)
-            {
-            }
-                
-            var toilets = _floorSpec.Toilets;
-            var rooms = _floorSpec.Rooms;
-            var kichen = _floorSpec.Kitchen;
             base.PreStart();
+        }
+        protected override void OnRecoverComplete()
+        {
+            CreateChildren(State.FloorSpec);
+            base.OnRecoverComplete();
+        }
+        protected override void OnPersist(IEvent persistedEvent)
+        {            
+            switch (persistedEvent)
+            {
+                case CreatedFloor createdFloor:
+                    {
+                        CreateChildren(createdFloor.Floor);
+                    }
+                    break;
+            }
+            base.OnPersist(persistedEvent);
         }
         public static Props Prop(ICommandHandler<FloorState> handler, FloorSpec spec, FloorState defaultState, string persistenceId, string connectionString)
         {
-            return Props.Create(() => new FloorActor(handler, spec, defaultState, persistenceId, connectionString));
+            return Props.Create(() => new FloorActor(handler, defaultState, persistenceId, connectionString));
         }
         protected override SupervisorStrategy SupervisorStrategy()
         {
@@ -46,6 +48,15 @@ namespace Hostel.Entity.Floor
                 {
                     return Directive.Restart;
                 }));
+        }
+        private void CreateChildren(FloorSpec spec)
+        {
+            var bathId = $"{spec.Tag}-BathManager";
+            var child = Context.Child(bathId);
+            if (child.IsNobody())
+            {
+                Context.ActorOf(BathRoomManagerActor.Prop(new BathRoomManagerHandler(), spec.BathRooms, BathRoomManagerState.Empty, bathId, _connectionString), bathId);
+            }
         }
     }
 }
