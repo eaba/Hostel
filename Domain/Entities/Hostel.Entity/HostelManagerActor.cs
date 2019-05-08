@@ -19,25 +19,7 @@ namespace Hostel.Entity
         public HostelManagerActor(ICommandHandler<HostelManagerState> handler, HostelManagerState defaultState, string persistenceId, string connectionstring)
             : base(handler, defaultState, persistenceId, new Shared.Repository.Impl.Repository(connectionstring))
         {
-            _connectionString = connectionstring;
-            Command<ConstructHostel>(build =>
-            {
-                if(!State.Constructed)
-                {
-                    var construct = build.Construction;
-                    foreach(var floor in construct.Floors)
-                    {
-                        var createFloor = new CreateFloor(floor);
-                        Self.Tell(createFloor);
-                    }
-                    var tank = construct.SepticTank;
-                    var reservoir = construct.Reservoir;
-                    var septic = new CreateSepticTank(tank.Tag, tank.Height, tank.Sensors);
-                    var water = new CreateWaterReservoir(reservoir.Tag, reservoir.Height, reservoir.Sensors);
-                    Self.Tell(septic);
-                    Self.Tell(water);
-                }
-            });
+            _connectionString = connectionstring;            
             Command<StoreFloorStateChange>(state => 
             {
                 var floorStates = State.FloorStates.ToList();
@@ -67,13 +49,20 @@ namespace Hostel.Entity
         {
             switch(persistedEvent)
             {
-                case CreatedFloor createdFloor:
+                case ConstructedHostel hostel:
                     {
-                        var tag = createdFloor.Floor.Tag;
-                        if (Context.Child(tag).IsNobody())
+                        var construct = hostel.Construction;
+                        foreach (var floor in construct.Floors)
                         {
-                            Context.ActorOf(FloorActor.Prop(new FloorHandler(), createdFloor.Floor, FloorState.Empty, tag, _connectionString), tag);
+                            var createFloor = new CreateFloor(floor);
+                            Self.Tell(createFloor);
                         }
+                        var tank = construct.SepticTank;
+                        var reservoir = construct.Reservoir;
+                        var septic = new CreateSepticTank(tank.Tag, tank.Height, tank.Sensors);
+                        var water = new CreateWaterReservoir(reservoir.Tag, reservoir.Height, reservoir.Sensors);
+                        Self.Tell(septic);
+                        Self.Tell(water);
                     }
                     break;
             }

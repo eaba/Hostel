@@ -28,19 +28,19 @@ namespace Hostel.Repository
             }
             return false;
         }
-        public static bool ConstructHostel(this IRepository<IDbProperties> repository, HostelDetail detail)
+        public static bool ConstructHostel(this IRepository<IDbProperties> repository, Construction hostel)
         {
             var dataTypes = new List<IDataTypes>
                         {
-                            new DataTypes("@name", SqlDbType.NVarChar, 50, detail.Name, ParameterDirection.Input, false, false, ""),
-                            new DataTypes("@address", SqlDbType.NVarChar, 50, detail.Address, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@name", SqlDbType.NVarChar, 50, hostel.Detail.Name, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@address", SqlDbType.NVarChar, 50, hostel.Detail.Address, ParameterDirection.Input, false, false, ""),
                             new DataTypes("@hostel", SqlDbType.UniqueIdentifier, 0, string.Empty, ParameterDirection.Output, false, false, "@hostel")
                         };
             var repos = new DbProperties("ConstructHostel", dataTypes, string.Empty, true, "@hostel");
             var x = repository.Update(new[] { repos });
             if (x > 0)
             {
-                detail.HostelId = repos.Id;
+                hostel.Detail.HostelId = repos.Id;
                 return true;
             }
             return false;

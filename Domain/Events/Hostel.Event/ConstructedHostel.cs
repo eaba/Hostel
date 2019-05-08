@@ -1,5 +1,5 @@
-﻿using Shared;
-using static Hostel.Model.Construction;
+﻿using Hostel.Model;
+using Shared;
 
 namespace Hostel.Event
 {
@@ -8,10 +8,10 @@ namespace Hostel.Event
         public string Commander => string.Empty;
 
         public string CommandId => string.Empty;
-        public HostelDetail Detail { get; }
-        public ConstructedHostel(HostelDetail detail)
+        public Construction Construction { get; }
+        public ConstructedHostel(Construction detail)
         {
-            Detail = detail;
+            Construction = detail;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Hostel.Command;
 using Hostel.Event;
-using Hostel.Model;
 using Hostel.Repository;
 using Hostel.State;
 using Shared;
@@ -14,7 +13,19 @@ namespace Hostel.Entity.Handler
         {
             switch (command)
             {
-                
+                case ConstructHostel construct:
+                    {
+                        var hostel = construct.Construction;
+                        if (!state.Constructed)
+                        {
+                            if (repository.ConstructHostel(hostel))
+                            {
+                                return new HandlerResult(new ConstructedHostel(hostel));
+                            }
+                            return new HandlerResult($"Hostel {hostel.Detail.Name} could not be constructed at this time!", string.Empty, string.Empty);
+                        }
+                        return new HandlerResult($"Hostel {hostel.Detail.Name} alread exist. Did the government demonish your hostel?", string.Empty, string.Empty);
+                    }
                 default: return HandlerResult.NotHandled(command, command.Commander, command.CommandId);
             }
         }

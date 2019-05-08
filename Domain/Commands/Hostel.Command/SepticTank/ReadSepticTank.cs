@@ -2,7 +2,7 @@
 
 namespace Hostel.Command.SepticTank
 {
-    public class ReadSepticTank : Message, ISystemCommand
+    public class ReadSepticTank : Message, ICommand
     {
     }
 }
