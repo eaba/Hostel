@@ -149,6 +149,8 @@ namespace Hostel.Model
     }
     public class SepticTankSpec
     {
+        public string HostelId;
+        public string SepticTankId;
         public string Tag { get; }
         public int Height { get; }
         public IEnumerable<SensorSpec> Sensors;
@@ -160,6 +162,8 @@ namespace Hostel.Model
     }
     public class ReservoirSpec
     {
+        public string HostelId;
+        public string ReservoirId;
         public string Tag { get; }
         public int Height { get; }
         public IEnumerable<SensorSpec> Sensors;

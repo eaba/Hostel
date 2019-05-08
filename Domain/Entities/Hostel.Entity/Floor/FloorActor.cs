@@ -11,13 +11,16 @@ namespace Hostel.Entity.Floor
     public class FloorActor : HostelActor<FloorState>
     {
         private string _connectionString;
-        public FloorActor(ICommandHandler<FloorState> handler, FloorState defaultState, string persistenceId, string connectionString)
+        private FloorSpec _floorSpec;
+        public FloorActor(ICommandHandler<FloorState> handler, FloorSpec spec, FloorState defaultState, string persistenceId, string connectionString)
             : base(handler, defaultState, persistenceId, new Shared.Repository.Impl.Repository(connectionString))
         {
+            _floorSpec = spec;
             _connectionString = connectionString;
         }
         protected override void PreStart()
         {
+            //go through spec and generate commands here to self
             base.PreStart();
         }
         protected override void OnRecoverComplete()
@@ -29,17 +32,13 @@ namespace Hostel.Entity.Floor
         {            
             switch (persistedEvent)
             {
-                case CreatedFloor createdFloor:
-                    {
-                        CreateChildren(createdFloor.Floor);
-                    }
-                    break;
+                
             }
             base.OnPersist(persistedEvent);
         }
         public static Props Prop(ICommandHandler<FloorState> handler, FloorSpec spec, FloorState defaultState, string persistenceId, string connectionString)
         {
-            return Props.Create(() => new FloorActor(handler, defaultState, persistenceId, connectionString));
+            return Props.Create(() => new FloorActor(handler, spec, defaultState, persistenceId, connectionString));
         }
         protected override SupervisorStrategy SupervisorStrategy()
         {
