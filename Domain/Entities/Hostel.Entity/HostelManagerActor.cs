@@ -57,6 +57,20 @@ namespace Hostel.Entity
                         Context.ActorOf(FloorActor.Prop(new FloorHandler(), floor, FloorState.Empty, floor.Tag, _connectionString), floor.Tag);
                     }
                     break;
+                case CreatedSepticTank createdSepticTank:
+                    {
+                        var septic = createdSepticTank.SepticTankSpec;
+                        septic.HostelId = State.ConstructionRecord.Detail.HostelId;
+                        Context.ActorOf(SepticTankActor.Prop(new SepticTankHandler(), septic.Sensors, SepticTankState.Empty, septic.Tag, _connectionString), septic.Tag);
+                    }
+                    break;
+                case CreatedWaterReservoir createdWater:
+                    {
+                        var water = createdWater.ReservoirSpec;
+                        water.HostelId = State.ConstructionRecord.Detail.HostelId;
+                        Context.ActorOf(WaterReservoirActor.Prop(new WaterReservoirHandler(), water.Sensors, WaterReservoirState.Empty, water.Tag, _connectionString), water.Tag);
+                    }
+                    break;
             }
             base.OnPersist(persistedEvent);
         }

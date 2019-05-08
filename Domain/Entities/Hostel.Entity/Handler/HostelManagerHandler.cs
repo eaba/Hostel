@@ -35,6 +35,24 @@ namespace Hostel.Entity.Handler
                         }
                         return new HandlerResult($"Floor {floor.Tag} could not be created at this time!", createFloor.Commander, createFloor.CommandId);
                     }
+                case CreateSepticTank createSeptic:
+                    {
+                        var tank = createSeptic.Spec;
+                        if (repository.CreateSepticTank(tank))
+                        {
+                            return new HandlerResult(new CreatedSepticTank(tank));
+                        }
+                        return new HandlerResult($"SepticTank {tank.Tag} could not be created at this time!", createSeptic.Commander, createSeptic.CommandId);
+                    }
+                case CreateWaterReservoir createWater:
+                    {
+                        var water = createWater.Spec;
+                        if (repository.CreateReservoir(water))
+                        {
+                            return new HandlerResult(new CreatedWaterReservoir(water));
+                        }
+                        return new HandlerResult($"Water Reservoir {water.Tag} could not be created at this time!", createWater.Commander, createWater.CommandId);
+                    }
                 default: return HandlerResult.NotHandled(command, command.Commander, command.CommandId);
             }
         }

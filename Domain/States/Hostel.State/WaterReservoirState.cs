@@ -9,7 +9,7 @@ namespace Hostel.State
         public Reading Previous { get; }
         public Reading Current { get; }
         public int AlertHeight { get; }
-
+        public static readonly WaterReservoirState Empty = new WaterReservoirState();
         public WaterReservoirState Update(IEvent evnt)
         {
             throw new System.NotImplementedException();

@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Hostel.State;
+using Shared;
+using Shared.Repository;
+using System;
 
 namespace Hostel.Entity.Handler
 {
-    class WaterReservoirHandler
+    public class WaterReservoirHandler : ICommandHandler<WaterReservoirState>
     {
+        public HandlerResult Handle(WaterReservoirState state, ICommand command, IRepository<IDbProperties> repository)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

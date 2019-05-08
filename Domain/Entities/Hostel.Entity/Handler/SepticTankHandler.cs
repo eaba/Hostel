@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Hostel.State;
+using Shared;
+using Shared.Repository;
+using System;
 
 namespace Hostel.Entity.Handler
 {
-    class SepticTankHandler
+    public class SepticTankHandler : ICommandHandler<SepticTankState>
     {
+        public HandlerResult Handle(SepticTankState state, ICommand command, IRepository<IDbProperties> repository)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
