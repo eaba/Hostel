@@ -1,6 +1,5 @@
 ﻿using Akka.Actor;
 using Hostel.Entity.Handler.Floor;
-using Hostel.Event;
 using Hostel.Model;
 using Hostel.State.Floor;
 using Shared;
