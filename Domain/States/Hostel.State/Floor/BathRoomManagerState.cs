@@ -1,13 +1,19 @@
-﻿using Shared;
+﻿using Hostel.Model;
+using Shared;
 using System;
+using System.Collections.Generic;
 
 namespace Hostel.State.Floor
 {
     public class BathRoomManagerState : Message, IState<BathRoomManagerState>
     {
-        public Guid FloorId { get; }
-        public string FlooTag { get; }
-        public static readonly BathRoomManagerState Empty = new BathRoomManagerState();
+        public string Tag { get; }
+        public IEnumerable<BathRoomSpec> Specs { get; }
+        public BathRoomManagerState(IEnumerable<BathRoomSpec> spec, string tag)
+        {
+            Tag = tag;
+            Specs = spec;
+        }
 
         public BathRoomManagerState Update(IEvent evnt)
         {

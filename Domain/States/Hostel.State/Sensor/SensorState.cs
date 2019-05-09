@@ -31,12 +31,14 @@ namespace Hostel.State.Sensor
     }
     public class Reading
     {
+        public string Role { get; }
         public string Value { get; }
         public string TimeStamp { get; }
-        public Reading(string value, string time)
+        public Reading(string value, string time, string role = "")
         {
             Value = value;
             TimeStamp = time;
+            Role = role;
         }
     }
 }

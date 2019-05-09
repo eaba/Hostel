@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Hostel.State.Floor;
+using Shared.Actors;
 
 namespace Hostel.Entity.Floor.Units
 {
-    class KitchenActor
+    public class KitchenActor: HostelActor<FloorState>
     {
     }
 }

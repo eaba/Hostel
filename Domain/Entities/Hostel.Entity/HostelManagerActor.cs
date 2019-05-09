@@ -1,5 +1,6 @@
 ﻿using Akka.Actor;
 using Hostel.Command;
+using Hostel.Command.Internal;
 using Hostel.Entity.Floor;
 using Hostel.Entity.Handler;
 using Hostel.Event;
@@ -63,7 +64,9 @@ namespace Hostel.Entity
                     {
                         var floor = createdFloor.Floor;
                         floor.HostelId = State.ConstructionRecord.Detail.HostelId;
-                        Context.ActorOf(FloorActor.Prop(new FloorHandler(), floor, FloorState.Empty, floor.Tag, _connectionString), floor.Tag);
+                        var floorState = new FloorState(floor);
+                        var floorActor = Context.ActorOf(FloorActor.Prop(new FloorHandler(), floorState, floor.Tag, _connectionString), floor.Tag);
+                        floorActor.Tell(new LayoutFloor());
                     }
                     break;
                 case CreatedSepticTank createdSepticTank:
