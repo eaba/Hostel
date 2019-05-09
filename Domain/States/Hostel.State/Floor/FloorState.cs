@@ -14,8 +14,7 @@ namespace Hostel.State.Floor
         }
         
         public FloorState Update(IEvent evnt)
-        {
-            
+        {            
             return this;
         }
     }
