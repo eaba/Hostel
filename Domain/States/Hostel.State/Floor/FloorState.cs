@@ -1,7 +1,5 @@
-﻿using Hostel.Event;
-using Hostel.Model;
+﻿using Hostel.Model;
 using Shared;
-using System;
 
 namespace Hostel.State.Floor
 {
