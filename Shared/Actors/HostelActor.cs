@@ -33,7 +33,7 @@ namespace Shared.Actors
                 if (offer.Snapshot is TState)
                 {
                     State = (TState)offer.Snapshot;
-                    OnSnapshortOffer(State);
+                    OnSnapshotOffer(State);
                 }                   
             });
             Recover<RecoveryCompleted>(completed => { OnRecoverComplete(); });
@@ -45,7 +45,7 @@ namespace Shared.Actors
         {
             
         }
-        protected virtual void OnSnapshortOffer(TState state)
+        protected virtual void OnSnapshotOffer(TState state)
         {
 
         }

@@ -61,8 +61,8 @@ namespace Hostel.Host
                 .WithFloor("Ground-Floor","", 20, "", 2, "T", 2, "B", "K")
                 .WithFloor("First-Floor", "1", 22, "1", 3, "T1", 2, "B", "K")
                 .WithFloor("Second-Floor", "1", 23, "1", 3, "T1", 2, "B", "K")
-                .WithSepticTank("Septic", 100)
-                .WithReservoir("Reservoir", 500);
+                .WithSepticTank("Septic", 10, 7)
+                .WithReservoir("Reservoir", 20, 15);
             return new ConstructHostel(construction);
         }
     }

@@ -61,7 +61,9 @@ namespace Hostel.Entity
                     {
                         var septic = createdSepticTank.SepticTankSpec;
                         septic.HostelId = State.ConstructionRecord.Detail.HostelId;
-                        Context.ActorOf(SepticTankActor.Prop(new SepticTankHandler(), septic.Sensors, SepticTankState.Empty, septic.Tag, _connectionString), septic.Tag);
+                        var septicState = new SepticTankState(septic.SepticTankId, septic.Height, septic.AlertHeight, septic.Sensors);
+                        var septicActor = Context.ActorOf(SepticTankActor.Prop(new SepticTankHandler(), septicState, septic.Tag, _connectionString), septic.Tag);
+                        septicActor.Tell(new InstallSensor());
                     }
                     break;
                 case CreatedWaterReservoir createdWater:

@@ -76,9 +76,9 @@ namespace Hostel.Model
             Floors.Add(new FloorSpec(floorTag, rooms, toilets, bathrooms, kitchen));
             return this;
         }
-        public Construction WithSepticTank(string tag, int height)
+        public Construction WithSepticTank(string tag, int height, int alert)
         {
-            var septic = new SepticTankSpec(tag, height)
+            var septic = new SepticTankSpec(tag, height, alert)
             {
                 Sensors = new List<SensorSpec>(new[]
                 {
@@ -90,9 +90,9 @@ namespace Hostel.Model
             SepticTank = septic;
             return this;
         }
-        public Construction WithReservoir(string tag, int height)
+        public Construction WithReservoir(string tag, int height, int alert)
         {
-            var reservoir = new ReservoirSpec(tag, height)
+            var reservoir = new ReservoirSpec(tag, height, alert)
             {
                 Sensors = new List<SensorSpec>(new[]
                 {
@@ -152,12 +152,14 @@ namespace Hostel.Model
         public string HostelId;
         public string SepticTankId;
         public string Tag { get; }
-        public int Height { get; }
+        public int Height { get; }// Feet
+        public int AlertHeight { get; } //Feet
         public IEnumerable<SensorSpec> Sensors;
-        public SepticTankSpec(string tag, int height)
+        public SepticTankSpec(string tag, int height, int alert)
         {
             Tag = tag;
             Height = height;
+            AlertHeight = alert;
         }
     }
     public class ReservoirSpec
@@ -165,16 +167,19 @@ namespace Hostel.Model
         public string HostelId;
         public string ReservoirId;
         public string Tag { get; }
-        public int Height { get; }
+        public int Height { get; }//Feet
+        public int AlertHeight { get; }//Feet
         public IEnumerable<SensorSpec> Sensors;
-        public ReservoirSpec(string tag, int height)
+        public ReservoirSpec(string tag, int height, int alert)
         {
             Tag = tag;
             Height = height;
+            AlertHeight = alert;
         }
     }
     public class SensorSpec
     {
+        public string SensorId;
         public string Tag { get; }
         public string Role { get; }
         public SensorSpec(string tag, string role)

@@ -8,18 +8,27 @@ namespace Hostel.State
 {
     public class SepticTankState : Message, IState<SepticTankState>
     {
+        public string SepticTankId { get; }
         public int Height { get; }
         public Reading Previous { get; }
         public Reading Current { get; }
         public int AlertHeight { get; }
-        public static readonly SepticTankState Empty = new SepticTankState(0);
-        public SepticTankState(int current):this(current, 100, 75, string.Empty)
+        public IEnumerable<SensorSpec> Sensors { get; }
+        public SepticTankState(string id, int height, int alert, IEnumerable<SensorSpec> sensors) :this(id, height, alert, sensors, null, null)
         {
-
+            Height = height;
+            AlertHeight = alert;
+            Sensors = sensors;
+            SepticTankId = id;
         }
-        public SepticTankState(int current, int dept, int alert, string who)
+        public SepticTankState(string id, int height, int alert, IEnumerable<SensorSpec> sensors, Reading current, Reading previous)
         {
-
+            Height = height;
+            AlertHeight = alert;
+            Sensors = sensors;
+            Previous = previous;
+            Current = current;
+            SepticTankId = id;
         }
         public SepticTankState Update(IEvent evnt)
         {

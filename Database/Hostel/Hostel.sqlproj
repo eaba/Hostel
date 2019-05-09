@@ -66,7 +66,7 @@
   <ItemGroup>
     <Build Include="dbo\Tables\Hostel_Floor_Kitchen_Sensors_Reading.sql" />
     <Build Include="dbo\Tables\Hostel_Septic_Tank_Sensors_Reading.sql" />
-    <Build Include="dbo\Tables\Hostel_Water_Reservoir_Sensor_Reading.sql" />
+    <Build Include="dbo\Tables\Hostel_Water_Reservoir_Sensors_Reading.sql" />
     <Build Include="dbo\Tables\Hostel_Roles.sql" />
     <Build Include="dbo\Tables\Hostel_Persons.sql" />
     <Build Include="dbo\Tables\Hostel.sql" />
@@ -90,6 +90,8 @@
     <Build Include="dbo\Stored Procedures\ConstructHostel.sql" />
     <Build Include="dbo\Stored Procedures\CreateSepticTank.sql" />
     <Build Include="dbo\Stored Procedures\CreateReseervoir.sql" />
+    <Build Include="dbo\Tables\Hostel_Septic_Tank_Sensors.sql" />
+    <Build Include="dbo\Tables\Hostel_Water_Reservoir_Sensors.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Hostel.refactorlog" />

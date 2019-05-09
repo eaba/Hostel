@@ -26,6 +26,24 @@ namespace Hostel.Repository
             }
             return false;
         }
+        public static bool InstallSepticTankSensors(this IRepository<IDbProperties> repository, FloorSpec spec)
+        {
+            var floor = spec;
+            var dataTypes = new List<IDataTypes>
+                        {
+                            new DataTypes("@hostel", SqlDbType.UniqueIdentifier, 0, spec.HostelId, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@tag", SqlDbType.NVarChar, 50, floor.Tag, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@floor", SqlDbType.UniqueIdentifier, 0, string.Empty, ParameterDirection.Output, false, false, "@floor")
+                        };
+            var repos = new DbProperties("CreateFloor", dataTypes, string.Empty, true, "@floor");
+            var x = repository.Update(new[] { repos });
+            if (x > 0)
+            {
+                spec.FloorId = repos.Id;
+                return true;
+            }
+            return false;
+        }
         public static bool CreateSepticTank(this IRepository<IDbProperties> repository, SepticTankSpec spec)
         {
             var septic = spec;
