@@ -1,7 +1,7 @@
-﻿using Hostel.Model;
+﻿using Hostel.Event;
+using Hostel.Model;
 using Hostel.State.Sensor;
 using Shared;
-using System;
 using System.Collections.Generic;
 
 namespace Hostel.State
@@ -32,7 +32,14 @@ namespace Hostel.State
         }
         public SepticTankState Update(IEvent evnt)
         {
-            throw new NotImplementedException();
+            switch(evnt)
+            {
+                case InstalledSensor sensor:
+                    {
+                        return new SepticTankState(SepticTankId, Height, AlertHeight, sensor.Sensors, Current, Previous);
+                    }
+                default: return this;
+            }
         }
     }
 }

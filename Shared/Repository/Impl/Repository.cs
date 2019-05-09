@@ -85,7 +85,7 @@ namespace Shared.Repository.Impl
                                     foreach (var o in os)
                                     {
                                         var op = cmd.Parameters[o].Value.ToString();
-                                        OutPuts.Add(new OutPut { Value = op, Param = o });
+                                        OutPuts.Add(new OutPut { Value = op, Param = o, Identifier = prop.Identifier });
                                     }
                                 }
                                 if (rowsAffected >= 0)

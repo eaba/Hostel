@@ -20,12 +20,12 @@ namespace Hostel.Entity
         }
         protected override void OnRecoverComplete()
         {
-            if (State.Constructed)
-            {
-                var hostel = State.ConstructionRecord;
-                Self.Tell(new ConstructHostel(hostel));
-            }
             base.OnRecoverComplete();
+        }
+        protected override void OnSnapshotOffer(HostelManagerState state)
+        {
+            Self.Tell(new ConstructHostel(state.ConstructionRecord));
+            base.OnSnapshotOffer(state);
         }
         protected override void OnPersist(IEvent persistedEvent)
         {
@@ -36,18 +36,27 @@ namespace Hostel.Entity
                         var construct = hostel.Construction;
                         foreach (var floor in construct.Floors)
                         {
-                            floor.HostelId = hostel.Construction.Detail.HostelId;
-                            var createFloor = new CreateFloor(floor);
-                            Self.Tell(createFloor);
+                            if(Context.Child(floor.Tag).IsNobody())
+                            {
+                                floor.HostelId = hostel.Construction.Detail.HostelId;
+                                var createFloor = new CreateFloor(floor);
+                                Self.Tell(createFloor);
+                            }
                         }
-                        var septicSpec = construct.SepticTank;
-                        septicSpec.HostelId = hostel.Construction.Detail.HostelId;
-                        var septic = new CreateSepticTank(septicSpec);
-                        var waterSpec = construct.Reservoir;
-                        waterSpec.HostelId = hostel.Construction.Detail.HostelId; ;
-                        var water = new CreateWaterReservoir(waterSpec);
-                        Self.Tell(septic);
-                        Self.Tell(water);
+                        if(Context.Child(construct.SepticTank.Tag).IsNobody())
+                        {
+                            var septicSpec = construct.SepticTank;
+                            septicSpec.HostelId = hostel.Construction.Detail.HostelId;
+                            var septic = new CreateSepticTank(septicSpec);
+                            Self.Tell(septic);
+                        }
+                        if(Context.Child(construct.Reservoir.Tag).IsNobody())
+                        {
+                            var waterSpec = construct.Reservoir;
+                            waterSpec.HostelId = hostel.Construction.Detail.HostelId; ;
+                            var water = new CreateWaterReservoir(waterSpec);
+                            Self.Tell(water);
+                        }
                     }
                     break;
                 case CreatedFloor createdFloor:
@@ -70,7 +79,9 @@ namespace Hostel.Entity
                     {
                         var water = createdWater.ReservoirSpec;
                         water.HostelId = State.ConstructionRecord.Detail.HostelId;
-                        Context.ActorOf(WaterReservoirActor.Prop(new WaterReservoirHandler(), water.Sensors, WaterReservoirState.Empty, water.Tag, _connectionString), water.Tag);
+                        var reservoirState = new WaterReservoirState(water.ReservoirId, water.Height, water.AlertHeight, water.Sensors);
+                        var waterActor = Context.ActorOf(WaterReservoirActor.Prop(new WaterReservoirHandler(), reservoirState, water.Tag, _connectionString), water.Tag);
+                        waterActor.Tell(new InstallSensor());
                     }
                     break;
             }

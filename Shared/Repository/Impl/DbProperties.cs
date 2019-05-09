@@ -6,22 +6,20 @@ namespace Shared.Repository.Impl
     {
 
         public string StoredProcedureName { get; }
-
         public List<IDataTypes> ProcedureProps { get; set; }
-
         public string Id { get; set; }
-
         public bool Output { get; }
-
         public string Param { get; }
+        public string Identifier { get; }
 
-        public DbProperties(string procName, List<IDataTypes> props, string id, bool output, string param)
+        public DbProperties(string procName, List<IDataTypes> props, string id, bool output, string param, string identifier = "")
         {
             StoredProcedureName = procName;
             ProcedureProps = props;
             Id = id;
             Output = output;
             Param = param;
+            Identifier = identifier;
         }
     }
 }

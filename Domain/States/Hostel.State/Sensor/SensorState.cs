@@ -5,13 +5,25 @@ namespace Hostel.State.Sensor
 {
     public class SensorState : Message, IState<SensorState>
     {
-        public Guid SensorId { get; }
-        public Guid BathRoom { get; }
+        public string SensorId { get; }
         public string Tag { get; }
         public string Role { get; }
         public Reading Current { get; }
         public Reading Previous { get; }
-        public static readonly SensorState Empty = new SensorState();
+        public SensorState(string sensorid, string tag, string role):this(sensorid, tag, role, null, null)
+        {
+            SensorId = sensorid;
+            Tag = tag;
+            Role = role;
+        }
+        public SensorState(string sensorid, string tag, string role, Reading current, Reading previous)
+        {
+            SensorId = sensorid;
+            Tag = tag;
+            Role = role;
+            Current = current;
+            Previous = previous;
+        }
         public SensorState Update(IEvent evnt)
         {
             throw new NotImplementedException();

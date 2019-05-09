@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Shared.Repository.Impl;
+using System.Collections.Generic;
 
 namespace Shared.Repository
 {
@@ -6,5 +7,6 @@ namespace Shared.Repository
     {
         IEnumerable<Dictionary<string, string>> Read(IDbProperties properties);
         int Update(IEnumerable<IDbProperties> properties);
+        List<OutPut> OutPuts { get; }
     }
 }

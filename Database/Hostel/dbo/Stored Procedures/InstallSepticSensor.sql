@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[InstallsEPTICSensor]
+﻿CREATE PROCEDURE [dbo].[InstallSepticSensor]
 	@septictank uniqueidentifier,
 	@tag nvarchar(50),
 	@role nvarchar(50),

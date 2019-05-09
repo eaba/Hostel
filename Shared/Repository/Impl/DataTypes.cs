@@ -38,5 +38,6 @@ namespace Shared.Repository.Impl
     {
         public string Param;
         public string Value;
+        public string Identifier;
     }
 }

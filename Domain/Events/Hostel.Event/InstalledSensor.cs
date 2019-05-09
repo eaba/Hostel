@@ -1,17 +1,17 @@
-﻿using Shared;
+﻿using Hostel.Model;
+using Shared;
+using System.Collections.Generic;
 
 namespace Hostel.Event
 {
     public class InstalledSensor : IEvent
     {
-        public Sensor.Model.Sensor Device { get; }
         public string Commander { get; }
         public string CommandId { get; }
-        public InstalledSensor(Sensor.Model.Sensor device, string commander, string commandid)
+        public IEnumerable<SensorSpec> Sensors { get; }
+        public InstalledSensor(IEnumerable<SensorSpec> sensors)
         {
-            Device = device;
-            Commander = commander;
-            CommandId = commandid;
+            Sensors = sensors;
         }
     }
 }

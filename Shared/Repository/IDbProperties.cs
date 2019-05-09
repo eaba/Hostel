@@ -9,5 +9,6 @@ namespace Shared.Repository
         string Id { get; set; }
         bool Output { get; }
         string Param { get; }
+        string Identifier { get; }
     }
 }
