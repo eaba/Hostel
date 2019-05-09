@@ -5,10 +5,10 @@ using Shared.Actors;
 
 namespace Hostel.Entity.Floor
 {
-    public class BathRoomManagerActor : HostelActor<KitchenManagerState>
+    public class BathRoomManagerActor : HostelActor<BathRoomManagerState>
     {
         private string _connectionString;
-        public BathRoomManagerActor(ICommandHandler<KitchenManagerState> handler, KitchenManagerState defaultState, string persistenceId, string connectionString)
+        public BathRoomManagerActor(ICommandHandler<BathRoomManagerState> handler, BathRoomManagerState defaultState, string persistenceId, string connectionString)
             : base(handler, defaultState, persistenceId, new Shared.Repository.Impl.Repository(connectionString))
         {
             _connectionString = connectionString;
@@ -22,7 +22,7 @@ namespace Hostel.Entity.Floor
             }*/
             base.PreStart();
         }
-        public static Props Prop(ICommandHandler<KitchenManagerState> handler, KitchenManagerState defaultState, string persistenceId, string connectionString)
+        public static Props Prop(ICommandHandler<BathRoomManagerState> handler, BathRoomManagerState defaultState, string persistenceId, string connectionString)
         {
             return Props.Create(() => new BathRoomManagerActor(handler, defaultState, persistenceId, connectionString));
         }

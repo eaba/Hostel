@@ -8,11 +8,11 @@ namespace Hostel.State.Floor
     public class BathRoomManagerState : Message, IState<BathRoomManagerState>
     {
         public string Tag { get; }
-        public IEnumerable<SensorSpec> Sensors { get; }
-        public BathRoomManagerState(IEnumerable<SensorSpec> sensors, string tag)
+        public IEnumerable<BathRoomSpec> BathRooms { get; }
+        public BathRoomManagerState(IEnumerable<BathRoomSpec> bathRooms, string tag)
         {
             Tag = tag;
-            Sensors = sensors;
+            BathRooms = bathRooms;
         }
 
         public BathRoomManagerState Update(IEvent evnt)

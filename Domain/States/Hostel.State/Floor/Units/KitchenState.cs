@@ -14,11 +14,10 @@ namespace Hostel.State.Floor.Units
         public IEnumerable<SensorSpec> Sensors { get; }
         public IEnumerable<Reading> Current { get; }
         public IEnumerable<Reading> Previous { get; }
-        public KitchenState(string id, string tag, IEnumerable<SensorSpec> sensors) : this(id, tag, sensors, Enumerable.Empty<Reading>(), Enumerable.Empty<Reading>())
+        public KitchenState(string tag, IEnumerable<SensorSpec> sensors) : this(string.Empty,tag, sensors, Enumerable.Empty<Reading>(), Enumerable.Empty<Reading>())
         {
             Tag = tag;
             Sensors = sensors;
-            KitchenId = id;
         }
         public KitchenState(string id, string tag, IEnumerable<SensorSpec> sensors, IEnumerable<Reading> current, IEnumerable<Reading> previous)
         {

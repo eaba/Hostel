@@ -3,8 +3,8 @@ using Hostel.Command;
 using Hostel.Command.Internal;
 using Hostel.Entity.Floor.Units;
 using Hostel.Entity.Handler;
-using Hostel.Entity.Handler.Floor;
 using Hostel.State.Floor;
+using Hostel.State.Floor.Units;
 using Shared;
 using Shared.Actors;
 
@@ -55,7 +55,7 @@ namespace Hostel.Entity.Floor
             var managerTag = $"{State.FloorSpec.Tag}-BathRoom-Manager";
             if(Context.Child(managerTag).IsNobody())
             {
-                var bm = Context.ActorOf(BathRoomManagerActor.Prop(new BathRoomManagerHandler(), new KitchenManagerState(State.FloorSpec.Kitchen.Sensors, managerTag), managerTag, _connectionString), managerTag);
+                var bm = Context.ActorOf(BathRoomManagerActor.Prop(new BathRoomManagerHandler(), new BathRoomManagerState(State.FloorSpec.BathRooms, managerTag), managerTag, _connectionString), managerTag);
                 bm.Tell(new LayoutBathRoom());
             }
             var toiletManagerTag = $"{State.FloorSpec.Tag}-Toilet-Manager";
@@ -67,7 +67,7 @@ namespace Hostel.Entity.Floor
             var kitchenTag = State.FloorSpec.Kitchen.Tag;
             if (Context.Child(kitchenTag).IsNobody())
             {
-                var km = Context.ActorOf(KitchenActor.Prop(new KitchenManagerHandler(), new KitchenManagerState(State.FloorSpec.Kitchen.Sensors, kitchenTag), kitchenTag, _connectionString), kitchenTag);
+                var km = Context.ActorOf(KitchenActor.Prop(new KitchenHandler(), new KitchenState(kitchenTag, State.FloorSpec.Kitchen.Sensors), kitchenTag, _connectionString), kitchenTag);
                 km.Tell(new InstallSensor());
             }
         }
