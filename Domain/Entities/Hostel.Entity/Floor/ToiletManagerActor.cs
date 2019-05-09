@@ -1,4 +1,5 @@
 ﻿using Akka.Actor;
+using Hostel.Command.Internal;
 using Hostel.State.Floor;
 using Shared;
 using Shared.Actors;
@@ -12,15 +13,18 @@ namespace Hostel.Entity.Floor
             : base(handler, defaultState, persistenceId, new Shared.Repository.Impl.Repository(connectionString))
         {
             _connectionString = connectionString;
+            Command<LayoutToilet>(toilet => {
+                CreateToilets(State);
+            });
         }
         protected override void PreStart()
-        {
-            /*var child = Context.Child(bath.Tag);
-            if (child.IsNobody())
-            {
-                Context.ActorOf(BathRoomActor.Prop(new BathRoomHandler(), bath.Sensors, BathRoomState.Empty, bath.Tag, _connectionString), bath.Tag);
-            }*/
+        {            
             base.PreStart();
+        }
+        protected override void OnSnapshotOffer(ToiletManagerState state)
+        {
+            CreateToilets(state);
+            base.OnSnapshotOffer(state);
         }
         public static Props Prop(ICommandHandler<ToiletManagerState> handler, ToiletManagerState defaultState, string persistenceId, string connectionString)
         {
@@ -33,6 +37,14 @@ namespace Hostel.Entity.Floor
                 {
                     return Directive.Restart;
                 }));
+        }
+        private void CreateToilets(ToiletManagerState state)
+        {
+            var toilets = state.Toilets;
+            foreach (var tlt in toilets)
+            {
+                //send createtoilet command to self
+            }
         }
     }
 }

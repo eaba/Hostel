@@ -9,11 +9,11 @@ namespace Hostel.State.Floor
     public class RoomManagerState : Message, IState<RoomManagerState>
     {
         public string Tag { get; }
-        public IEnumerable<RoomSpecs> Specs { get; }
-        public RoomManagerState(IEnumerable<RoomSpecs> spec, string tag)
+        public IEnumerable<RoomSpecs> Rooms { get; }
+        public RoomManagerState(IEnumerable<RoomSpecs> rooms, string tag)
         {
             Tag = tag;
-            Specs = spec;
+            Rooms = rooms;
         }
         public RoomManagerState Update(IEvent evnt)
         {

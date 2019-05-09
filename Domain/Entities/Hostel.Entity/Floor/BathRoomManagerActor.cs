@@ -1,4 +1,5 @@
 ﻿using Akka.Actor;
+using Hostel.Command.Internal;
 using Hostel.State.Floor;
 using Shared;
 using Shared.Actors;
@@ -12,14 +13,17 @@ namespace Hostel.Entity.Floor
             : base(handler, defaultState, persistenceId, new Shared.Repository.Impl.Repository(connectionString))
         {
             _connectionString = connectionString;
+            Command<LayoutBathRoom>(bath => {
+                CreateBathRooms(State);
+            });
+        }
+        protected override void OnSnapshotOffer(BathRoomManagerState state)
+        {
+            CreateBathRooms(state);
+            base.OnSnapshotOffer(state);
         }
         protected override void PreStart()
         {
-            /*var child = Context.Child(bath.Tag);
-            if (child.IsNobody())
-            {
-                Context.ActorOf(BathRoomActor.Prop(new BathRoomHandler(), bath.Sensors, BathRoomState.Empty, bath.Tag, _connectionString), bath.Tag);
-            }*/
             base.PreStart();
         }
         public static Props Prop(ICommandHandler<BathRoomManagerState> handler, BathRoomManagerState defaultState, string persistenceId, string connectionString)
@@ -33,6 +37,14 @@ namespace Hostel.Entity.Floor
                 {
                     return Directive.Restart;
                 }));
+        }
+        private void CreateBathRooms(BathRoomManagerState state)
+        {
+            var bathRooms = state.BathRooms;
+            foreach (var baths in bathRooms)
+            {
+                //send createbathroom command to self
+            }
         }
     }
 }

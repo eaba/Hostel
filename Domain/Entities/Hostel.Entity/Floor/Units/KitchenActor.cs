@@ -18,7 +18,6 @@ namespace Hostel.Entity.Floor.Units
         }
         protected override void PreStart()
         {
-
             base.PreStart();
         }
         public static Props Prop(ICommandHandler<KitchenState> handler, KitchenState defaultState, string persistenceId, string connectionString)
