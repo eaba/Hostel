@@ -9,11 +9,12 @@ namespace Shared.Actors
         public override string PersistenceId { get; }
         public IRepository<IDbProperties> Repo;
         private int _eventCount = 0;
-        private int _snapShotAfter = 100;
+        private int _snapShotAfter;
         protected TState State { get; private set; }
 
-        public HostelActor(ICommandHandler<TState> handler, TState defaultState,string persistenceId, IRepository<IDbProperties> repository)
+        public HostelActor(ICommandHandler<TState> handler, TState defaultState,string persistenceId, IRepository<IDbProperties> repository, int snapshotafter = 100)
         {
+            _snapShotAfter = snapshotafter;
             PersistenceId = persistenceId;
             Repo = repository;
             _handler = handler ?? throw new ArgumentNullException(nameof(handler));
@@ -27,6 +28,14 @@ namespace Shared.Actors
                 }
             });
             Recover<IEvent>(evnt => { State = State.Update(evnt); });
+            Recover<SnapshotOffer>(offer =>
+            {
+                if (offer.Snapshot is TState)
+                {
+                    State = (TState)offer.Snapshot;
+                    OnSnapshortOffer(State);
+                }                   
+            });
             Recover<RecoveryCompleted>(completed => { OnRecoverComplete(); });
         }
 
@@ -36,7 +45,10 @@ namespace Shared.Actors
         {
             
         }
+        protected virtual void OnSnapshortOffer(TState state)
+        {
 
+        }
         protected virtual void OnPersist(IEvent persistedEvent)
         {
             State = State.Update(persistedEvent);
