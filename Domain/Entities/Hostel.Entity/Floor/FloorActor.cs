@@ -30,6 +30,11 @@ namespace Hostel.Entity.Floor
         {
             base.OnRecoverComplete();
         }
+        protected override void OnSnapshotOffer(FloorState state)
+        {
+            CreateChildren(state);
+            base.OnSnapshotOffer(state);
+        }
         protected override void OnPersist(IEvent persistedEvent)
         {            
             switch (persistedEvent)
@@ -57,6 +62,12 @@ namespace Hostel.Entity.Floor
             {
                 var bm = Context.ActorOf(BathRoomManagerActor.Prop(new BathRoomManagerHandler(), new BathRoomManagerState(State.FloorSpec.BathRooms, managerTag), managerTag, _connectionString), managerTag);
                 bm.Tell(new LayoutBathRoom());
+            }
+            var roomManagerTag = $"{State.FloorSpec.Tag}-Room-Manager";
+            if (Context.Child(roomManagerTag).IsNobody())
+            {
+                var rm = Context.ActorOf(RoomManagerActor.Prop(new RoomManagerHandler(), new RoomManagerState(State.FloorSpec.Rooms, roomManagerTag), roomManagerTag, _connectionString), roomManagerTag);
+                rm.Tell(new LayoutRoom());
             }
             var toiletManagerTag = $"{State.FloorSpec.Tag}-Toilet-Manager";
             if (Context.Child(toiletManagerTag).IsNobody())
