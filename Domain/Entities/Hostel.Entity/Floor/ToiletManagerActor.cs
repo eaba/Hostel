@@ -1,7 +1,12 @@
 ﻿using Akka.Actor;
+using Hostel.Command;
 using Hostel.Command.Create;
 using Hostel.Command.Internal;
+using Hostel.Entity.Floor.Units;
+using Hostel.Entity.Handler.Floor.Units;
+using Hostel.Event.Created;
 using Hostel.State.Floor;
+using Hostel.State.Floor.Units;
 using Shared;
 using Shared.Actors;
 
@@ -24,6 +29,19 @@ namespace Hostel.Entity.Floor
         }
         protected override void OnPersist(IEvent persistedEvent)
         {
+            switch (persistedEvent)
+            {
+                case CreatedToilet toilet:
+                    {
+                        var tolet = toilet.Toilet;
+                        if (Context.Child(tolet.Tag).IsNobody())
+                        {
+                            var toiletActor = Context.ActorOf(ToiletActor.Prop(new ToiletHandler(), new ToiletState(tolet.ToiletId, tolet.Tag, tolet.Sensors), tolet.Tag, _connectionString), tolet.Tag);
+                            toiletActor.Tell(new InstallSensor());
+                        }
+                    }
+                    break;
+            }
             base.OnPersist(persistedEvent);
         }
         protected override void OnSnapshotOffer(ToiletManagerState state)
