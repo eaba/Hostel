@@ -98,6 +98,7 @@
     <Build Include="dbo\Stored Procedures\CreateToilet.sql" />
     <Build Include="dbo\Stored Procedures\CreateRoom.sql" />
     <Build Include="dbo\Stored Procedures\CreateKitchen.sql" />
+    <Build Include="dbo\Tables\Hostel_Floor_Rooms_Tenancy.sql" />
     <Build Include="dbo\Tables\Hostel_Floor_Rooms_Tenants.sql" />
   </ItemGroup>
   <ItemGroup>
