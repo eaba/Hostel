@@ -3,7 +3,7 @@ using Shared;
 using Shared.Repository;
 using System;
 
-namespace Hostel.Entity.Handler
+namespace Hostel.Entity.Handler.Floor.Units
 {
     public class RoomHandler : ICommandHandler<RoomState>
     {
