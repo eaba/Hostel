@@ -48,7 +48,7 @@ namespace Hostel.Entity.Floor
                         var kitchen = createdKitchen.Kitchen;
                         if(Context.Child(kitchen.Tag).IsNobody())
                         {
-                            var km = Context.ActorOf(KitchenActor.Prop(new KitchenHandler(), new KitchenState(kitchen.Tag, State.FloorSpec.Kitchen.Sensors), kitchen.Tag, _connectionString), kitchen.Tag);
+                            var km = Context.ActorOf(KitchenActor.Prop(new KitchenHandler(), new KitchenState(kitchen.KitchenId, kitchen.Tag, State.FloorSpec.Kitchen.Sensors), kitchen.Tag, _connectionString), kitchen.Tag);
                             km.Tell(new InstallSensor());
                         }
                     }

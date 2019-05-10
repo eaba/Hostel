@@ -4,7 +4,6 @@ using Hostel.Repository;
 using Hostel.State.Floor.Units;
 using Shared;
 using Shared.Repository;
-using System;
 
 namespace Hostel.Entity.Handler.Floor.Units
 {
@@ -16,7 +15,7 @@ namespace Hostel.Entity.Handler.Floor.Units
             {
                 case InstallSensor senors:
                     {
-                        if (repository.InstallSepticTankSensors(state, out var newstate))
+                        if (repository.InstallKitchenSensors(state, out var newstate))
                         {
                             return new HandlerResult(new InstalledSensor(newstate.Sensors));
                         }
