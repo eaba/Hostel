@@ -81,11 +81,11 @@ namespace Shared.Repository.Impl
                                 var rowsAffected = cmd.ExecuteNonQuery();
                                 if (prop.Output)
                                 {
-                                    var os = prop.Param.Split(',');
-                                    foreach (var o in os)
+                                    var outPutParams = prop.Param.Split(',');
+                                    foreach (var outPutParam in outPutParams)
                                     {
-                                        var op = cmd.Parameters[o].Value.ToString();
-                                        OutPuts.Add(new OutPut { Value = op, Param = o, Identifier = prop.Identifier });
+                                        var outputValue = cmd.Parameters[outPutParam].Value.ToString();
+                                        OutPuts.Add(new OutPut(outPutParam, outputValue, prop.Identifier));
                                     }
                                 }
                                 if (rowsAffected >= 0)
@@ -118,13 +118,13 @@ namespace Shared.Repository.Impl
                     var x = cmd.ExecuteNonQuery();
                     if (prop.Output)
                     {
-                        var os = prop.Param.Split(',');
-                        if (os.Count() > 1)
+                        var outPutParams = prop.Param.Split(',');
+                        if (outPutParams.Count() > 1)
                         {
-                            foreach (var o in os)
+                            foreach (var outPutParam in outPutParams)
                             {
-                                var op = cmd.Parameters[o].Value.ToString();
-                                OutPuts.Add(new OutPut { Value = op, Param = o });
+                                var outputValue = cmd.Parameters[outPutParam].Value.ToString();
+                                OutPuts.Add(new OutPut(outPutParam, outputValue, prop.Identifier));
                             }
                         }
                         else

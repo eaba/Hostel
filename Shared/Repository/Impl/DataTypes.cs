@@ -36,8 +36,14 @@ namespace Shared.Repository.Impl
 
     public class OutPut
     {
-        public string Param;
-        public string Value;
-        public string Identifier;
+        public string Param { get; }
+        public string Value { get; }
+        public string Identifier { get; }
+        public OutPut(string param, string value, string identifier)
+        {
+            Param = param;
+            Value = value;
+            Identifier = identifier;
+        }
     }
 }
