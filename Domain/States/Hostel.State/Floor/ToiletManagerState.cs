@@ -1,8 +1,9 @@
-﻿using Hostel.Model;
+﻿using Hostel.Event.Created;
+using Hostel.Model;
 using Shared;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Hostel.State.Floor
 {
@@ -17,7 +18,17 @@ namespace Hostel.State.Floor
         }
         public ToiletManagerState Update(IEvent evnt)
         {
-            throw new NotImplementedException();
+            switch(evnt)
+            {
+                case CreatedToilet createdToilet:
+                    {
+                        var toilet = createdToilet.Toilet;
+                        var toilets = Toilets.Where(x => x.Tag != toilet.Tag).ToList();
+                        toilets.Add(toilet);
+                        return new ToiletManagerState(toilets, toilet.Tag);
+                    }
+                default: return this;
+            }
         }
     }
 }

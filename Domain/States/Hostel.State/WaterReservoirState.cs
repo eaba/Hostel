@@ -1,4 +1,6 @@
-﻿using Hostel.Model;
+﻿using Hostel.Event;
+using Hostel.Event.Created;
+using Hostel.Model;
 using Hostel.State.Sensor;
 using Shared;
 using System.Collections.Generic;
@@ -31,7 +33,19 @@ namespace Hostel.State
         }
         public WaterReservoirState Update(IEvent evnt)
         {
-            throw new System.NotImplementedException();
+            switch (evnt)
+            {
+                case InstalledSensor sensor:
+                    {
+                        return new WaterReservoirState(ReservoirId, Height, AlertHeight, sensor.Sensors, Current, Previous);
+                    }
+                case CreatedWaterReservoir reservoir:
+                    {
+                        var spec = reservoir.ReservoirSpec;
+                        return new WaterReservoirState(spec.ReservoirId, spec.Height, spec.AlertHeight, spec.Sensors);
+                    }
+                default: return this;
+            }
         }
     }
 }

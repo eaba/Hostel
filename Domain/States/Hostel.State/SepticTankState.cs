@@ -1,4 +1,5 @@
 ﻿using Hostel.Event;
+using Hostel.Event.Created;
 using Hostel.Model;
 using Hostel.State.Sensor;
 using Shared;
@@ -37,6 +38,11 @@ namespace Hostel.State
                 case InstalledSensor sensor:
                     {
                         return new SepticTankState(SepticTankId, Height, AlertHeight, sensor.Sensors, Current, Previous);
+                    }
+                case CreatedSepticTank tank:
+                    {
+                        var spec = tank.SepticTankSpec;
+                        return new SepticTankState(spec.SepticTankId, spec.Height, spec.AlertHeight, spec.Sensors);
                     }
                 default: return this;
             }
