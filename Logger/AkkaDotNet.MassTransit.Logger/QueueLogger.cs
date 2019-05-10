@@ -5,6 +5,8 @@ using Akka.Event;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using LogShared;
+
 namespace Akka.MassTransit.Logger
 {
     public class QueueLogger : ReceiveActor

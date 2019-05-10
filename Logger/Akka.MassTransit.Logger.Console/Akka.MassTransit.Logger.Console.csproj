@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AkkaDotNet.MassTransit.Logger\Akka.MassTransit.Logger.csproj" />
+    <ProjectReference Include="..\..\LogShared\LogShared.csproj" />
   </ItemGroup>
 
 </Project>

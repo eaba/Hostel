@@ -1,4 +1,5 @@
 ﻿using GreenPipes;
+using LogShared;
 using MassTransit;
 using Newtonsoft.Json;
 using System;
@@ -11,6 +12,8 @@ namespace Akka.MassTransit.Logger.Console
         static void Main(string[] args)
         {
             System.Console.WriteLine("Hello World!");
+            CreateBus();
+            System.Console.ReadLine();
         }
         private static IBusControl CreateBus()
         {

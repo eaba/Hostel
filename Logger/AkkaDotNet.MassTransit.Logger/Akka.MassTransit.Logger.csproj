@@ -14,4 +14,8 @@
     <PackageReference Include="MassTransit.Azure.ServiceBus.Core" Version="5.3.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\LogShared\LogShared.csproj" />
+  </ItemGroup>
+
 </Project>

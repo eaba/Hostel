@@ -1,5 +1,6 @@
 ﻿using Akka.Actor;
 using Akka.Event;
+using LogShared;
 using MassTransit;
 using System;
 using System.Collections.Generic;
