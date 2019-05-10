@@ -1,6 +1,19 @@
 ﻿CREATE PROCEDURE [dbo].[CreateKitchen]
-	@param1 int = 0,
-	@param2 int
+@tag nvarchar(50),
+@floor uniqueidentifier,
+@kitchen uniqueidentifier output
 AS
-	SELECT @param1, @param2
-RETURN 0
+BEGIN
+	DECLARE @id uniqueidentifier;
+	SET @id = (SELECT KitchenId FROM Hostel_Floor_Kitchen WHERE Tag = @tag AND FloorId = @floor);
+	IF @id IS NULL
+	BEGIN
+		SET @id = NEWID();
+		INSERT INTO Hostel_Floor_Kitchen(KitchenId, FloorId, Tag) VALUES(@id, @floor, @tag);
+		SET @kitchen = @id;
+	END
+	ELSE
+	BEGIN
+	 SET @kitchen = @id;
+	END
+END

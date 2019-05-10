@@ -5,15 +5,15 @@
 AS
 BEGIN
 	DECLARE @id uniqueidentifier;
-	SET @id = (SELECT RoomId FROM Hostel_Floor_Rooms WHERE Tag = @tag AND HostelId = @hostel);
+	SET @id = (SELECT RoomId FROM Hostel_Floor_Rooms WHERE Tag = @tag AND FloorId = @floor);
 	IF @id IS NULL
 	BEGIN
 		SET @id = NEWID();
-		INSERT INTO Hostel_Floor(FloorId, HostelId, Tag) VALUES(@id, @hostel, @tag);
-		SET @floor = @id;
+		INSERT INTO Hostel_Floor_Rooms(RoomId, FloorId, Tag) VALUES(@id, @floor, @tag);
+		SET @room = @id;
 	END
 	ELSE
 	BEGIN
-	 SET @floor = @id;
+	 SET @room = @id;
 	END
 END

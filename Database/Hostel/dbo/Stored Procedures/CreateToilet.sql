@@ -1,6 +1,19 @@
 ﻿CREATE PROCEDURE [dbo].[CreateToilet]
-	@param1 int = 0,
-	@param2 int
+@tag nvarchar(50),
+@floor uniqueidentifier,
+@toilet uniqueidentifier output
 AS
-	SELECT @param1, @param2
-RETURN 0
+BEGIN
+	DECLARE @id uniqueidentifier;
+	SET @id = (SELECT ToiletId FROM Hostel_Floor_Toilets WHERE Tag = @tag AND FloorId = @floor);
+	IF @id IS NULL
+	BEGIN
+		SET @id = NEWID();
+		INSERT INTO Hostel_Floor_Toilets(ToiletId, FloorId, Tag) VALUES(@id, @floor, @tag);
+		SET @toilet = @id;
+	END
+	ELSE
+	BEGIN
+	 SET @toilet = @id;
+	END
+END
