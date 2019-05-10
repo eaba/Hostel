@@ -1,4 +1,5 @@
 ﻿using Akka.Actor;
+using Hostel.Command.Create;
 using Hostel.Command.Internal;
 using Hostel.State.Floor;
 using Shared;
@@ -21,6 +22,10 @@ namespace Hostel.Entity.Floor
         {            
             base.PreStart();
         }
+        protected override void OnPersist(IEvent persistedEvent)
+        {
+            base.OnPersist(persistedEvent);
+        }
         protected override void OnSnapshotOffer(ToiletManagerState state)
         {
             CreateToilets(state);
@@ -41,9 +46,9 @@ namespace Hostel.Entity.Floor
         private void CreateToilets(ToiletManagerState state)
         {
             var toilets = state.Toilets;
-            foreach (var tlt in toilets)
+            foreach (var toilet in toilets)
             {
-                //send createtoilet command to self
+                var createToilet = new CreateToilet(toilet);
             }
         }
     }

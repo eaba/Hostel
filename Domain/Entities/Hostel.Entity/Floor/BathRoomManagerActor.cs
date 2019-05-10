@@ -1,7 +1,7 @@
 ﻿using Akka.Actor;
+using Hostel.Command.Create;
 using Hostel.Command.Internal;
 using Hostel.Entity.Floor.Units;
-using Hostel.Entity.Handler;
 using Hostel.State.Floor;
 using Hostel.State.Floor.Units;
 using Shared;
@@ -29,6 +29,10 @@ namespace Hostel.Entity.Floor
         {
             base.PreStart();
         }
+        protected override void OnPersist(IEvent persistedEvent)
+        {
+            base.OnPersist(persistedEvent);
+        }
         public static Props Prop(ICommandHandler<BathRoomManagerState> handler, BathRoomManagerState defaultState, string persistenceId, string connectionString)
         {
             return Props.Create(() => new BathRoomManagerActor(handler, defaultState, persistenceId, connectionString));
@@ -46,9 +50,8 @@ namespace Hostel.Entity.Floor
             var bathRooms = state.BathRooms;
             foreach (var bath in bathRooms)
             {
-
-                var bathState = new BathRoomState();
-                var bathActor = Context.ActorOf(BathRoomActor.Prop(new BathRoomHandler(), State, bath.Tag, _connectionString), bath.Tag);
+                var createBathRoom = new CreateBathRoom(bath);
+                Self.Tell(createBathRoom);
             }
         }
     }
