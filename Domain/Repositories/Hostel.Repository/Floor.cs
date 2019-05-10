@@ -97,7 +97,7 @@ namespace Hostel.Repository
             }
             return false;
         }
-        public static bool InstallKitchenSensors(this IRepository<IDbProperties> repository, KitchenState state, out SepticTankState septicTankState)
+        public static bool InstallKitchenSensors(this IRepository<IDbProperties> repository, KitchenState state, out KitchenState kitchenNewState)
         {
             var sensors = state.Sensors;
             var dbProperties = new List<IDbProperties>();
@@ -105,12 +105,12 @@ namespace Hostel.Repository
             {
                 var dataTypes = new List<IDataTypes>
                         {
-                            new DataTypes("@septictank", SqlDbType.UniqueIdentifier, 0, state.SepticTankId, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@kitchen", SqlDbType.UniqueIdentifier, 0, state.KitchenId, ParameterDirection.Input, false, false, ""),
                             new DataTypes("@tag", SqlDbType.NVarChar, 50, sensor.Tag, ParameterDirection.Input, false, false, ""),
                             new DataTypes("@role", SqlDbType.NVarChar, 50, sensor.Role, ParameterDirection.Input, false, false, ""),
                             new DataTypes("@sensorid", SqlDbType.UniqueIdentifier, 0, string.Empty, ParameterDirection.Output, false, false, "@sensorid")
                         };
-                var repos = new DbProperties("InstallSepticSensor", dataTypes, string.Empty, true, "@sensorid", sensor.Tag);
+                var repos = new DbProperties("InstallKitchenSensor", dataTypes, string.Empty, true, "@sensorid", sensor.Tag);
             }
             var x = repository.Update(dbProperties);
             if (x > 0)
@@ -120,10 +120,68 @@ namespace Hostel.Repository
                     var outputs = repository.OutPuts;
                     sensor.SensorId = outputs.ToList().FirstOrDefault(y => y.Identifier == sensor.Tag).Value;
                 }
-                septicTankState = new SepticTankState(state.SepticTankId, state.Height, state.AlertHeight, sensors);
+                kitchenNewState = new KitchenState(state.KitchenId, state.Tag, sensors);
                 return true;
             }
-            septicTankState = state;
+            kitchenNewState = state;
+            return false;
+        }
+        public static bool InstallBathRoomSensors(this IRepository<IDbProperties> repository, BathRoomState state, out BathRoomState bathroomNewState)
+        {
+            var sensors = state.Sensors;
+            var dbProperties = new List<IDbProperties>();
+            foreach (var sensor in sensors)
+            {
+                var dataTypes = new List<IDataTypes>
+                        {
+                            new DataTypes("@bathroom", SqlDbType.UniqueIdentifier, 0, state.BathRoomId, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@tag", SqlDbType.NVarChar, 50, sensor.Tag, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@role", SqlDbType.NVarChar, 50, sensor.Role, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@sensorid", SqlDbType.UniqueIdentifier, 0, string.Empty, ParameterDirection.Output, false, false, "@sensorid")
+                        };
+                var repos = new DbProperties("InstallBathRoomSensor", dataTypes, string.Empty, true, "@sensorid", sensor.Tag);
+            }
+            var x = repository.Update(dbProperties);
+            if (x > 0)
+            {
+                foreach (var sensor in sensors)
+                {
+                    var outputs = repository.OutPuts;
+                    sensor.SensorId = outputs.ToList().FirstOrDefault(y => y.Identifier == sensor.Tag).Value;
+                }
+                bathroomNewState = new BathRoomState(state.BathRoomId, state.Tag, sensors);
+                return true;
+            }
+            bathroomNewState = state;
+            return false;
+        }
+        public static bool InstallToiletSensors(this IRepository<IDbProperties> repository, ToiletState state, out ToiletState toiletNewState)
+        {
+            var sensors = state.Sensors;
+            var dbProperties = new List<IDbProperties>();
+            foreach (var sensor in sensors)
+            {
+                var dataTypes = new List<IDataTypes>
+                        {
+                            new DataTypes("@toilet", SqlDbType.UniqueIdentifier, 0, state.ToiletId, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@tag", SqlDbType.NVarChar, 50, sensor.Tag, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@role", SqlDbType.NVarChar, 50, sensor.Role, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@sensorid", SqlDbType.UniqueIdentifier, 0, string.Empty, ParameterDirection.Output, false, false, "@sensorid")
+                        };
+                var repos = new DbProperties("InstallToiletSensor", dataTypes, string.Empty, true, "@sensorid", sensor.Tag);
+            }
+            var x = repository.Update(dbProperties);
+            if (x > 0)
+            {
+                foreach (var sensor in sensors)
+                {
+                    var outputs = repository.OutPuts;
+                    sensor.SensorId = outputs.ToList().FirstOrDefault(y => y.Identifier == sensor.Tag).Value;
+                }
+                toiletNewState = new ToiletState(state.ToiletId, state.Tag, sensors);
+                return true;
+            }
+            toiletNewState = state;
             return false;
         }
         public static bool InstallSepticTankSensors(this IRepository<IDbProperties> repository, SepticTankState state, out SepticTankState septicTankState)
