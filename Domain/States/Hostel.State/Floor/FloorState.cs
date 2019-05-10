@@ -1,4 +1,5 @@
-﻿using Hostel.Model;
+﻿using Hostel.Event.Created;
+using Hostel.Model;
 using Shared;
 
 namespace Hostel.State.Floor
@@ -12,8 +13,16 @@ namespace Hostel.State.Floor
         }
         
         public FloorState Update(IEvent evnt)
-        {            
-            return this;
+        {
+            switch (evnt)
+            {
+                case CreatedFloor createdFloor:
+                    {
+                        var floor = createdFloor.Floor;
+                        return new FloorState(floor);
+                    }
+                default: return this;
+            }
         }
     }
 }

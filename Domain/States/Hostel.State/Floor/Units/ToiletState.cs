@@ -30,7 +30,10 @@ namespace Hostel.State.Floor.Units
         }
         public ToiletState Update(IEvent evnt)
         {
-            throw new NotImplementedException();
+            switch (evnt)
+            {
+                default: return this;
+            }
         }
     }
 }

@@ -23,16 +23,6 @@ namespace Hostel.State.Floor.Units
         {
             switch (evnt)
             {
-                /*case CreatedRoom createdRoom:
-                    {
-                        var room = createdRoom.Room;
-                        return new RoomState(room.RoomId, room.FloorId, room.Tag, false, Enumerable.Empty<Tenant>());
-                    }
-                case RentedOutRoom rentedOutRoom:
-                    {
-                        var tenant = rentedOutRoom.RentOut;
-                        return new RoomState(RoomId, FloorId, Tag, true, tenant.Tenants);
-                    }*/
                 default:
                     return this;
             }
