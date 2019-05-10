@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Hostel_Floors] (
+﻿CREATE TABLE [dbo].[Hostel_Floor] (
     [FloorId]   UNIQUEIDENTIFIER CONSTRAINT [DF_Hostel_Floors_FloorId] DEFAULT (newid()) ROWGUIDCOL NOT NULL,
     [HostelId]   UNIQUEIDENTIFIER NOT NULL,
 	[Tag] NVARCHAR (50)    NOT NULL,

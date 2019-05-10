@@ -72,7 +72,7 @@
     <Build Include="dbo\Tables\Hostel.sql" />
     <Build Include="dbo\Tables\Hostel_Water_Reservoir.sql" />
     <Build Include="dbo\Tables\Hostel_Septic_Tank.sql" />
-    <Build Include="dbo\Tables\Hostel_Floors.sql" />
+    <Build Include="dbo\Tables\Hostel_Floor.sql" />
     <Build Include="dbo\Tables\Hostel_Floor_Toilets.sql" />
     <Build Include="dbo\Tables\Hostel_Floor_Bath_Room.sql" />
     <Build Include="dbo\Tables\Hostel_Floor_Kitchen.sql" />

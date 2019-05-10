@@ -3,7 +3,7 @@
     [FloorId] UNIQUEIDENTIFIER NOT NULL,
     [Tag] NVARCHAR (50)    NOT NULL,
     CONSTRAINT [PK_Hostel_Floor_Rooms] PRIMARY KEY CLUSTERED ([RoomId] ASC),
-    CONSTRAINT [FK_Hostel_Floor_Rooms_Hostel_Floors] FOREIGN KEY ([FloorId]) REFERENCES [dbo].[Hostel_Floors] ([FloorId]),
+    CONSTRAINT [FK_Hostel_Floor_Rooms_Hostel_Floors] FOREIGN KEY ([FloorId]) REFERENCES [dbo].[Hostel_Floor] ([FloorId]),
     CONSTRAINT [Unique_Floor_Room] UNIQUE NONCLUSTERED ([Tag] ASC)
 );
 

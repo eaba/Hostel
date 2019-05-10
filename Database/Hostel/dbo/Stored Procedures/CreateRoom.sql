@@ -1,6 +1,19 @@
 ﻿CREATE PROCEDURE [dbo].[CreateRoom]
-	@param1 int = 0,
-	@param2 int
+@tag nvarchar(50),
+@floor uniqueidentifier,
+@room uniqueidentifier output
 AS
-	SELECT @param1, @param2
-RETURN 0
+BEGIN
+	DECLARE @id uniqueidentifier;
+	SET @id = (SELECT RoomId FROM Hostel_Floor_Rooms WHERE Tag = @tag AND HostelId = @hostel);
+	IF @id IS NULL
+	BEGIN
+		SET @id = NEWID();
+		INSERT INTO Hostel_Floor(FloorId, HostelId, Tag) VALUES(@id, @hostel, @tag);
+		SET @floor = @id;
+	END
+	ELSE
+	BEGIN
+	 SET @floor = @id;
+	END
+END
