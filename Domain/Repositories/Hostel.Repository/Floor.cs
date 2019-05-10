@@ -1,5 +1,6 @@
 ﻿using Hostel.Model;
 using Hostel.State;
+using Hostel.State.Floor.Units;
 using Shared.Repository;
 using Shared.Repository.Impl;
 using System.Collections.Generic;
@@ -94,6 +95,35 @@ namespace Hostel.Repository
                 spec.ToiletId = repos.Id;
                 return true;
             }
+            return false;
+        }
+        public static bool InstallKitchenSensors(this IRepository<IDbProperties> repository, KitchenState state, out SepticTankState septicTankState)
+        {
+            var sensors = state.Sensors;
+            var dbProperties = new List<IDbProperties>();
+            foreach (var sensor in sensors)
+            {
+                var dataTypes = new List<IDataTypes>
+                        {
+                            new DataTypes("@septictank", SqlDbType.UniqueIdentifier, 0, state.SepticTankId, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@tag", SqlDbType.NVarChar, 50, sensor.Tag, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@role", SqlDbType.NVarChar, 50, sensor.Role, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@sensorid", SqlDbType.UniqueIdentifier, 0, string.Empty, ParameterDirection.Output, false, false, "@sensorid")
+                        };
+                var repos = new DbProperties("InstallSepticSensor", dataTypes, string.Empty, true, "@sensorid", sensor.Tag);
+            }
+            var x = repository.Update(dbProperties);
+            if (x > 0)
+            {
+                foreach (var sensor in sensors)
+                {
+                    var outputs = repository.OutPuts;
+                    sensor.SensorId = outputs.ToList().FirstOrDefault(y => y.Identifier == sensor.Tag).Value;
+                }
+                septicTankState = new SepticTankState(state.SepticTankId, state.Height, state.AlertHeight, sensors);
+                return true;
+            }
+            septicTankState = state;
             return false;
         }
         public static bool InstallSepticTankSensors(this IRepository<IDbProperties> repository, SepticTankState state, out SepticTankState septicTankState)

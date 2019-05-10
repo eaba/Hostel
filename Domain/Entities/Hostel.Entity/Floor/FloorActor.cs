@@ -4,6 +4,8 @@ using Hostel.Command.Create;
 using Hostel.Command.Internal;
 using Hostel.Entity.Floor.Units;
 using Hostel.Entity.Handler;
+using Hostel.Entity.Handler.Floor;
+using Hostel.Entity.Handler.Floor.Units;
 using Hostel.Event.Created;
 using Hostel.State.Floor;
 using Hostel.State.Floor.Units;

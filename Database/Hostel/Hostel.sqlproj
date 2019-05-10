@@ -100,6 +100,10 @@
     <Build Include="dbo\Stored Procedures\CreateKitchen.sql" />
     <Build Include="dbo\Tables\Hostel_Floor_Rooms_Tenancy.sql" />
     <Build Include="dbo\Tables\Hostel_Floor_Rooms_Tenants.sql" />
+    <Build Include="dbo\Stored Procedures\InstallKitchenSensor.sql" />
+    <Build Include="dbo\Stored Procedures\InstallToiletSensor.sql" />
+    <Build Include="dbo\Stored Procedures\InstallBathRoomSensor.sql" />
+    <Build Include="dbo\Stored Procedures\InstallRoomSensor.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Hostel.refactorlog" />

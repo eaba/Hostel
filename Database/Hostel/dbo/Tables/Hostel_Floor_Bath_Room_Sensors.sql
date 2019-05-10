@@ -2,7 +2,6 @@
 (
 	[BathroomSensorId]  UNIQUEIDENTIFIER CONSTRAINT [Hostel_Bath_Room_Sensors_BathroomSensorId] DEFAULT (newid()) ROWGUIDCOL NOT NULL,
     [BathRoomId]    UNIQUEIDENTIFIER NOT NULL,
-	[SensorId]    UNIQUEIDENTIFIER NOT NULL,
     [Tag] NVARCHAR (50)    NOT NULL,
 	[Role] NVARCHAR (50)    NOT NULL,
     CONSTRAINT [PK_Hostel_Bath_Room_Sensors] PRIMARY KEY CLUSTERED ([BathroomSensorId] ASC),

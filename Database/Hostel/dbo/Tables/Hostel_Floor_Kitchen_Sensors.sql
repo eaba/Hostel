@@ -2,7 +2,6 @@
 (
 	[KitchenSensorId]  UNIQUEIDENTIFIER CONSTRAINT [DF_Hostel_Floor_Kitchen_Sensors] DEFAULT (newid()) ROWGUIDCOL NOT NULL,
     [KitchenId]    UNIQUEIDENTIFIER NOT NULL,
-	[SensorId]    UNIQUEIDENTIFIER NOT NULL,
     [Tag] NVARCHAR (50)    NOT NULL,
 	[Role] NVARCHAR (50)    NOT NULL,
     CONSTRAINT [PK_Hostel_Floor_Kitchen_Sensors] PRIMARY KEY CLUSTERED ([KitchenSensorId] ASC),
