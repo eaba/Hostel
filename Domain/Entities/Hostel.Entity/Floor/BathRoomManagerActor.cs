@@ -1,6 +1,9 @@
 ﻿using Akka.Actor;
 using Hostel.Command.Internal;
+using Hostel.Entity.Floor.Units;
+using Hostel.Entity.Handler;
 using Hostel.State.Floor;
+using Hostel.State.Floor.Units;
 using Shared;
 using Shared.Actors;
 
@@ -41,9 +44,11 @@ namespace Hostel.Entity.Floor
         private void CreateBathRooms(BathRoomManagerState state)
         {
             var bathRooms = state.BathRooms;
-            foreach (var baths in bathRooms)
+            foreach (var bath in bathRooms)
             {
-                //send createbathroom command to self
+
+                var bathState = new BathRoomState();
+                var bathActor = Context.ActorOf(BathRoomActor.Prop(new BathRoomHandler(), State, bath.Tag, _connectionString), bath.Tag);
             }
         }
     }

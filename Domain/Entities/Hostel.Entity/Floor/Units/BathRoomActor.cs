@@ -1,12 +1,9 @@
 ﻿using Akka.Actor;
 using Hostel.Entity.Handler.Sensor;
 using Hostel.Entity.Sensor;
-using Hostel.Model;
 using Hostel.State.Floor.Units;
-using Hostel.State.Sensor;
 using Shared;
 using Shared.Actors;
-using System.Collections.Generic;
 
 namespace Hostel.Entity.Floor.Units
 {
