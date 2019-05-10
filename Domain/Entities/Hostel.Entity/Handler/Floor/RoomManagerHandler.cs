@@ -15,7 +15,7 @@ namespace Hostel.Entity.Handler.Floor
             {
                 case CreateRoom room:
                     {
-                        if (repository.CreateRoom(room.Room))
+                        if (repository.CreateRoom(room.Room)) 
                         {
                             return new HandlerResult(new CreatedRoom(room.Room));
                         }
