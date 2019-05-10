@@ -13,14 +13,7 @@ namespace Hostel.Entity.Handler.Floor.Units
         {
             switch (command)
             {
-                case CreateRoom room:
-                    {
-                        if (repository.CreateRoom(room.Room))
-                        {
-                            return new HandlerResult(new CreatedRoom(room.Room));
-                        }
-                        return new HandlerResult($"Room {room.Room.Tag} could not be created at this time!", "", "");
-                    }
+                
                 default: return HandlerResult.NotHandled(command, command.Commander, command.CommandId);
             }
         }

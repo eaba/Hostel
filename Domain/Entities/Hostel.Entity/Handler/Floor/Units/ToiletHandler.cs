@@ -1,4 +1,6 @@
-﻿using Hostel.Command.Create;
+﻿using Hostel.Command;
+using Hostel.Command.Create;
+using Hostel.Event;
 using Hostel.Event.Created;
 using Hostel.Repository;
 using Hostel.State.Floor.Units;
@@ -13,13 +15,14 @@ namespace Hostel.Entity.Handler.Floor.Units
         {
             switch (command)
             {
-                case CreateToilet toilet:
+                
+                case InstallSensor senors:
                     {
-                        if (repository.CreateToilet(toilet.Toilet))
+                        if (repository.InstallToiletSensors(state, out var newstate))
                         {
-                            return new HandlerResult(new CreatedToilet(toilet.Toilet));
+                            return new HandlerResult(new InstalledSensor(newstate.Sensors));
                         }
-                        return new HandlerResult($"Toilet {toilet.Toilet.Tag} could not be created at this time!", "", "");
+                        return new HandlerResult($"Sensors for {state.Tag} could not be installed at this time!", string.Empty, string.Empty);
                     }
                 default: return HandlerResult.NotHandled(command, command.Commander, command.CommandId);
             }
