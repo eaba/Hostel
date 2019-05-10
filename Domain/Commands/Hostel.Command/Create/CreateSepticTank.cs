@@ -2,7 +2,7 @@
 using Shared;
 using System.Collections.Generic;
 
-namespace Hostel.Command
+namespace Hostel.Command.Create
 {
     public class CreateSepticTank : Message, ICommand
     {

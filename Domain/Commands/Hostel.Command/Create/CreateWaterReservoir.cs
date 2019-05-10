@@ -1,7 +1,7 @@
 ﻿using Hostel.Model;
 using Shared;
 
-namespace Hostel.Command
+namespace Hostel.Command.Create
 {
     public class CreateWaterReservoir : Message, ICommand
     {

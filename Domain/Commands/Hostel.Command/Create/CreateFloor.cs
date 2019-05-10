@@ -1,7 +1,7 @@
 ﻿using Hostel.Model;
 using Shared;
 
-namespace Hostel.Command
+namespace Hostel.Command.Create
 {
     public class CreateFloor: Message, ICommand
     {
@@ -12,6 +12,5 @@ namespace Hostel.Command
         {
             Floor = floor;
         }
-
     }
 }

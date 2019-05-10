@@ -28,6 +28,74 @@ namespace Hostel.Repository
             }
             return false;
         }
+        public static bool CreateKitchen(this IRepository<IDbProperties> repository, KitchenSpec spec)
+        {
+            var dataTypes = new List<IDataTypes>
+                        {
+                            new DataTypes("@floor", SqlDbType.UniqueIdentifier, 0, spec.FloorId, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@tag", SqlDbType.NVarChar, 50, spec.Tag, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@kitchen", SqlDbType.UniqueIdentifier, 0, string.Empty, ParameterDirection.Output, false, false, "@kitchen")
+                        };
+            var repos = new DbProperties("CreateKitchen", dataTypes, string.Empty, true, "@kitchen");
+            var x = repository.Update(new[] { repos });
+            if (x > 0)
+            {
+                spec.KitchenId = repos.Id;
+                return true;
+            }
+            return false;
+        }
+        public static bool CreateRoom(this IRepository<IDbProperties> repository, RoomSpecs spec)
+        {
+            var dataTypes = new List<IDataTypes>
+                        {
+                            new DataTypes("@floor", SqlDbType.UniqueIdentifier, 0, spec.FloorId, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@tag", SqlDbType.NVarChar, 50, spec.Tag, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@room", SqlDbType.UniqueIdentifier, 0, string.Empty, ParameterDirection.Output, false, false, "@room")
+                        };
+            var repos = new DbProperties("CreateRoom", dataTypes, string.Empty, true, "@room");
+            var x = repository.Update(new[] { repos });
+            if (x > 0)
+            {
+                spec.RoomId = repos.Id;
+                return true;
+            }
+            return false;
+        }
+        public static bool CreateBathRoom(this IRepository<IDbProperties> repository, BathRoomSpec spec)
+        {
+            var dataTypes = new List<IDataTypes>
+                        {
+                            new DataTypes("@floor", SqlDbType.UniqueIdentifier, 0, spec.FloorId, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@tag", SqlDbType.NVarChar, 50, spec.Tag, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@bathroom", SqlDbType.UniqueIdentifier, 0, string.Empty, ParameterDirection.Output, false, false, "@bathroom")
+                        };
+            var repos = new DbProperties("CreateBathRoom", dataTypes, string.Empty, true, "@bathroom");
+            var x = repository.Update(new[] { repos });
+            if (x > 0)
+            {
+                spec.BathRoomId = repos.Id;
+                return true;
+            }
+            return false;
+        }
+        public static bool CreateToilet(this IRepository<IDbProperties> repository, ToiletSpec spec)
+        {
+            var dataTypes = new List<IDataTypes>
+                        {
+                            new DataTypes("@floor", SqlDbType.UniqueIdentifier, 0, spec.FloorId, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@tag", SqlDbType.NVarChar, 50, spec.Tag, ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@toilet", SqlDbType.UniqueIdentifier, 0, string.Empty, ParameterDirection.Output, false, false, "@toilet")
+                        };
+            var repos = new DbProperties("CreateToilet", dataTypes, string.Empty, true, "@toilet");
+            var x = repository.Update(new[] { repos });
+            if (x > 0)
+            {
+                spec.ToiletId = repos.Id;
+                return true;
+            }
+            return false;
+        }
         public static bool InstallSepticTankSensors(this IRepository<IDbProperties> repository, SepticTankState state, out SepticTankState septicTankState)
         {
             var sensors = state.Sensors;

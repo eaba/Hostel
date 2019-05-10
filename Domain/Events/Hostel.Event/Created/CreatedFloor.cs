@@ -1,7 +1,7 @@
 ﻿using Hostel.Model;
 using Shared;
 
-namespace Hostel.Event
+namespace Hostel.Event.Created
 {
     public class CreatedFloor:IEvent
     {
@@ -11,8 +11,6 @@ namespace Hostel.Event
         public CreatedFloor(FloorSpec floor)
         {
             Floor = floor;
-            Commander = string.Empty;
-            CommandId = string.Empty;
         }        
     }
 }

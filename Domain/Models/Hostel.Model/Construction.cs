@@ -33,7 +33,7 @@ namespace Hostel.Model
 
             for (var i = 0; i <= room; ++i)
             {
-                rooms.Add(new RoomSpecs(roomprefix, i.ToString("00")));
+                rooms.Add(new RoomSpecs { Tag = roomprefix + i.ToString("00") });
             }
             for (var i = 0; i <= toilet; ++i)
             {
@@ -126,24 +126,29 @@ namespace Hostel.Model
     }
     public class RoomSpecs
     {
-        public string Tag { get; }
-        public RoomSpecs(string roomTag, string tag)
-        {
-            Tag = roomTag+tag;
-        }
+        public string RoomId;
+        public string FloorId;
+        public string Tag;
+        public IEnumerable<SensorSpec> Sensors;
     }
     public class ToiletSpec
     {
+        public string ToiletId;
+        public string FloorId;
         public string Tag;
         public IEnumerable<SensorSpec> Sensors;
     }
     public class BathRoomSpec
     {
+        public string BathRoomId;
+        public string FloorId;
         public string Tag;
         public IEnumerable<SensorSpec> Sensors;
     }
     public class KitchenSpec
     {
+        public string KitchenId;
+        public string FloorId;
         public string Tag;
         public IEnumerable<SensorSpec> Sensors;
     }

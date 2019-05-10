@@ -1,10 +1,9 @@
-﻿using Hostel.Command;
-using Hostel.Event;
+﻿using Hostel.Command.Create;
+using Hostel.Event.Created;
 using Hostel.Repository;
 using Hostel.State.Floor;
 using Shared;
 using Shared.Repository;
-using System;
 
 namespace Hostel.Entity.Handler
 {
@@ -14,7 +13,15 @@ namespace Hostel.Entity.Handler
         {
             switch(command)
             {
-                
+                case CreateKitchen createKitchen:
+                    {
+                        var kitchen = createKitchen.Kitchen;
+                        if (repository.CreateKitchen(kitchen))
+                        {
+                            return new HandlerResult(new CreatedKitchen(kitchen));
+                        }
+                        return new HandlerResult($"Kitchen {kitchen.Tag} could not be created at this time!", createKitchen.Commander, createKitchen.CommandId);
+                    }
                 default: return HandlerResult.NotHandled(command, command.Commander, command.CommandId);
             }
         }

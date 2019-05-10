@@ -1,18 +1,16 @@
 ﻿using Hostel.Model;
 using Shared;
 
-namespace Hostel.Command
+namespace Hostel.Command.Create
 {
     public class CreateRoom : Message, ICommand
     {
-        public readonly Room Room;
+        public readonly RoomSpec Room;
         public string Commander { get; }
         public string CommandId { get; }
-        public CreateRoom(Room room, string commander, string commandid)
+        public CreateRoom(RoomSpec room)
         {
             Room = room;
-            Commander = commander;
-            CommandId = commandid;
         }
         
     }

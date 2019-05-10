@@ -1,7 +1,7 @@
 ﻿using Hostel.Model;
 using Shared;
 
-namespace Hostel.Event
+namespace Hostel.Event.Created
 {
     public class CreatedSepticTank : IEvent
     {

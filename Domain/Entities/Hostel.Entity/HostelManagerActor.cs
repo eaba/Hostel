@@ -1,9 +1,11 @@
 ﻿using Akka.Actor;
 using Hostel.Command;
+using Hostel.Command.Create;
 using Hostel.Command.Internal;
 using Hostel.Entity.Floor;
 using Hostel.Entity.Handler;
 using Hostel.Event;
+using Hostel.Event.Created;
 using Hostel.State;
 using Hostel.State.Floor;
 using Shared;

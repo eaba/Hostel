@@ -1,8 +1,10 @@
 ﻿using Akka.Actor;
 using Hostel.Command;
+using Hostel.Command.Create;
 using Hostel.Command.Internal;
 using Hostel.Entity.Floor.Units;
 using Hostel.Entity.Handler;
+using Hostel.Event.Created;
 using Hostel.State.Floor;
 using Hostel.State.Floor.Units;
 using Shared;
@@ -39,7 +41,16 @@ namespace Hostel.Entity.Floor
         {            
             switch (persistedEvent)
             {
-                
+                case CreatedKitchen createdKitchen:
+                    {
+                        var kitchen = createdKitchen.Kitchen;
+                        if(Context.Child(kitchen.Tag).IsNobody())
+                        {
+                            var km = Context.ActorOf(KitchenActor.Prop(new KitchenHandler(), new KitchenState(kitchen.Tag, State.FloorSpec.Kitchen.Sensors), kitchen.Tag, _connectionString), kitchen.Tag);
+                            km.Tell(new InstallSensor());
+                        }
+                    }
+                    break;
             }
             base.OnPersist(persistedEvent);
         }
@@ -57,6 +68,10 @@ namespace Hostel.Entity.Floor
         }
         private void CreateChildren(FloorState state)
         {
+            var kitchenSpec = State.FloorSpec.Kitchen;
+            var createKitchen = new CreateKitchen(kitchenSpec);
+            Self.Tell(createKitchen);
+
             var managerTag = $"{State.FloorSpec.Tag}-BathRoom-Manager";
             if(Context.Child(managerTag).IsNobody())
             {
@@ -75,12 +90,7 @@ namespace Hostel.Entity.Floor
                 var tm = Context.ActorOf(ToiletManagerActor.Prop(new ToiletManagerHandler(), new ToiletManagerState(State.FloorSpec.Toilets, toiletManagerTag), toiletManagerTag, _connectionString), toiletManagerTag);
                 tm.Tell(new LayoutToilet());
             }
-            var kitchenTag = State.FloorSpec.Kitchen.Tag;
-            if (Context.Child(kitchenTag).IsNobody())
-            {
-                var km = Context.ActorOf(KitchenActor.Prop(new KitchenHandler(), new KitchenState(kitchenTag, State.FloorSpec.Kitchen.Sensors), kitchenTag, _connectionString), kitchenTag);
-                km.Tell(new InstallSensor());
-            }
+            
         }
     }
 }
