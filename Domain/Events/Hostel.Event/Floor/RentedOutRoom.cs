@@ -11,5 +11,9 @@ namespace Hostel.Event.Floor
         {
             RentOut = rentOut;
         }
+
+        public string Commander => throw new System.NotImplementedException();
+
+        public string CommandId => throw new System.NotImplementedException();
     }
 }

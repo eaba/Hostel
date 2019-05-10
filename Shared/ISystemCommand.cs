@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Shared
 {
-    public interface ICommand: IMessage
+    public interface ISystemCommand: IMessage
     {
     }
 }
