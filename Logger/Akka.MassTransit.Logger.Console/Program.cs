@@ -12,8 +12,10 @@ namespace Akka.MassTransit.Logger.Console
         static void Main(string[] args)
         {
             System.Console.WriteLine("Hello World!");
-            CreateBus();
+            var bus = CreateBus();
+            bus.Start();
             System.Console.ReadLine();
+            bus.Stop();
         }
         private static IBusControl CreateBus()
         {
