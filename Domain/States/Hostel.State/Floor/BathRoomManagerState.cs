@@ -9,10 +9,12 @@ namespace Hostel.State.Floor
 {
     public class BathRoomManagerState : Message, IState<BathRoomManagerState>
     {
+        public string FloorId { get; }
         public string Tag { get; }
         public IEnumerable<BathRoomSpec> BathRooms { get; }
-        public BathRoomManagerState(IEnumerable<BathRoomSpec> bathRooms, string tag)
+        public BathRoomManagerState(string floor, IEnumerable<BathRoomSpec> bathRooms, string tag)
         {
+            FloorId = floor;
             Tag = tag;
             BathRooms = bathRooms;
         }
@@ -26,7 +28,7 @@ namespace Hostel.State.Floor
                         var bathroom = createdBathRoom.BathRoom;
                         var bathrooms = BathRooms.Where(x => x.Tag != bathroom.Tag).ToList();
                         bathrooms.Add(bathroom);
-                        return new BathRoomManagerState(bathrooms, bathroom.Tag);
+                        return new BathRoomManagerState(FloorId, bathrooms, bathroom.Tag);
                     }
                 default: return this;
             }

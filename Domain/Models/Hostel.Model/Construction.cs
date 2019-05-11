@@ -39,7 +39,7 @@ namespace Hostel.Model
             {
                 var tolet = new ToiletSpec
                 {
-                    Tag = toiletprefix + i.ToString("00")
+                    Tag = toiletprefix + floor + i.ToString("00")
                 };
                 tolet.Sensors = new List<SensorSpec>(new[] 
                 {
@@ -53,7 +53,7 @@ namespace Hostel.Model
             {
                 var bath = new BathRoomSpec
                 {
-                    Tag = bathprefix + i.ToString("00")
+                    Tag = bathprefix + floor + i.ToString("00")
                 };
                 bath.Sensors = new List<SensorSpec>(new[]
                 {
@@ -65,7 +65,7 @@ namespace Hostel.Model
             }
             var kitchen = new KitchenSpec
             {
-                Tag = kitTag,
+                Tag = kitTag + floor,
                 Sensors = new List<SensorSpec>(new[]
                 {
                     new SensorSpec($"Sensor_{kitTag}_A", "Dirth"),

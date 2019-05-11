@@ -66,6 +66,7 @@ namespace Hostel.Entity.Floor
             var bathRooms = state.BathRooms;
             foreach (var bath in bathRooms)
             {
+                bath.FloorId = state.FloorId;
                 var createBathRoom = new CreateBathRoom(bath);
                 Self.Tell(createBathRoom);
             }

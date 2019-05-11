@@ -111,6 +111,7 @@ namespace Hostel.Repository
                             new DataTypes("@sensorid", SqlDbType.UniqueIdentifier, 0, string.Empty, ParameterDirection.Output, false, false, "@sensorid")
                         };
                 var repos = new DbProperties("InstallKitchenSensor", dataTypes, string.Empty, true, "@sensorid", sensor.Tag);
+                dbProperties.Add(repos);
             }
             var x = repository.Update(dbProperties);
             if (x > 0)
@@ -140,6 +141,7 @@ namespace Hostel.Repository
                             new DataTypes("@sensorid", SqlDbType.UniqueIdentifier, 0, string.Empty, ParameterDirection.Output, false, false, "@sensorid")
                         };
                 var repos = new DbProperties("InstallBathRoomSensor", dataTypes, string.Empty, true, "@sensorid", sensor.Tag);
+                dbProperties.Add(repos);
             }
             var x = repository.Update(dbProperties);
             if (x > 0)
@@ -169,6 +171,7 @@ namespace Hostel.Repository
                             new DataTypes("@sensorid", SqlDbType.UniqueIdentifier, 0, string.Empty, ParameterDirection.Output, false, false, "@sensorid")
                         };
                 var repos = new DbProperties("InstallToiletSensor", dataTypes, string.Empty, true, "@sensorid", sensor.Tag);
+                dbProperties.Add(repos);
             }
             var x = repository.Update(dbProperties);
             if (x > 0)
@@ -198,6 +201,7 @@ namespace Hostel.Repository
                             new DataTypes("@sensorid", SqlDbType.UniqueIdentifier, 0, string.Empty, ParameterDirection.Output, false, false, "@sensorid")
                         };
                 var repos = new DbProperties("InstallSepticSensor", dataTypes, string.Empty, true, "@sensorid", sensor.Tag);
+                dbProperties.Add(repos);
             }            
             var x = repository.Update(dbProperties);
             if (x > 0)
@@ -227,6 +231,7 @@ namespace Hostel.Repository
                             new DataTypes("@sensorid", SqlDbType.UniqueIdentifier, 0, string.Empty, ParameterDirection.Output, false, false, "@sensorid")
                         };
                 var repos = new DbProperties("InstallReservoirSensor", dataTypes, string.Empty, true, "@sensorid", sensor.Tag);
+                dbProperties.Add(repos);
             }
             var x = repository.Update(dbProperties);
             if (x > 0)

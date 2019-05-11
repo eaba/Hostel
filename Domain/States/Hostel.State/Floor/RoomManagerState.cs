@@ -10,10 +10,12 @@ namespace Hostel.State.Floor
 {
     public class RoomManagerState : Message, IState<RoomManagerState>
     {
+        public string FloorId { get; }
         public string Tag { get; }
         public IEnumerable<RoomSpecs> Rooms { get; }
-        public RoomManagerState(IEnumerable<RoomSpecs> rooms, string tag)
+        public RoomManagerState(string floor, IEnumerable<RoomSpecs> rooms, string tag)
         {
+            FloorId = floor;
             Tag = tag;
             Rooms = rooms;
         }
@@ -26,7 +28,7 @@ namespace Hostel.State.Floor
                         var room = createdRoom.Room;
                         var rooms = Rooms.Where(x => x.Tag != room.Tag).ToList();
                         rooms.Add(room);
-                        return new RoomManagerState(rooms, room.Tag);
+                        return new RoomManagerState(FloorId, rooms, room.Tag);
                     }
                 default: return this;
             }

@@ -64,14 +64,15 @@ namespace Shared.Repository.Impl
             }
             return collectDict;
         }
-        private int TranNonQuery(IEnumerable<IDbProperties> props)
+        private int TranNonQuery(IEnumerable<IDbProperties> properties)
         {
             using (var tran = _connection.BeginTransaction())
             {
                 try
                 {
-                    foreach (var prop in props)
+                    foreach (var property in properties)
                     {
+                        var prop = property;
                         try
                         {
                             using (var cmd = new SqlCommand(prop.StoredProcedureName, _connection, tran))

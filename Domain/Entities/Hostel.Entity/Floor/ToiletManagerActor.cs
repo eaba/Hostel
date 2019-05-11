@@ -66,7 +66,9 @@ namespace Hostel.Entity.Floor
             var toilets = state.Toilets;
             foreach (var toilet in toilets)
             {
+                toilet.FloorId = state.FloorId;
                 var createToilet = new CreateToilet(toilet);
+                Self.Tell(createToilet);
             }
         }
     }
