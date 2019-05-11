@@ -21,7 +21,7 @@ namespace Shared.Actors
             State = defaultState ?? throw new ArgumentNullException(nameof(defaultState));
             Command<ICommand>(command => 
             {
-                var handlerResult = _handler.Handle(State, command, repository);
+                var handlerResult = _handler.Handle(State, command, Repo);
                 if (handlerResult.Success)
                 {
                     Persist(handlerResult.Event, OnPersist);
@@ -44,6 +44,11 @@ namespace Shared.Actors
         protected virtual void OnRecoverComplete()
         {
             
+        }
+        protected override void PostStop()
+        {
+            Repo.Close();
+            base.PostStop();
         }
         protected virtual void OnSnapshotOffer(TState state)
         {

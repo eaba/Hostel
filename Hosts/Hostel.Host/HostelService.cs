@@ -28,7 +28,7 @@ namespace Hostel.Host
         public HostelService(IBusControl busControl, IActorRef provider, ActorSystem actorSystem)
         {
             _busControl = busControl;
-            HostActorRef.ActorRef = provider;
+            //HostActorRef.ActorRef = provider;
             _actorSystem = actorSystem;
         }
         public async Task StartAsync(CancellationToken cancellationToken)
@@ -37,9 +37,9 @@ namespace Hostel.Host
             var observer = new ReceiveObserver(_actorSystem);
             _busControl.ConnectReceiveObserver(observer);
             await _busControl.StartAsync(cancellationToken);
-            HostActorRef.ActorRef.Tell(Construct());
-            HostActorRef.ActorIsReady = true;
-            HostActorRef.ProcessCached();
+            //HostActorRef.ActorRef.Tell(Construct());
+            //HostActorRef.ActorIsReady = true;
+            //HostActorRef.ProcessCached();
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

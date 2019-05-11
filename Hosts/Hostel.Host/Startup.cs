@@ -1,8 +1,10 @@
 ﻿using Akka.Actor;
 using Akka.Extension;
 using GreenPipes;
+using Hostel.Command;
 using Hostel.Entity;
 using Hostel.Entity.Handler;
+using Hostel.Model;
 using Hostel.State;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
@@ -10,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using static Hostel.Model.Construction;
 
 namespace Hostel.Host
 {
@@ -56,10 +59,26 @@ namespace Hostel.Host
             {
                 var actorSystem = provider.GetService<ActorSystem>();
                 var hostelManagerActor = actorSystem.ActorOf(HostelManagerActor.Prop(new HostelManagerHandler(), HostelManagerState.Empty, "HostelManager", Configuration.GetConnectionString("Database")), "HostelManager");
+                HostActorRef.ActorRef = hostelManagerActor;
+                HostActorRef.ActorRef.Tell(Construct());
+                HostActorRef.ActorIsReady = true;
+                HostActorRef.ProcessCached();
                 return hostelManagerActor;
             });
             services.AddSingleton<IHostedService, HostelService>();
         }
+
+        private ConstructHostel Construct()
+        {
+            var construction = new Construction(new HostelDetail("Baafog", "Onikolobo Abeokuta, Ogun, Nigeria"))
+                .WithFloor("Ground-Floor", "", 20, "", 2, "T", 2, "B", "K")
+                .WithFloor("First-Floor", "1", 22, "1", 3, "T1", 2, "B", "K")
+                .WithFloor("Second-Floor", "1", 23, "1", 3, "T1", 2, "B", "K")
+                .WithSepticTank("Septic", 10, 7)
+                .WithReservoir("Reservoir", 20, 15);
+            return new ConstructHostel(construction);
+        }
+
         public IConfiguration Configuration { get; }
         public void Configure(IApplicationBuilder app)
         {

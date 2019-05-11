@@ -190,7 +190,12 @@ namespace Shared.Repository.Impl
                 _connection = null;
             }
             _disposed = true;
-        }    
+        }
 
+        public void Close()
+        {
+            _connection.Close();
+            Dispose();
+        }
     }
 }
