@@ -44,6 +44,7 @@ namespace Hostel.Entity
                                 floor.HostelId = hostel.Construction.Detail.HostelId;
                                 var createFloor = new CreateFloor(floor);
                                 Self.Tell(createFloor);
+                                Context.System.Log.Info($"FloorActor", $"Creating Floor - {floor.Tag}");
                             }
                         }
                         if(Context.Child(construct.SepticTank.Tag).IsNobody())
