@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using LogShared;
+using Microsoft.Extensions.DependencyInjection;
+using Akka.Extension;
 
 namespace Akka.MassTransit.Logger
 {
@@ -43,26 +45,30 @@ namespace Akka.MassTransit.Logger
                     {"System", system },
                     {"Log", message }
                 };
-                if(AkkaService.Bus != null) //Logging may start before bus is ready
+
+                var dto = new Dto(data.ToImmutableDictionary());
+                if (_sendEndPoint != null)
                 {
-                    var dto = new Dto(data.ToImmutableDictionary());
-                    if (_sendEndPoint != null)
-                    {
-                        await DeCache();
-                        await _sendEndPoint.Send(dto);
-                    }
-                    else
-                    {
-                        _sendEndPoint = await AkkaService.Bus.GetSendEndpoint(new Uri(_queueUri));
-                        await DeCache();
-                        await _sendEndPoint.Send(dto);
-                    }
+                    await DeCache();
+                    await _sendEndPoint.Send(dto);
                 }
                 else
                 {
-                    _logCache.Add(data);
+                    using (IServiceScope serviceScope = Context.CreateScope())
+                    {
+                        var busControl = serviceScope.ServiceProvider.GetService<IBusControl>();
+                        _sendEndPoint = await busControl.GetSendEndpoint(new Uri(_queueUri));
+                        if (_sendEndPoint != null)
+                        {
+                            await DeCache();
+                            await _sendEndPoint.Send(dto);
+                        }
+                        else
+                        {
+                            _logCache.Add(data);
+                        }
+                    }
                 }
-                
             }
             catch(Exception e) {
                 Console.WriteLine(e.ToString());

@@ -1,7 +1,9 @@
 ﻿using Akka.Actor;
 using Akka.Event;
+using Akka.Extension;
 using LogShared;
 using MassTransit;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -47,24 +49,28 @@ namespace Akka.MassTransit.Logger
             try
             {
                 var data = new Dictionary<string, string> {{"Trace", trace}};
-                if (AkkaService.Bus != null) //Logging may start before bus is ready
+                var dto = new Dto(data.ToImmutableDictionary());
+                if (_sendEndPoint != null)
                 {
-                    var dto = new Dto(data.ToImmutableDictionary());
-                    if (_sendEndPoint != null)
-                    {
-                        DeCache();
-                        _sendEndPoint.Send(dto);
-                    }
-                    else
-                    {
-                        _sendEndPoint = AkkaService.Bus.GetSendEndpoint(new Uri(_traceUri)).GetAwaiter().GetResult();
-                        DeCache();
-                        _sendEndPoint.Send(dto);
-                    }
+                    DeCache();
+                    _sendEndPoint.Send(dto).GetAwaiter();
                 }
                 else
                 {
-                    _traceCache.Add(data);
+                    using (IServiceScope serviceScope = Context.CreateScope())
+                    {
+                        var busControl = serviceScope.ServiceProvider.GetService<IBusControl>();
+                        _sendEndPoint = busControl.GetSendEndpoint(new Uri(_traceUri)).GetAwaiter().GetResult();
+                        if (_sendEndPoint != null)
+                        {
+                            DeCache();
+                            _sendEndPoint.Send(dto).GetAwaiter();
+                        }
+                        else
+                        {
+                            _traceCache.Add(data);
+                        }
+                    }
                 }
 
             }

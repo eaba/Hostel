@@ -1,5 +1,6 @@
 ﻿using Akka.Actor;
 using Akka.Configuration;
+using Akka.Extension;
 using Akka.MassTransit.Logger;
 using Hostel.Command;
 using Hostel.Entity;
@@ -7,6 +8,7 @@ using Hostel.Entity.Handler;
 using Hostel.Host.Observers;
 using Hostel.Model;
 using Hostel.State;
+using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -22,22 +24,19 @@ namespace Hostel.Host
         private readonly IConfiguration _configuration;
         private readonly IServiceProvider _serviceProvider;
         private ActorSystem _actorSystem;
-        public HostelService(IConfiguration configuration, IServiceProvider serviceProvider)
+        private IBusControl _busControl;
+        public HostelService(IBusControl busControl, IActorRef provider, ActorSystem actorSystem)
         {
-            _configuration = configuration;
-            _serviceProvider = serviceProvider;
+            _busControl = busControl;
+            HostActorRef.ActorRef = provider;
+            _actorSystem = actorSystem;
         }
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            var hoconFile = File.ReadAllText("host.hocon");
-            var hoconConfig = ConfigurationFactory.ParseString(hoconFile);
-            _actorSystem = ActorSystem.Create("HostelActorSystem", hoconConfig);
-            BusCreator.BusControl = BusCreator.CreateBus(_configuration, _serviceProvider);
+            //_actorSystem = _serviceProvider.GetService.;
             var observer = new ReceiveObserver(_actorSystem);
-            BusCreator.BusControl.ConnectReceiveObserver(observer);
-            await BusCreator.BusControl.StartAsync(cancellationToken);
-            AkkaService.Bus = BusCreator.BusControl;
-            HostActorRef.ActorRef = _actorSystem.ActorOf(HostelManagerActor.Prop(new HostelManagerHandler(), HostelManagerState.Empty, "HostelManager", _configuration.GetConnectionString("Database")), "HostelManager");
+            _busControl.ConnectReceiveObserver(observer);
+            await _busControl.StartAsync(cancellationToken);
             HostActorRef.ActorRef.Tell(Construct());
             HostActorRef.ActorIsReady = true;
             HostActorRef.ProcessCached();
@@ -47,7 +46,7 @@ namespace Hostel.Host
         {
             try
             {
-                BusCreator.BusControl.StopAsync(cancellationToken);
+                _busControl.StopAsync(cancellationToken);
                 _actorSystem.Stop(HostActorRef.ActorRef);
                 _actorSystem?.Dispose();
                 _actorSystem = null;
