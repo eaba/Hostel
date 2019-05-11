@@ -14,29 +14,30 @@ namespace Shared.Actors
 
         public HostelActor(ICommandHandler<TState> handler, TState defaultState,string persistenceId, IRepository<IDbProperties> repository, int snapshotafter = 100)
         {
-            _snapShotAfter = snapshotafter;
-            PersistenceId = persistenceId;
-            Repo = repository;
-            _handler = handler ?? throw new ArgumentNullException(nameof(handler));
-            State = defaultState ?? throw new ArgumentNullException(nameof(defaultState));
-            Command<ICommand>(command => 
-            {
-                var handlerResult = _handler.Handle(State, command, Repo);
-                if (handlerResult.Success)
+           
+                _snapShotAfter = snapshotafter;
+                PersistenceId = persistenceId;
+                Repo = repository;
+                _handler = handler ?? throw new ArgumentNullException(nameof(handler));
+                State = defaultState ?? throw new ArgumentNullException(nameof(defaultState));
+                Command<ICommand>(command =>
                 {
-                    Persist(handlerResult.Event, OnPersist);
-                }
-            });
-            Recover<IEvent>(evnt => { State = State.Update(evnt); });
-            Recover<SnapshotOffer>(offer =>
-            {
-                if (offer.Snapshot is TState)
+                    var handlerResult = _handler.Handle(State, command, Repo);
+                    if (handlerResult.Success)
+                    {
+                        Persist(handlerResult.Event, OnPersist);
+                    }
+                });
+                Recover<IEvent>(evnt => { State = State.Update(evnt); });
+                Recover<SnapshotOffer>(offer =>
                 {
-                    State = (TState)offer.Snapshot;
-                    OnSnapshotOffer(State);
-                }                   
-            });
-            Recover<RecoveryCompleted>(completed => { OnRecoverComplete(); });
+                    if (offer.Snapshot is TState)
+                    {
+                        State = (TState)offer.Snapshot;
+                        OnSnapshotOffer(State);
+                    }
+                });
+                Recover<RecoveryCompleted>(completed => { OnRecoverComplete(); });
         }
 
         private readonly ICommandHandler<TState> _handler;

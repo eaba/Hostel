@@ -8,7 +8,6 @@ namespace Hostel.State
     {
         public Construction ConstructionRecord { get; }
         public bool Constructed;
-        public static readonly HostelManagerState Empty = new HostelManagerState(false, null);
         public HostelManagerState(bool constructed, Construction record)
         {
             Constructed = false;

@@ -38,7 +38,7 @@
 			                    plugin-dispatcher = "akka.actor.default-dispatcher"
 
 			                    # connection string used for database access
-								connection-string = "Data Source=QUARRY\\\\SQLEXPRESS;Initial Catalog=Hostel;user id=hostel; password=hostel;MultipleActiveResultSets=True"
+								connection-string = "Data Source=QUARRY\\SQLEXPRESS;Initial Catalog=Hostel;user id=hostel; password=hostel;MultipleActiveResultSets=True"
 
 			                    # default SQL commands timeout
 			                    connection-timeout = 60s
@@ -73,7 +73,7 @@
 			                  plugin-dispatcher = ""akka.actor.default-dispatcher""
 
 			                  # connection string used for database access
-			                  connection-string = "Data Source=QUARRY\\\\SQLEXPRESS;Initial Catalog=Hostel;user id=hostel; password=hostel;MultipleActiveResultSets=True"
+			                  connection-string = "Data Source=QUARRY\\SQLEXPRESS;Initial Catalog=Hostel;user id=hostel; password=hostel;MultipleActiveResultSets=True"
 
 			                  # default SQL commands timeout
 			                  connection-timeout = 60s
