@@ -7,7 +7,22 @@
 			loggers = ["Akka.MassTransit.Logger.QueueLogger, Akka.MassTransit.Logger", "Akka.MassTransit.Logger.TraceLogger, Akka.MassTransit.Logger"]
 			queue-uri = "rabbitmq://localhost/logging_akka"
 			trace-uri = "rabbitmq://localhost/trace_akka"
-            
+          actor 
+            {              
+				  debug 
+				  {
+					  receive = on
+					  autoreceive = on
+					  lifecycle = on
+					  event-stream = on
+					  unhandled = on
+				  }  
+				  serialization-settings.json 
+				  {
+                        preserve-object-references = false
+                        encode-type-names = false
+                  }
+			} 
           persistence
           {
 			max-concurrent-recoveries = 5

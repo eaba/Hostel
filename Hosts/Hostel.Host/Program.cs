@@ -18,7 +18,6 @@ namespace Hostel.Host
             .UseStartup<Startup>()
             .Build();
             host.Run();
-            Console.ReadLine();
         }
     }
 }
