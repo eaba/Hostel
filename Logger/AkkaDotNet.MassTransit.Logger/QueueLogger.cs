@@ -54,19 +54,27 @@ namespace Akka.MassTransit.Logger
                 }
                 else
                 {
-                    using (IServiceScope serviceScope = Context.CreateScope())
+                    var context = Context.CreateScope();
+                    if(context != null)
                     {
-                        var busControl = serviceScope.ServiceProvider.GetService<IBusControl>();
-                        _sendEndPoint = await busControl.GetSendEndpoint(new Uri(_queueUri));
-                        if (_sendEndPoint != null)
+                        using (IServiceScope serviceScope = context)
                         {
-                            await DeCache();
-                            await _sendEndPoint.Send(dto);
+                            var busControl = serviceScope.ServiceProvider.GetService<IBusControl>();
+                            _sendEndPoint = await busControl.GetSendEndpoint(new Uri(_queueUri));
+                            if (_sendEndPoint != null)
+                            {
+                                await DeCache();
+                                await _sendEndPoint.Send(dto);
+                            }
+                            else
+                            {
+                                _logCache.Add(data);
+                            }
                         }
-                        else
-                        {
-                            _logCache.Add(data);
-                        }
+                    }
+                    else
+                    {
+                        _logCache.Add(data);
                     }
                 }
             }
