@@ -156,22 +156,21 @@ namespace Shared.Repository.Impl
             }
             return param.ToArray();
         }
-        private IDbProperties TransformProps(IDbProperties prop)
+        private IDbProperties TransformProps(IDbProperties properties)
         {
-            var props = prop;
-            foreach (var p in prop.ProcedureProps.ToList())
+            foreach (var dataType in properties.ProcedureProps.ToList())
             {
-                if (p.NeedPrevious)
+                if (dataType.NeedPrevious)
                 {
-                    var outPut = OutPuts.LastOrDefault(x => x.Param == p.OutParam);
+                    var outPut = OutPuts.LastOrDefault(x => x.Param == dataType.OutParam);
                     if (outPut != null)
                     {
-                        p.Value = outPut.Value;
+                        dataType.Value = outPut.Value;
                     }
                 }
-                props.ProcedureProps.Add(p);
+                //props.ProcedureProps.Add(p);
             }
-            return props;
+            return properties;
         }
         public void Dispose()
         {
