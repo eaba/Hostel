@@ -101,7 +101,7 @@ namespace Hostel.Repository
         {
             var sensors = state.Sensors;
             var dbProperties = new List<IDbProperties>();
-            foreach (var sensor in sensors)
+            foreach (var sensor in sensors.ToList())
             {
                 var dataTypes = new List<IDataTypes>
                         {
@@ -116,12 +116,14 @@ namespace Hostel.Repository
             var x = repository.Update(dbProperties);
             if (x > 0)
             {
-                foreach (var sensor in sensors)
+                var sensorsSpec = new List<SensorSpec>();
+                foreach (var sensor in sensors.ToList())
                 {
                     var outputs = repository.OutPuts;
                     sensor.SensorId = outputs.ToList().FirstOrDefault(y => y.Identifier == sensor.Tag).Value;
+                    sensorsSpec.Add(sensor);
                 }
-                kitchenNewState = new KitchenState(state.KitchenId, state.Tag, sensors);
+                kitchenNewState = new KitchenState(state.KitchenId, state.Tag, sensorsSpec);
                 return true;
             }
             kitchenNewState = state;
@@ -131,7 +133,7 @@ namespace Hostel.Repository
         {
             var sensors = state.Sensors;
             var dbProperties = new List<IDbProperties>();
-            foreach (var sensor in sensors)
+            foreach (var sensor in sensors.ToList())
             {
                 var dataTypes = new List<IDataTypes>
                         {
@@ -146,12 +148,14 @@ namespace Hostel.Repository
             var x = repository.Update(dbProperties);
             if (x > 0)
             {
-                foreach (var sensor in sensors)
+                var sensorsSpec = new List<SensorSpec>();
+                foreach (var sensor in sensors.ToList())
                 {
                     var outputs = repository.OutPuts;
                     sensor.SensorId = outputs.ToList().FirstOrDefault(y => y.Identifier == sensor.Tag).Value;
+                    sensorsSpec.Add(sensor);
                 }
-                bathroomNewState = new BathRoomState(state.BathRoomId, state.Tag, sensors);
+                bathroomNewState = new BathRoomState(state.BathRoomId, state.Tag, sensorsSpec);
                 return true;
             }
             bathroomNewState = state;
@@ -161,7 +165,7 @@ namespace Hostel.Repository
         {
             var sensors = state.Sensors;
             var dbProperties = new List<IDbProperties>();
-            foreach (var sensor in sensors)
+            foreach (var sensor in sensors.ToList())
             {
                 var dataTypes = new List<IDataTypes>
                         {
@@ -176,12 +180,14 @@ namespace Hostel.Repository
             var x = repository.Update(dbProperties);
             if (x > 0)
             {
-                foreach (var sensor in sensors)
+                var sensorsSpec = new List<SensorSpec>();
+                foreach (var sensor in sensors.ToList())
                 {
                     var outputs = repository.OutPuts;
                     sensor.SensorId = outputs.ToList().FirstOrDefault(y => y.Identifier == sensor.Tag).Value;
+                    sensorsSpec.Add(sensor);
                 }
-                toiletNewState = new ToiletState(state.ToiletId, state.Tag, sensors);
+                toiletNewState = new ToiletState(state.ToiletId, state.Tag, sensorsSpec);
                 return true;
             }
             toiletNewState = state;
@@ -191,7 +197,7 @@ namespace Hostel.Repository
         {
             var sensors = state.Sensors;
             var dbProperties = new List<IDbProperties>();
-            foreach(var sensor in sensors)
+            foreach(var sensor in sensors.ToList())
             {
                 var dataTypes = new List<IDataTypes>
                         {
@@ -206,12 +212,14 @@ namespace Hostel.Repository
             var x = repository.Update(dbProperties);
             if (x > 0)
             {
-                foreach(var sensor in sensors)
+                var sensorsSpec = new List<SensorSpec>();
+                foreach (var sensor in sensors.ToList())
                 {
                     var outputs = repository.OutPuts;
                     sensor.SensorId = outputs.ToList().FirstOrDefault(y => y.Identifier == sensor.Tag).Value;
+                    sensorsSpec.Add(sensor);
                 }
-                septicTankState = new SepticTankState(state.SepticTankId, state.Height, state.AlertHeight, sensors);
+                septicTankState = new SepticTankState(state.SepticTankId, state.Height, state.AlertHeight, sensorsSpec);
                 return true;
             }
             septicTankState = state;
@@ -221,7 +229,7 @@ namespace Hostel.Repository
         {
             var sensors = state.Sensors;
             var dbProperties = new List<IDbProperties>();
-            foreach (var sensor in sensors)
+            foreach (var sensor in sensors.ToList())
             {
                 var dataTypes = new List<IDataTypes>
                         {
@@ -236,12 +244,14 @@ namespace Hostel.Repository
             var x = repository.Update(dbProperties);
             if (x > 0)
             {
-                foreach (var sensor in sensors)
+                var sensorsSpec = new List<SensorSpec>();
+                foreach (var sensor in sensors.ToList())
                 {
                     var outputs = repository.OutPuts;
                     sensor.SensorId = outputs.ToList().FirstOrDefault(y => y.Identifier == sensor.Tag).Value;
+                    sensorsSpec.Add(sensor);
                 }
-                waterReservoirState = new WaterReservoirState(state.ReservoirId, state.Height, state.AlertHeight, sensors);
+                waterReservoirState = new WaterReservoirState(state.ReservoirId, state.Height, state.AlertHeight, sensorsSpec);
                 return true;
             }
             waterReservoirState = state;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
@@ -70,23 +70,22 @@ namespace Shared.Repository.Impl
             {
                 try
                 {
-                    foreach (var property in properties)
+                    foreach (var property in properties.ToList())
                     {
-                        var prop = property;
                         try
                         {
-                            using (var cmd = new SqlCommand(prop.StoredProcedureName, _connection, tran))
+                            using (var cmd = new SqlCommand(property.StoredProcedureName, _connection, tran))
                             {
                                 cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddRange(Parameters(TransformProps(prop)));
+                                cmd.Parameters.AddRange(Parameters(TransformProps(property)));
                                 var rowsAffected = cmd.ExecuteNonQuery();
-                                if (prop.Output)
+                                if (property.Output)
                                 {
-                                    var outPutParams = prop.Param.Split(',');
+                                    var outPutParams = property.Param.Split(',');
                                     foreach (var outPutParam in outPutParams)
                                     {
                                         var outputValue = cmd.Parameters[outPutParam].Value.ToString();
-                                        OutPuts.Add(new OutPut(outPutParam, outputValue, prop.Identifier));
+                                        OutPuts.Add(new OutPut(outPutParam, outputValue, property.Identifier));
                                     }
                                 }
                                 if (rowsAffected >= 0)
@@ -160,7 +159,7 @@ namespace Shared.Repository.Impl
         private IDbProperties TransformProps(IDbProperties prop)
         {
             var props = prop;
-            foreach (var p in prop.ProcedureProps)
+            foreach (var p in prop.ProcedureProps.ToList())
             {
                 if (p.NeedPrevious)
                 {
