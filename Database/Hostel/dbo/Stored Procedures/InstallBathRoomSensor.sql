@@ -9,6 +9,7 @@ BEGIN
 	SET @id = (SELECT BathroomSensorId FROM Hostel_Floor_Bath_Room_Sensors WHERE Tag = @tag AND BathRoomId = @bathroom);
 	IF @id IS NULL
 	BEGIN
+		SET @id = NEWID();
 		INSERT INTO Hostel_Floor_Bath_Room_Sensors(BathroomSensorId, BathRoomId, Tag, [Role])
 		VALUES(@id, @bathroom, @tag, @role)
 		SET @sensorid = @id;
