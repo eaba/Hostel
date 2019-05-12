@@ -43,9 +43,9 @@ namespace Hostel.Model
                 };
                 tolet.Sensors = new List<SensorSpec>(new[] 
                 {
-                    new SensorSpec($"Sensor_{tolet.Tag}", "Dirth"),
-                    new SensorSpec($"Sensor_{tolet.Tag}", "Smell"),
-                    new SensorSpec($"Sensor_{tolet.Tag}", "Flush")
+                    new SensorSpec($"{tolet.Tag}", "Dirt"),
+                    new SensorSpec($"{tolet.Tag}", "Smell"),
+                    new SensorSpec($"{tolet.Tag}", "Flush")
                 });
                 toilets.Add(tolet);
             }
@@ -57,22 +57,22 @@ namespace Hostel.Model
                 };
                 bath.Sensors = new List<SensorSpec>(new[]
                 {
-                    new SensorSpec($"Sensor_{bath.Tag}_A", "Dirth"),
-                    new SensorSpec($"Sensor_{bath.Tag}_B", "Dirth"),
-                    new SensorSpec($"Sensor_{bath.Tag}", "Smell")
+                    new SensorSpec($"{bath.Tag}_A", "Dirt"),
+                    new SensorSpec($"{bath.Tag}_B", "Dirt"),
+                    new SensorSpec($"{bath.Tag}", "Smell")
                 });
                 bathrooms.Add(bath);
             }
             var kitchen = new KitchenSpec
             {
-                Tag = kitTag + floor,
-                Sensors = new List<SensorSpec>(new[]
-                {
-                    new SensorSpec($"Sensor_{kitTag}_A", "Dirth"),
-                    new SensorSpec($"Sensor_{kitTag}_B", "Dirth"),
-                    new SensorSpec($"Sensor_{kitTag}", "Smell")
-                })
+                Tag = kitTag + floor
             };
+            kitchen.Sensors = new List<SensorSpec>(new[]
+                {
+                    new SensorSpec($"{kitchen.Tag}_A", "Dirt"),
+                    new SensorSpec($"{kitchen.Tag}_B", "Dirt"),
+                    new SensorSpec($"{kitchen.Tag}", "Smell")
+                });
             Floors.Add(new FloorSpec(floorTag, rooms, toilets, bathrooms, kitchen));
             return this;
         }
@@ -82,9 +82,9 @@ namespace Hostel.Model
             {
                 Sensors = new List<SensorSpec>(new[]
                 {
-                    new SensorSpec($"Sensor_{tag}_A", "Sonic"),
-                    new SensorSpec($"Sensor_{tag}_B", "Sonic"),
-                    new SensorSpec($"Sensor_{tag}_C", "Sonic")
+                    new SensorSpec($"{tag}_A", "Sonic"),
+                    new SensorSpec($"{tag}_B", "Sonic"),
+                    new SensorSpec($"{tag}_C", "Sonic")
                 })
             };
             SepticTank = septic;
@@ -96,9 +96,9 @@ namespace Hostel.Model
             {
                 Sensors = new List<SensorSpec>(new[]
                 {
-                    new SensorSpec($"Sensor_{tag}_A", "Sonic"),
-                    new SensorSpec($"Sensor_{tag}_B", "Sonic"),
-                    new SensorSpec($"Sensor_{tag}_C", "Sonic")
+                    new SensorSpec($"{tag}_A", "Sonic"),
+                    new SensorSpec($"{tag}_B", "Sonic"),
+                    new SensorSpec($"{tag}_C", "Sonic")
                 })
             };
             Reservoir = reservoir;

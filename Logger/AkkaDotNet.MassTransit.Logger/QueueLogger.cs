@@ -38,14 +38,14 @@ namespace Akka.MassTransit.Logger
         }
         private async Task LogAsync(string level, string message, string system)
         {
-            try
-            {
-                var data = new Dictionary<string, string> {
+            var data = new Dictionary<string, string> {
                     {"Level", level},
                     {"System", system },
                     {"Log", message }
                 };
-
+            try
+            {
+                
                 var dto = new Dto(data.ToImmutableDictionary());
                 if (_sendEndPoint != null)
                 {
@@ -79,7 +79,7 @@ namespace Akka.MassTransit.Logger
                 }
             }
             catch(Exception e) {
-                Console.WriteLine(e.ToString());
+                _logCache.Add(data);
             }
         }
         private void Init(IActorRef sender)

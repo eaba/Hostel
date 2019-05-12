@@ -46,9 +46,9 @@ namespace Akka.MassTransit.Logger
         }
         private void Trace(string trace)
         {
+            var data = new Dictionary<string, string> { { "Trace", trace } };
             try
-            {
-                var data = new Dictionary<string, string> {{"Trace", trace}};
+            {               
                 var dto = new Dto(data.ToImmutableDictionary());
                 if (_sendEndPoint != null)
                 {
@@ -84,7 +84,7 @@ namespace Akka.MassTransit.Logger
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                _traceCache.Add(data);
             }
         }
         private void DeCache()
