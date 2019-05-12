@@ -18,7 +18,7 @@ namespace Hostel.Entity.Floor
     {
         private string _connectionString;
         public FloorActor(ICommandHandler<FloorState> handler, FloorState defaultState, string persistenceId, string connectionString)
-            : base(handler, defaultState, persistenceId, new Shared.Repository.Impl.Repository(connectionString))
+            : base(handler, defaultState, persistenceId, connectionString)
         {
             _connectionString = connectionString;
             Command<LayoutFloor>(_=> {

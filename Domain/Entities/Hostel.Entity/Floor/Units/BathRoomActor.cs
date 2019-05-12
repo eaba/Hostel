@@ -13,7 +13,7 @@ namespace Hostel.Entity.Floor.Units
     {
         private string _connectionString;
         public BathRoomActor(ICommandHandler<BathRoomState> handler, BathRoomState defaultState, string persistenceId, string connectionString)
-            : base(handler, defaultState, persistenceId, new Shared.Repository.Impl.Repository(connectionString))
+            : base(handler, defaultState, persistenceId, connectionString)
         {
             _connectionString = connectionString;
         }

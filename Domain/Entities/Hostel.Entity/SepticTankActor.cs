@@ -14,7 +14,7 @@ namespace Hostel.Entity
     {
         private string _connectionString;
         public SepticTankActor(ICommandHandler<SepticTankState> handler, SepticTankState defaultState, string persistenceId, string connectionstring)
-            : base(handler, defaultState, persistenceId, new Shared.Repository.Impl.Repository(connectionstring))
+            : base(handler, defaultState, persistenceId, connectionstring)
         {
             _connectionString = connectionstring;
         }

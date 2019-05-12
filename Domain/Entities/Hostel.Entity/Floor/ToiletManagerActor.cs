@@ -16,7 +16,7 @@ namespace Hostel.Entity.Floor
     {
         private string _connectionString;
         public ToiletManagerActor(ICommandHandler<ToiletManagerState> handler, ToiletManagerState defaultState, string persistenceId, string connectionString)
-            : base(handler, defaultState, persistenceId, new Shared.Repository.Impl.Repository(connectionString))
+            : base(handler, defaultState, persistenceId, connectionString)
         {
             _connectionString = connectionString;
             Command<LayoutToilet>(toilet => {

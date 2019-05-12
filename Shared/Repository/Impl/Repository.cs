@@ -13,11 +13,10 @@ namespace Shared.Repository.Impl
         private bool _disposed;
         public List<OutPut> OutPuts { get; }
         private readonly List<int> _success;
-        public Repository(string connStringName)
+        public Repository(SqlConnection connection)
         {
             OutPuts = new List<OutPut>();
-            _connection = new SqlConnection(connStringName);
-            _connection.Open();
+            _connection = connection;
             _success = new List<int>();
         }              
         public IEnumerable<Dictionary<string, string>> Read(IDbProperties properties)
