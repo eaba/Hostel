@@ -21,19 +21,19 @@ namespace Shared.Repository.Impl
         }              
         public IEnumerable<Dictionary<string, string>> Read(IDbProperties properties)
         {
-            using (var cmd = new SqlCommand(properties.StoredProcedureName, _connection))
+            try
             {
-                try
+                var cmd = new SqlCommand(properties.StoredProcedureName, _connection)
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddRange(Parameters(properties));
-                    var x = cmd.ExecuteReader(CommandBehavior.SequentialAccess);
-                    return GetRows(x);
-                }
-                catch(Exception e)
-                {
-                    throw e;
-                }
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddRange(Parameters(properties));
+                var x = cmd.ExecuteReader(CommandBehavior.SequentialAccess);
+                return GetRows(x);
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
         public int Update(IEnumerable<IDbProperties> properties)
@@ -48,95 +48,90 @@ namespace Shared.Repository.Impl
         private IEnumerable<Dictionary<string, string>> GetRows(DbDataReader reader)
         {
             var collectDict = new List<Dictionary<string, string>>();
-            using (reader)
+            if (!reader.HasRows) return collectDict;
+            while (reader.Read())
             {
-                if (!reader.HasRows) return collectDict;
-                while (reader.Read())
+                var dictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                for (var i = 0; i < reader.FieldCount; i++)
                 {
-                    var dictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-                    for (var i = 0; i < reader.FieldCount; i++)
-                    {
-                        dictionary.Add(reader.GetName(i), reader.GetValue(i).ToString());
-                    }
-                    collectDict.Add(dictionary);
+                    dictionary.Add(reader.GetName(i), reader.GetValue(i).ToString());
                 }
+                collectDict.Add(dictionary);
             }
             return collectDict;
         }
         private int TranNonQuery(IEnumerable<IDbProperties> properties)
         {
-            using (var tran = _connection.BeginTransaction())
+            try
             {
-                try
+                var tran = _connection.BeginTransaction();
+                foreach (var property in properties.ToList())
                 {
-                    foreach (var property in properties.ToList())
+                    try
                     {
-                        try
+                        using (var cmd = new SqlCommand(property.StoredProcedureName, _connection, tran))
                         {
-                            using (var cmd = new SqlCommand(property.StoredProcedureName, _connection, tran))
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddRange(Parameters(TransformProps(property)));
+                            var rowsAffected = cmd.ExecuteNonQuery();
+                            if (property.Output)
                             {
-                                cmd.CommandType = CommandType.StoredProcedure;
-                                cmd.Parameters.AddRange(Parameters(TransformProps(property)));
-                                var rowsAffected = cmd.ExecuteNonQuery();
-                                if (property.Output)
+                                var outPutParams = property.Param.Split(',');
+                                foreach (var outPutParam in outPutParams)
                                 {
-                                    var outPutParams = property.Param.Split(',');
-                                    foreach (var outPutParam in outPutParams)
-                                    {
-                                        var outputValue = cmd.Parameters[outPutParam].Value.ToString();
-                                        OutPuts.Add(new OutPut(outPutParam, outputValue, property.Identifier));
-                                    }
+                                    var outputValue = cmd.Parameters[outPutParam].Value.ToString();
+                                    OutPuts.Add(new OutPut(outPutParam, outputValue, property.Identifier));
                                 }
-                                if (rowsAffected >= 0)
-                                    _success.Add(rowsAffected);
                             }
-                        }
-                        catch (Exception e)
-                        {
-                            tran.Rollback();
-                            throw e;
+                            if (rowsAffected >= 0)
+                                _success.Add(rowsAffected);
                         }
                     }
-                    tran.Commit();
-                    return _success.Sum();
+                    catch (Exception e)
+                    {
+                        tran.Rollback();
+                        throw e;
+                    }
                 }
-                catch (Exception e)
-                {
-                    throw e;
-                }
+                tran.Commit();
+                return _success.Sum();
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
         private int NonQuery(IDbProperties prop)
         {
-            using (var cmd = new SqlCommand(prop.StoredProcedureName, _connection))
+            try
             {
-                try
+                var cmd = new SqlCommand(prop.StoredProcedureName, _connection)
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddRange(Parameters(prop));
-                    var x = cmd.ExecuteNonQuery();
-                    if (prop.Output)
+                    CommandType = CommandType.StoredProcedure,
+                };
+                cmd.Parameters.AddRange(Parameters(prop));
+                var x = cmd.ExecuteNonQuery();
+                if (prop.Output)
+                {
+                    var outPutParams = prop.Param.Split(',');
+                    if (outPutParams.Count() > 1)
                     {
-                        var outPutParams = prop.Param.Split(',');
-                        if (outPutParams.Count() > 1)
+                        foreach (var outPutParam in outPutParams)
                         {
-                            foreach (var outPutParam in outPutParams)
-                            {
-                                var outputValue = cmd.Parameters[outPutParam].Value.ToString();
-                                OutPuts.Add(new OutPut(outPutParam, outputValue, prop.Identifier));
-                            }
-                        }
-                        else
-                        {
-                            prop.Id = cmd.Parameters[prop.Param].Value.ToString();
+                            var outputValue = cmd.Parameters[outPutParam].Value.ToString();
+                            OutPuts.Add(new OutPut(outPutParam, outputValue, prop.Identifier));
                         }
                     }
-                    return x;
+                    else
+                    {
+                        prop.Id = cmd.Parameters[prop.Param].Value.ToString();
+                    }
                 }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                return x;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
         private static SqlParameter[] Parameters(IDbProperties dbProperties)
@@ -193,6 +188,7 @@ namespace Shared.Repository.Impl
         public void Close()
         {
             _connection.Close();
+            _connection.Dispose();
             Dispose();
         }
     }
