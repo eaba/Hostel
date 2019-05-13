@@ -1,0 +1,31 @@
+<div class='main-nav'>
+  <nav class='navbar navbar-expand-lg navbar-dark bg-dark d-flex flex-column'>
+    <div class="navbar-header p-0">
+      <a class='navbar-brand' [routerLink]='["/"]'>Hostel.Web.Portal</a>
+      <button type='button' class='navbar-toggler' data-toggle='collapse' data-target='#navbarNav' [attr.aria-expanded]='isExpanded' (click)='toggle()'>
+        <span class='sr-only'>Toggle navigation</span>
+        <span class='navbar-toggler-icon'></span>
+      </button>
+    </div>
+    <div class='clearfix p-2'></div>
+    <div id="navbarNav" class='navbar-collapse collapse p-0' [ngClass]='{ "in": isExpanded }'>
+      <ul class='nav navbar-nav flex-column'>
+        <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
+          <a [routerLink]='["/"]' class="nav-link" (click)='collapse()'>
+            <span class='fas fa-home'></span> Home
+          </a>
+        </li>
+        <li class="nav-item" [routerLinkActive]='["link-active"]'>
+          <a [routerLink]='["/counter"]' class="nav-link" (click)='collapse()'>
+            <span class='fas fa-sort-amount-up'></span> Counter
+          </a>
+        </li>
+        <li class="nav-item" [routerLinkActive]='["link-active"]'>
+          <a [routerLink]='["/fetch-data"]' class="nav-link" (click)='collapse()'>
+            <span class='fas fa-database'></span> Fetch data
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
