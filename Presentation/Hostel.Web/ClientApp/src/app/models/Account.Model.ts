@@ -1,4 +1,4 @@
-export interface Account {
+export class Account {
   cmd: string; //hack
   email: string,
   password: string,

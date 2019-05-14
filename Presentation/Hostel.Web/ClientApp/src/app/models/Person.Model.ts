@@ -1,4 +1,4 @@
-export interface Person {
+export class Person {
   cmd: string; //hack
   email: string,
   phone: string,

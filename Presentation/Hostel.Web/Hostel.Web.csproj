@@ -28,7 +28,9 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\components\home\account.component.ts" />
+    <None Remove="ClientApp\src\app\components\home\home.animation.ts" />
     <None Remove="ClientApp\src\app\components\home\home.component.ts" />
+    <None Remove="ClientApp\src\app\components\home\home.routing.ts" />
     <None Remove="ClientApp\src\app\components\home\register.component.ts" />
     <None Remove="ClientApp\src\app\models\Account.Model.ts" />
     <None Remove="ClientApp\src\app\models\Person.Model.ts" />
@@ -49,7 +51,9 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\components\home\account.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\home\home.animation.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\home\home.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\home\home.routing.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\home\register.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\Account.Model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\Person.Model.ts" />
