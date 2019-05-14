@@ -9,9 +9,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MassTransit" Version="5.3.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.10" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\Events\MassTransit.Event\MassTransit.Event.csproj" />
   </ItemGroup>
 
 </Project>

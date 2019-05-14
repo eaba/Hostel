@@ -2,48 +2,49 @@ import { Injectable } from '@angular/core';
 import * as signalR from "@aspnet/signalr";
 import { Person } from '../models/Person.Model';
 import { Account } from '../models/Account.Model';
-import { interval } from 'rxjs';
-import { HttpTransportType } from '@aspnet/signalr';
-
+import { interval, Subject } from 'rxjs';
+import { HttpTransportType, HubConnection } from '@aspnet/signalr';
+import { CONFIGURATION } from '../shared/app.constants';
+import { v4 as uuid } from 'uuid';
+const WAIT_UNTIL_ASPNETCORE_IS_READY_DELAY_IN_MS = 2000;
 @Injectable()
 export class SignalRService {
-  public person: Person;
-  public account: Account;
-  public connected: boolean = false;
-
-  private hubConnection: signalR.HubConnection;
-  public startConnection = (url: string) =>
+  commander = new Subject<string>();
+  serverData = new Subject<string>();
+  connectionEstablished = new Subject<Boolean>();
+  private hubConnection: HubConnection;
+  constructor() {
+    this.createConnection();
+    this.registerOnServerEvents();
+    this.startConnection();
+    this.commander = uuid();
+  }
+  public createConnection()
   {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(url, HttpTransportType.WebSockets)
+      .withUrl(CONFIGURATION.baseUrls.events + "home", HttpTransportType.WebSockets)
       .build();
-    this.hubConnection.onclose(() =>
+  }
+  private startConnection() {
+    setTimeout(() =>
     {
-      this.connected = false;
-      this.startReconnection(url);
-    });
-    this.hubConnection.start()
-      .then(() => { console.log('Connection started'); })
-      .catch(err => {
-        console.log('Error while starting connection: ' + err);
-        this.startReconnection(url);
-      })
+      this.hubConnection.onclose(() => this.connectionEstablished.next(false));
+      this.hubConnection.start().then(() => {
+        console.log('Hub connection started');
+        this.connectionEstablished.next(true);
+      });
+    }, WAIT_UNTIL_ASPNETCORE_IS_READY_DELAY_IN_MS);
   }
-  private startReconnection(url: string) {
-    console.log('Connection started');
-    setTimeout(()=> this.startConnection, 2000)
-  }
-  public addListeners = () => {
-
+  public registerOnServerEvents(): void
+  {
     this.hubConnection.on('personcreated', (data: string) => {
-      console.log(data);
+      this.serverData.next(data);
     });
     this.hubConnection.on('accountcreated', (data: string) => {
-      console.log(data);
+      this.serverData.next(data);
     });
     this.hubConnection.on('connected', (data: string) => {
-      this.connected = true;
+      this.commander.next(data);
     });
-
   }
 }

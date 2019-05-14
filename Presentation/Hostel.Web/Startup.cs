@@ -1,9 +1,11 @@
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Hostel.Web
 {
@@ -19,8 +21,18 @@ namespace Hostel.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+            {
+                var host = cfg.Host(new Uri("rabbitmq://localhost:/"), h =>
+                {
+                    h.Username("guest");
+                    h.Password("guest");
+                });
+            }));
+            services.AddSingleton<IPublishEndpoint>(provider => provider.GetRequiredService<IBusControl>());
+            services.AddSingleton<ISendEndpointProvider>(provider => provider.GetRequiredService<IBusControl>());
+            services.AddSingleton<IBus>(provider => provider.GetRequiredService<IBusControl>());
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -47,7 +59,7 @@ namespace Hostel.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
+                    template: "{controller}/{action}/{id?}");
             });
 
             app.UseSpa(spa =>

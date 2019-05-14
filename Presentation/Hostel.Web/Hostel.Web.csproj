@@ -13,6 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MassTransit" Version="5.3.2" />
+    <PackageReference Include="MassTransit.rabbitmq" Version="5.3.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.1" />
@@ -25,11 +27,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\components\home\home.component.ts" />
     <None Remove="ClientApp\src\app\components\signup\signup.component.ts" />
     <None Remove="ClientApp\src\app\models\Account.Model.ts" />
     <None Remove="ClientApp\src\app\models\Person.Model.ts" />
-    <None Remove="ClientApp\src\app\services\input.service.ts" />
+    <None Remove="ClientApp\src\app\models\transporter.model.ts" />
+    <None Remove="ClientApp\src\app\services\home.service.ts" />
     <None Remove="ClientApp\src\app\services\signalr.service.ts" />
+    <None Remove="ClientApp\src\app\shared\app.constants.ts" />
     <None Remove="ClientApp\tsconfig.json" />
   </ItemGroup>
 
@@ -38,11 +43,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Domain\Commands\MassTransit.Command\MassTransit.Command.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\components\home\home.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\signup\signup.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\Account.Model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\Person.Model.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\services\input.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\Transporter.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\home.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\signalr.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\app.constants.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
