@@ -26,11 +26,22 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\components\signup\signup.component.ts" />
+    <None Remove="ClientApp\src\app\models\Account.Model.ts" />
+    <None Remove="ClientApp\src\app\models\Person.Model.ts" />
+    <None Remove="ClientApp\src\app\services\input.service.ts" />
     <None Remove="ClientApp\src\app\services\signalr.service.ts" />
+    <None Remove="ClientApp\tsconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ClientApp\tsconfig.json" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\components\signup\signup.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\Account.Model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\Person.Model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\input.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\signalr.service.ts" />
   </ItemGroup>
 
