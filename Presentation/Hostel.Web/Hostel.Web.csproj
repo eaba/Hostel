@@ -27,8 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\components\home\account.component.ts" />
     <None Remove="ClientApp\src\app\components\home\home.component.ts" />
-    <None Remove="ClientApp\src\app\components\signup\signup.component.ts" />
+    <None Remove="ClientApp\src\app\components\home\register.component.ts" />
     <None Remove="ClientApp\src\app\models\Account.Model.ts" />
     <None Remove="ClientApp\src\app\models\Person.Model.ts" />
     <None Remove="ClientApp\src\app\models\transporter.model.ts" />
@@ -47,8 +48,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\components\home\account.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\home\home.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\components\signup\signup.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\home\register.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\Account.Model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\Person.Model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\Transporter.model.ts" />
