@@ -6,7 +6,7 @@ import { Account } from '../../models/Account.Model';
 @Component({
   selector: 'account-div',
   templateUrl: './account.component.html',
-  styleUrls: ['./account.component.csss']
+  //styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
   ngOnInit() {

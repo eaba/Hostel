@@ -4,11 +4,12 @@ import { HomeService } from '../../services/home.service';
 import { SignalRService } from '../../services/signalr.service';
 import { Person } from '../../models/Person.Model';
 import { Account } from '../../models/Account.Model';
+import { trigger, state, style, transition, animate } from '@angular/animations'
 
 @Component({
   selector: 'home-div',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.csss']
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   responses: Observable<string>;

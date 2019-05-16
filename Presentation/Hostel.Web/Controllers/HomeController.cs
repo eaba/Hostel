@@ -19,6 +19,12 @@ namespace Hostel.Web.Controllers
         {
             _bus = bus;
         }
+        [Route("")]
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View();
+        }
         [Route("person")]
         [HttpPost]
         public async Task<JsonResult> CreatePerson([FromBody]Dictionary<string, string> payload)

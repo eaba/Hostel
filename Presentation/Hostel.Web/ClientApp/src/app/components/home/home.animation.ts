@@ -1,3 +1,4 @@
+/*
 export const slideInAnimation =
   trigger('routeAnimations', [
     transition('HomePage <=> AboutPage', [
@@ -48,4 +49,4 @@ export const slideInAnimation =
       ]),
       query(':enter', animateChild()),
     ])
-  ]);
+  ]);*/

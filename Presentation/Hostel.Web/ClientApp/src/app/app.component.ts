@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { slideInAnimation } from './components/home/home.animation';
+//import { slideInAnimation } from './components/home/home.animation';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -7,7 +7,7 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   animations: [
-    slideInAnimation
+    //slideInAnimation
     // animation triggers go here
   ]
 })
