@@ -1,10 +1,43 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" id="lastName" placeholder="Last Name" [(ngModel)="person.lastName" ]>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" id="firstName" placeholder="First Name" [(ngModel)="person.firstName" ]>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" placeholder="Email Address" [(ngModel)="person.email" ]>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="phone">Phone</label>
+      <input type="tel" class="form-control" id="phone" placeholder="Telephone Number" [(ngModel)="person.phone" ]>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="dob">Date of Birth</label>
+      <input type="date" class="form-control" id="dob" placeholder="Date of Birth" [(ngModel)="person.birthday" ]>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="role">Register As</label>
+      <div class="col-md-6">
+        <select class="form-control" [(ngModel)]="person.role">
+          <option *ngFor="let role of roles" [ngValue]="role">{{role}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <input class="btn btn-success" (click)="RegisterPerson()" value="Register!" [disabled]="!connected">
+</form>

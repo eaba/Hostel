@@ -28,8 +28,5 @@ export class AppComponent implements OnInit {
     this.signalRService.serverData.subscribe((data: any) => {
       let response = JSON.parse(data);
     });
-    this.signalRService.commander.subscribe((id: string) => {
-      
-    });
   }
 }
