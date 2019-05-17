@@ -13,17 +13,17 @@ import { AccountComponent } from '../app/components/home/account.component';
 @NgModule({
   declarations: [
     AppComponent,
-	HomeComponent,
-	RegisterComponent,
-	AccountComponent
+	  HomeComponent,
+	  RegisterComponent,
+	  AccountComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     AngularFontAwesomeModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: AppComponent, pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'account', component: AccountComponent },
     ])
