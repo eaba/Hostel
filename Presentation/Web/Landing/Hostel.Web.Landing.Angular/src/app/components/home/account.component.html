@@ -1,10 +1,15 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="Password" [(ngModel)="account.password" ]>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="confirm">Confirm Password</label>
+      <input type="password" class="form-control" id="confirm" placeholder="Confirm Password" [(ngModel)="account.confirm" ]>
+    </div>
+  </div>
+  <input class="btn btn-success" (click)="RegisterAccount()" value="Submit!" [disabled]="!connected">
+</form>
