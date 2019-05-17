@@ -1,5 +1,5 @@
 {
-  "name": "Hostel.Web.Portal",
+  "name": "Hostel.Web.Portal.Angular",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -27,6 +27,7 @@
     "@nguniversal/module-map-ngfactory-loader": "^7.1.1",
     "ajv": "^6.10.0",
     "angular-font-awesome": "^3.1.2",
+    "animate.css": "^3.7.0",
     "aspnet-prerendering": "^3.0.1",
     "bootstrap": "^4.3.1",
     "core-js": "^2.6.5",
@@ -37,17 +38,17 @@
     "zone.js": "^0.8.29"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.10.7",
+    "@angular-devkit/build-angular": "^0.13.9",
     "@angular/cli": "^7.3.9",
     "@angular/compiler-cli": "^7.2.15",
     "@angular/language-service": "^7.2.15",
     "@types/jasmine": "^2.8.16",
     "@types/jasminewd2": "^2.0.6",
-    "@types/node": "^10.12.30",
+    "@types/node": "^10.14.6",
     "codelyzer": "^4.5.0",
     "jasmine-core": "~3.3.0",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "^3.1.4",
+    "karma": "^4.1.0",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "^2.0.5",
     "karma-jasmine": "~1.1.2",

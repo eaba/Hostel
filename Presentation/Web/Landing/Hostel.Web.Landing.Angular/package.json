@@ -1,5 +1,5 @@
 {
-  "name": "Hostel.Web.Portal",
+  "name": "Hostel.Web.Landing.Angular",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -27,6 +27,7 @@
     "@nguniversal/module-map-ngfactory-loader": "^7.1.1",
     "ajv": "^6.10.0",
     "angular-font-awesome": "^3.1.2",
+    "animate.css": "^3.7.0",
     "aspnet-prerendering": "^3.0.1",
     "bootstrap": "^4.3.1",
     "core-js": "^2.6.5",
