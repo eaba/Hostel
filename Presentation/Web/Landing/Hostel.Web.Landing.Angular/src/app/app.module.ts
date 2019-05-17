@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -19,6 +19,7 @@ import { AccountComponent } from '../app/components/home/account.component';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    AngularFontAwesomeModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
