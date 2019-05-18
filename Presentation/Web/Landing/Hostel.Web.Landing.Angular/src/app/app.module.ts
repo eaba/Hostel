@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { HomeService } from '../app/services/home.service';
+import { SignalRService } from '../app/services/signalr.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from '../app/components/home/home.component';
@@ -28,7 +30,7 @@ import { AccountComponent } from '../app/components/home/account.component';
       { path: 'account', component: AccountComponent },
     ])
   ],
-  providers: [],
+  providers: [HomeService, SignalRService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
