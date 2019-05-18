@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RouterOutlet, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { SignalRService } from './services/signalr.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { SignalRService } from './services/signalr.service';
 })
 export class AppComponent implements OnInit {
   title = 'Hostel';
-  constructor(private signalRService: SignalRService, public router: Router) { }
+  constructor(private signalRService: SignalRService, private router: Router) { }
 
   ngOnInit() {
     this.signalRService.connectionEstablished.subscribe((state: boolean) => {

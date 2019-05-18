@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { CommonModule, LocationStrategy, HashLocationStrategy, APP_BASE_HREF } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { HomeService } from '../app/services/home.service';
 import { SignalRService } from '../app/services/signalr.service';
 
@@ -20,6 +21,9 @@ import { AccountComponent } from '../app/components/home/account.component';
 	  AccountComponent
   ],
   imports: [
+    CommonModule,
+    BrowserModule,
+    RouterModule,
     AngularFontAwesomeModule,
     HttpClientModule,
     FormsModule,
@@ -30,7 +34,8 @@ import { AccountComponent } from '../app/components/home/account.component';
       { path: 'account', component: AccountComponent },
     ])
   ],
-  providers: [HomeService, SignalRService],
+  providers: [HomeService, SignalRService, { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: APP_BASE_HREF, useValue: '/' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
