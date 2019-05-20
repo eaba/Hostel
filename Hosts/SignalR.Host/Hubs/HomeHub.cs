@@ -8,7 +8,6 @@ namespace SignalR.Host.Hubs
     public class HomeHub:Hub
     {
         private IBusControl _bus;
-        private string _commander;
         public HomeHub(IBusControl bus)
         {
             _bus = bus;
@@ -16,13 +15,15 @@ namespace SignalR.Host.Hubs
         public override async Task OnConnectedAsync()
         {
             var httpContext = Context.GetHttpContext();
-            _commander = httpContext.Request.Query["commander"];
-            await Groups.AddToGroupAsync(Context.ConnectionId, _commander);
+            var commander = httpContext.Request.Query["commander"];
+            await Groups.AddToGroupAsync(Context.ConnectionId, commander);
             await base.OnConnectedAsync();
         }
         public override async Task OnDisconnectedAsync(Exception exception)
         {
-            await Groups.RemoveFromGroupAsync(Context.ConnectionId, _commander);
+            var httpContext = Context.GetHttpContext();
+            var commander = httpContext.Request.Query["commander"];
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, commander);
             await base.OnDisconnectedAsync(exception);
         }
     }

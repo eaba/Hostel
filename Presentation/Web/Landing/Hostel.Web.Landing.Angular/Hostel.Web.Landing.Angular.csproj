@@ -21,11 +21,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="src\app\providers\errorhandler.ts" />
+    <None Remove="src\app\providers\httpinterceptor.ts" />
     <None Remove="tsconfig.json" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="tsconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="src\app\providers\errorhandler.ts" />
+    <TypeScriptCompile Include="src\app\providers\httpinterceptor.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
