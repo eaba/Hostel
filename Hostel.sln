@@ -156,6 +156,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR.Host", "Hosts\Signa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpNetSH", "SharpNetSH\SharpNetSH.csproj", "{FCD1142E-BFD4-4088-9BE6-BD55B3C7C64A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Certificates", "Certificates", "{85A6B8C8-C435-40E8-A07E-599E9D9B0873}"
+	ProjectSection(SolutionItems) = preProject
+		Certificates\events.hostel.com.pfx = Certificates\events.hostel.com.pfx
+		Certificates\hostel.com.pfx = Certificates\hostel.com.pfx
+		Certificates\IdentityServer4.pfx = Certificates\IdentityServer4.pfx
+		Certificates\login.hostel.com.pfx = Certificates\login.hostel.com.pfx
+		Certificates\portal.hostel.com.pfx = Certificates\portal.hostel.com.pfx
+		Certificates\White_Purple_Certificate_Authority.crt = Certificates\White_Purple_Certificate_Authority.crt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
