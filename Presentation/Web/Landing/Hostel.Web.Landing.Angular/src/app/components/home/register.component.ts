@@ -14,9 +14,11 @@ export class RegisterComponent implements OnInit {
   person: Person = new Person();
   commander: string;
   connected: boolean;
-  roles = ['Owner', 'Tenant'];
+  roles: string[];
   constructor(private homeService: HomeService, private signalRService: SignalRService, public router: Router
-  ) { }
+  ) {
+    this.roles = ['Owner', 'Tenant'];
+  }
   ngOnInit() {
     this.subscribeToEvents();
     this.signalRService.connectionEstablished.subscribe((state: boolean) => {
@@ -30,9 +32,6 @@ export class RegisterComponent implements OnInit {
       if (cmd === 'PersonCreated') {
         this.router.navigateByUrl('/account', { state: { email: response.Email, role:response.Role } });
       }
-    });
-    this.signalRService.commander.subscribe((id: string) => {
-      this.commander = id;
     });
   }
   public RegisterPerson() {//this is AI folks ;)

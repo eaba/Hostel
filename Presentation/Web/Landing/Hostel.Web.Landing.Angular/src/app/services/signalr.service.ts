@@ -7,9 +7,9 @@ import { HttpTransportType, HubConnection } from '@aspnet/signalr';
 import { CONFIGURATION } from '../shared/app.constants';
 import { v4 as uuid } from 'uuid';
 const WAIT_UNTIL_ASPNETCORE_IS_READY_DELAY_IN_MS = 2000;
+const commander = uuid();
 @Injectable()
 export class SignalRService {
-  commander = new Subject<string>();
   serverData = new Subject<string>();
   connectionEstablished = new Subject<Boolean>();
   private hubConnection: HubConnection;
@@ -17,12 +17,12 @@ export class SignalRService {
     this.createConnection();
     this.registerOnServerEvents();
     this.startConnection();
-    this.commander = uuid();
+    //this.commander = uuid();
   }
   public createConnection()
   {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(CONFIGURATION.baseUrls.events + "home", HttpTransportType.WebSockets)
+      .withUrl(CONFIGURATION.baseUrls.events + "home" + "&commander=" + commander, HttpTransportType.WebSockets)
       .build();
   }
   private startConnection() {
@@ -42,9 +42,6 @@ export class SignalRService {
     });
     this.hubConnection.on('accountcreated', (data: string) => {
       this.serverData.next(data);
-    });
-    this.hubConnection.on('connected', (data: string) => {
-      this.commander.next(data);
     });
   }
 }

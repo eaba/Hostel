@@ -7,8 +7,7 @@ import { RouterOutlet, Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent{
-  constructor(public router: Router
-  )
+  constructor(public router: Router)
   { }
   public SignUp() {
     this.router.navigateByUrl('/register', { state: { commander: '' } });

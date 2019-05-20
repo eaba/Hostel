@@ -34,9 +34,6 @@ export class AccountComponent implements OnInit {
         window.open("https://portal.hostel.com", "_blank");
       }
     });
-    this.signalRService.commander.subscribe((id: string) => {
-      this.commander = id;
-    });
   }
   public RegisterAccount() {//this is AI folks ;)
     this.account.cmd = this.commander;
