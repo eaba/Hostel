@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Threading.Tasks;
 
-namespace SignalR.Host
+namespace SignalR.Host.Hubs
 {
-    public class HomeHub:Hub
+    public class PortalHub : Hub
     {
         private IBusControl _bus;
-        public HomeHub(IBusControl bus)
+        public PortalHub(IBusControl bus)
         {
             _bus = bus;
         }

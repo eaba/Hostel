@@ -1,15 +1,18 @@
 ﻿using MassTransit;
 using Microsoft.AspNetCore.SignalR;
 using Shared;
+using SignalR.Host.Hubs;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace SignalR.Host
+namespace SignalR.Host.Consumers
 {
-    public class ClientConsumer : IConsumer<IMassTransitEvent>
+    public class PortalConsumer : IConsumer<IMassTransitEvent>
     {
-        private readonly IHubContext<HomeHub> _hub;
-        public ClientConsumer(IHubContext<HomeHub> hub)
+        private readonly IHubContext<PortalHub> _hub;
+        public PortalConsumer(IHubContext<PortalHub> hub)
         {
             _hub = hub ?? throw new ArgumentNullException(nameof(hub)); ;
         }

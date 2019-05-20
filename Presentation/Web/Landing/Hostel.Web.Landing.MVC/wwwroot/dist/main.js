@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"color:lawngreen; height:400px; width:400px;\" class=\"justify-content-center align-items-center shadow p-3 mb-5 rounded mx-auto d-block\">\r\n  <fa name=\"compact-disc\" animation=\"spin\"></fa>\r\n  <router-outlet #outlet=\"outlet\"></router-outlet>\r\n</div>\r\n"
+module.exports = "<div style=\"position: absolute;  top: 50%;  left: 50%; font-size:100px; color:lawngreen\">\r\n  <fa name=\"compact-disc\" animation=\"spin\"></fa>\r\n  <router-outlet  #outlet=\"outlet\"></router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 
