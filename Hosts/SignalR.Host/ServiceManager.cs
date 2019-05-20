@@ -17,6 +17,7 @@ namespace SignalR.Host
         }
         public async Task StartAsync(CancellationToken cancellationToken)
         {
+            //>http add urlacl url=http://events.hostel.com:80/ user=Everyone
             //Had issues reserving url using this method, I went manual
             /*Console.WriteLine("Test!!!");
             //I created SSL cert using xca => https://github.com/chris2511/xca

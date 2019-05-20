@@ -17,7 +17,7 @@ namespace SignalR.Host.Consumers
         public async Task Consume(ConsumeContext<IMassTransitEvent> context)
         {
             var message = context.Message;
-            await _hub.Clients.Group(message.Commander).SendAsync(message.Event, message.Payload);
+            await _hub.Clients.Group(message.Commander).SendAsync(message.Event, message.Payload, message.CommandId);
         }
     }
 }
