@@ -38,7 +38,7 @@ namespace SignalR.Host
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                    builder => builder.WithOrigins(new[] { "https://portal.hostel.com", "https://hostel.com" })
+                    builder => builder.WithOrigins(new[] { "https://portal.hostel.com", "http://portal.hostel.com", "https://hostel.com", "http://hostel.com" })
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());

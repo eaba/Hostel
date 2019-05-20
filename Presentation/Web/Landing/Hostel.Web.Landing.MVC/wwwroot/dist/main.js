@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"position: absolute;  top: 50%;  left: 50%; font-size:100px; color:lawngreen\">\r\n  <fa name=\"compact-disc\" animation=\"spin\"></fa>\r\n  <router-outlet  #outlet=\"outlet\"></router-outlet>\r\n</div>\r\n"
+module.exports = "<div class=\"row justify-content-center align-items-center\">\r\n  <router-outlet  #outlet=\"outlet\"></router-outlet>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -46,7 +46,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _services_signalr_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/signalr.service */ "./src/app/services/signalr.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -58,27 +57,20 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-
 var AppComponent = /** @class */ (function () {
-    function AppComponent(signalRService, router) {
-        this.signalRService = signalRService;
+    function AppComponent(router) {
         this.router = router;
         this.title = 'Hostel';
     }
     AppComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.signalRService.connectionEstablished.subscribe(function (state) {
-            if (state) {
-                _this.router.navigateByUrl('/home', { state: { commander: '' } });
-            }
-        });
+        this.router.navigateByUrl('/home', { state: { commander: '' } });
     };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-root',
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html")
         }),
-        __metadata("design:paramtypes", [_services_signalr_service__WEBPACK_IMPORTED_MODULE_2__["SignalRService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -173,7 +165,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<form>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"password\">Password</label>\r\n      <input type=\"password\" class=\"form-control\" id=\"password\" placeholder=\"Password\" [(ngModel)=\"account.password\" ]>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"confirm\">Confirm Password</label>\r\n      <input type=\"password\" class=\"form-control\" id=\"confirm\" placeholder=\"Confirm Password\" [(ngModel)=\"account.confirm\" ]>\r\n    </div>\r\n  </div>\r\n  <input class=\"btn btn-success\" (click)=\"RegisterAccount()\" value=\"Submit!\" [disabled]=\"!connected\">\r\n</form>\r\n"
+module.exports = "<form class=\"col-12\">\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"password\">Password</label>\r\n      <input type=\"password\" class=\"form-control\" id=\"password\" placeholder=\"Password\" [(ngModel)=\"account.password\" ]>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"confirm\">Confirm Password</label>\r\n      <input type=\"password\" class=\"form-control\" id=\"confirm\" placeholder=\"Confirm Password\" [(ngModel)=\"account.confirm\" ]>\r\n    </div>\r\n  </div>\r\n  <input class=\"btn btn-success\" (click)=\"RegisterAccount()\" value=\"Submit!\" [disabled]=\"!connected\">\r\n</form>\r\n"
 
 /***/ }),
 

@@ -4,8 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Shared;
 using SignalR.Host.Hubs;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SignalR.Host.Consumers

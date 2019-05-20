@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Hostel.Web.Landing.MVC
 {
@@ -37,11 +39,13 @@ namespace Hostel.Web.Landing.MVC
             services.AddSingleton<IBus>(provider => provider.GetRequiredService<IBusControl>());
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSingleton<IHostedService, ServiceManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
         {
+            app.UseRewriter(new RewriteOptions().AddRedirectToHttps());
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

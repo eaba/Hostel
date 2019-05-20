@@ -9,13 +9,9 @@ import { SignalRService } from './services/signalr.service';
 })
 export class AppComponent implements OnInit {
   title = 'Hostel';
-  constructor(private signalRService: SignalRService, private router: Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
-    this.signalRService.connectionEstablished.subscribe((state: boolean) => {
-      if (state) {
-        this.router.navigateByUrl('/home', { state: { commander: '' } });
-      }
-    });
+    this.router.navigateByUrl('/home', { state: { commander: '' } });
   }
 }
