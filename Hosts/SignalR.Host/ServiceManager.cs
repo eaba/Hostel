@@ -1,5 +1,4 @@
-﻿using Ignite.SharpNetSH;
-using MassTransit;
+﻿using MassTransit;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using System;

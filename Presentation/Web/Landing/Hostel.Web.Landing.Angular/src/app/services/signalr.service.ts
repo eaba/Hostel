@@ -22,7 +22,7 @@ export class SignalRService {
   public createConnection()
   {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(CONFIGURATION.baseUrls.events + "home" + "&commander=" + commander, HttpTransportType.WebSockets)
+      .withUrl(CONFIGURATION.baseUrls.events + "home?commander=" + commander, HttpTransportType.WebSockets)
       .build();
   }
   private startConnection() {

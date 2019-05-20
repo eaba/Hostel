@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row justify-content-center align-items-center\">\r\n  <router-outlet  #outlet=\"outlet\"></router-outlet>\r\n</div>\r\n"
+module.exports = "\r\n  <router-outlet  #outlet=\"outlet\"></router-outlet>\r\n"
 
 /***/ }),
 
@@ -216,7 +216,6 @@ var AccountComponent = /** @class */ (function () {
         });
     };
     AccountComponent.prototype.subscribeToEvents = function () {
-        var _this = this;
         this.signalRService.serverData.subscribe(function (data) {
             var response = JSON.parse(data);
             var cmd = response.Command;
@@ -224,9 +223,6 @@ var AccountComponent = /** @class */ (function () {
                 //alert with message
                 window.open("https://portal.hostel.com", "_blank");
             }
-        });
-        this.signalRService.commander.subscribe(function (id) {
-            _this.commander = id;
         });
     };
     AccountComponent.prototype.RegisterAccount = function () {
@@ -348,7 +344,7 @@ module.exports = "body {\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<form>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"lastName\">Last Name</label>\r\n      <input type=\"text\" class=\"form-control\" id=\"lastName\" placeholder=\"Last Name\" [(ngModel)=\"person.lastName\" ]>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"firstName\">First Name</label>\r\n      <input type=\"text\" class=\"form-control\" id=\"firstName\" placeholder=\"First Name\" [(ngModel)=\"person.firstName\" ]>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"email\">Email</label>\r\n      <input type=\"email\" class=\"form-control\" id=\"email\" placeholder=\"Email Address\" [(ngModel)=\"person.email\" ]>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"phone\">Phone</label>\r\n      <input type=\"tel\" class=\"form-control\" id=\"phone\" placeholder=\"Telephone Number\" [(ngModel)=\"person.phone\" ]>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"dob\">Date of Birth</label>\r\n      <input type=\"date\" class=\"form-control\" id=\"dob\" placeholder=\"Date of Birth\" [(ngModel)=\"person.birthday\" ]>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"role\">Register As</label>\r\n      <div class=\"col-md-6\">\r\n        <select class=\"form-control\" [(ngModel)]=\"person.role\">\r\n          <option *ngFor=\"let role of roles\" [ngValue]=\"role\">{{role}}</option>\r\n        </select>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <input class=\"btn btn-success\" (click)=\"RegisterPerson()\" value=\"Register!\" [disabled]=\"!connected\">\r\n</form>\r\n"
+module.exports = "<form class=\"animated fadeInDown\">\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"lastName\">Last Name</label>\r\n      <input type=\"text\" class=\"form-control\" id=\"lastName\" placeholder=\"Last Name\" [(ngModel)=\"person.lastName\" ]>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"firstName\">First Name</label>\r\n      <input type=\"text\" class=\"form-control\" id=\"firstName\" placeholder=\"First Name\" [(ngModel)=\"person.firstName\" ]>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"email\">Email</label>\r\n      <input type=\"email\" class=\"form-control\" id=\"email\" placeholder=\"Email Address\" [(ngModel)=\"person.email\" ]>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"phone\">Phone</label>\r\n      <input type=\"tel\" class=\"form-control\" id=\"phone\" placeholder=\"Telephone Number\" [(ngModel)=\"person.phone\" ]>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"dob\">Date of Birth</label>\r\n      <input type=\"date\" class=\"form-control\" id=\"dob\" placeholder=\"Date of Birth\" [(ngModel)=\"person.birthday\" ]>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"role\">Register As</label>\r\n      <div class=\"col-md-6\">\r\n        <select class=\"form-control\" [(ngModel)]=\"person.role\">\r\n          <option *ngFor=\"let role of roles\" [ngValue]=\"role\">{{role}}</option>\r\n        </select>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <input class=\"btn btn-success\" (click)=\"RegisterPerson()\" value=\"Register!\" [disabled]=\"!connected\">\r\n</form>\r\n"
 
 /***/ }),
 
@@ -404,9 +400,6 @@ var RegisterComponent = /** @class */ (function () {
             if (cmd === 'PersonCreated') {
                 _this.router.navigateByUrl('/account', { state: { email: response.Email, role: response.Role } });
             }
-        });
-        this.signalRService.commander.subscribe(function (id) {
-            _this.commander = id;
         });
     };
     RegisterComponent.prototype.RegisterPerson = function () {
@@ -646,19 +639,19 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var WAIT_UNTIL_ASPNETCORE_IS_READY_DELAY_IN_MS = 2000;
+var commander = Object(uuid__WEBPACK_IMPORTED_MODULE_4__["v4"])();
 var SignalRService = /** @class */ (function () {
     function SignalRService() {
-        this.commander = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
         this.serverData = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
         this.connectionEstablished = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
         this.createConnection();
         this.registerOnServerEvents();
         this.startConnection();
-        this.commander = Object(uuid__WEBPACK_IMPORTED_MODULE_4__["v4"])();
+        //this.commander = uuid();
     }
     SignalRService.prototype.createConnection = function () {
         this.hubConnection = new _aspnet_signalr__WEBPACK_IMPORTED_MODULE_1__["HubConnectionBuilder"]()
-            .withUrl(_shared_app_constants__WEBPACK_IMPORTED_MODULE_3__["CONFIGURATION"].baseUrls.events + "home", _aspnet_signalr__WEBPACK_IMPORTED_MODULE_1__["HttpTransportType"].WebSockets)
+            .withUrl(_shared_app_constants__WEBPACK_IMPORTED_MODULE_3__["CONFIGURATION"].baseUrls.events + "home?commander=" + commander, _aspnet_signalr__WEBPACK_IMPORTED_MODULE_1__["HttpTransportType"].WebSockets)
             .build();
     };
     SignalRService.prototype.startConnection = function () {
@@ -678,9 +671,6 @@ var SignalRService = /** @class */ (function () {
         });
         this.hubConnection.on('accountcreated', function (data) {
             _this.serverData.next(data);
-        });
-        this.hubConnection.on('connected', function (data) {
-            _this.commander.next(data);
         });
     };
     SignalRService = __decorate([

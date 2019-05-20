@@ -48,7 +48,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\Events\MassTransit.Event\MassTransit.Event.csproj" />
     <ProjectReference Include="..\..\Shared\Shared.csproj" />
-    <ProjectReference Include="..\..\SharpNetSH\SharpNetSH.csproj" />
   </ItemGroup>
 
 </Project>
