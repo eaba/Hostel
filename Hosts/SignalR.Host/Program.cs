@@ -20,10 +20,11 @@ namespace SignalR.Host
             {
                 options.Authentication.Schemes = Microsoft.AspNetCore.Server.HttpSys.AuthenticationSchemes.None;
                 options.Authentication.AllowAnonymous = true;
+                options.UrlPrefixes.Add("http://events.hostel.com");
                 options.UrlPrefixes.Add("https://events.hostel.com");
             })
             //.UseIISIntegration()
-            .UseUrls("https://events.hostel.com:443")
+            .UseUrls("https://events.hostel.com:443", "http://events.hostel.com:80")
             .UseStartup<Startup>()
             .Build();
             host.Run();

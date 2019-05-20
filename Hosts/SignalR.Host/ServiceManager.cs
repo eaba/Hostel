@@ -1,10 +1,8 @@
 ﻿using Ignite.SharpNetSH;
 using MassTransit;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,9 +17,15 @@ namespace SignalR.Host
         }
         public async Task StartAsync(CancellationToken cancellationToken)
         {
+            //Had issues reserving url using this method, I went manual
+            /*Console.WriteLine("Test!!!");
             //I created SSL cert using xca => https://github.com/chris2511/xca
-            NetSH.CMD.Http.Add.UrlAcl("https://events.hostel.com:443/", "user", false, false);
-            NetSH.CMD.Http.Add.SSLCert(hostnamePort: "events.hostel.com:443", certHash: "62b399ff1cd0d6807c9dd70e832ca17ca009a918", appId: Guid.Parse("921328e8-5cdf-4b7f-a3cc-4e50147d1521"), certStoreName: "my");
+            var repse = NetSH.CMD.Http.Add.UrlAcl("http://events.hostel.com:80/", "user", false, false);
+            Console.WriteLine(JsonConvert.SerializeObject(repse, Formatting.Indented));
+            var reps = NetSH.CMD.Http.Add.UrlAcl("https://events.hostel.com:443/", "user", false, false);
+            Console.WriteLine(JsonConvert.SerializeObject(reps, Formatting.Indented));
+            var rep = NetSH.CMD.Http.Add.SSLCert(hostnamePort: "events.hostel.com:443", certHash: "8bb08e88fcef9a225f26d090eed0b702f8c3e237", appId: Guid.Parse("921328e8-5cdf-4b7f-a3cc-4e50147d1521"), certStoreName: "my");
+            Console.WriteLine(JsonConvert.SerializeObject(rep, Formatting.Indented));*/
             await _busControl.StartAsync(cancellationToken);
         }
 
@@ -29,11 +33,13 @@ namespace SignalR.Host
         {
             try
             {
-                NetSH.CMD.Http.Delete.SSLCert(hostnamePort: "events.hostel.com:443");
+
+                /*NetSH.CMD.Http.Delete.SSLCert(hostnamePort: "events.hostel.com:443");
                 NetSH.CMD.Http.Delete.UrlAcl("https://events.hostel.com:443");
+                NetSH.CMD.Http.Delete.UrlAcl("http://events.hostel.com:80");*/
                 _busControl.StopAsync(cancellationToken);
             }
-            catch { }
+            catch(Exception ex) { Console.WriteLine(ex.ToString()); }
             return Task.CompletedTask;
         }
     }
