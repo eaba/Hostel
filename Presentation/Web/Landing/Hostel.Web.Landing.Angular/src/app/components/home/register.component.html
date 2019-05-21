@@ -2,42 +2,40 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="lastName">Last Name</label>
-      <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Last Name" [(ngModel)]="person.lastName">
+      <input type="text" style="width:200px" name="lastName" class="form-control" id="lastName" placeholder="Last Name" [(ngModel)]="person.lastName">
     </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="firstName">First Name</label>
-      <input type="text" name="firstName" class="form-control" id="firstName" placeholder="First Name" [(ngModel)]="person.firstName">
+      <input type="text" style="width:200px" name="firstName" class="form-control" id="firstName" placeholder="First Name" [(ngModel)]="person.firstName">
     </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="email">Email</label>
-      <input type="email" name="email" class="form-control" id="email" placeholder="Email Address" [(ngModel)]="person.email">
+      <input type="email" style="width:200px" name="email" class="form-control" id="email" placeholder="Email Address" [(ngModel)]="person.email">
     </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="phone">Phone</label>
-      <input type="tel" name="phone" class="form-control" id="phone" placeholder="Telephone Number" [(ngModel)]="person.phone">
+      <input type="tel" style="width:200px" name="phone" class="form-control" id="phone" placeholder="Telephone Number" [(ngModel)]="person.phone">
     </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="dob">Date of Birth</label>
-      <input type="date" name="birthday" class="form-control col-md-3" id="dob" placeholder="Date of Birth" [(ngModel)]="person.birthday">
+      <input type="date" style="width:200px" name="birthday" class="form-control" id="dob" placeholder="Date of Birth" [(ngModel)]="person.birthday">
     </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="role">Register As</label>
-      <div class="col-md-6">
-        <select name="role" class="form-control" [(ngModel)]="person.role">
-          <option *ngFor="let role of roles" [ngValue]="role">{{role}}</option>
-        </select>
-      </div>
+      <select style="width:150px" name="role" class="form-control" [(ngModel)]="person.role">
+        <option *ngFor="let role of roles" [ngValue]="role">{{role}}</option>
+      </select>
     </div>
   </div>
-  <input class="btn btn-success" (click)="RegisterPerson()" value="Register!" [disabled]="!connected">
+  <input class="btn btn-success" style="cursor:pointer" (click)="RegisterPerson()" value="Register!" [hidden]="!connected">
 </form>

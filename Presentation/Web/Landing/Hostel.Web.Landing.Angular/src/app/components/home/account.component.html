@@ -1,15 +1,15 @@
-<form class="col-12">
+<form class="animated zoomIn">
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" placeholder="Password" [(ngModel)="account.password" ]>
+      <input type="password" name="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="account.password">
     </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="confirm">Confirm Password</label>
-      <input type="password" class="form-control" id="confirm" placeholder="Confirm Password" [(ngModel)="account.confirm" ]>
+      <input type="password" name="confirm" class="form-control" id="confirm" placeholder="Confirm Password" [(ngModel)]="account.confirm">
     </div>
   </div>
-  <input class="btn btn-success" (click)="RegisterAccount()" value="Submit!" [disabled]="!connected">
+  <input class="btn btn-success" style="cursor:pointer" (click)="RegisterAccount()" value="Submit!" [hidden]="!connected">
 </form>

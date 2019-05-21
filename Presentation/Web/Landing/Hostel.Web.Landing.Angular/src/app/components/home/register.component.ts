@@ -63,5 +63,6 @@ export class RegisterComponent implements OnInit {
         }
       }
     }
+    console.log(JSON.stringify(this.person));
   }
 }
