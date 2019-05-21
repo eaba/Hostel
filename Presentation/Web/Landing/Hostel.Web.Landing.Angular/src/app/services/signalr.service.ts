@@ -45,4 +45,7 @@ export class SignalRService {
       this.serverData.next(data);
     });
   }
+  public GetCommander(): string {
+    return commander;
+  }
 }

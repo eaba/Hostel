@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
     });
   }
   public RegisterPerson() {//this is AI folks ;)
-    this.person.cmd = this.commander;
+    this.person.cmd = this.signalRService.GetCommander();
     if (this.person.cmd)
     {
       if (this.person.birthday)

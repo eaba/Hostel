@@ -37,7 +37,7 @@ export class AccountComponent implements OnInit {
     });
   }
   public RegisterAccount() {//this is AI folks ;)
-    this.account.cmd = this.commander;
+    this.account.cmd = this.signalRService.GetCommander();
     if (this.account.cmd) {
       if (this.account.confirm === this.account.password) {
         if (this.account.email) {
@@ -51,5 +51,6 @@ export class AccountComponent implements OnInit {
         }
       }
     }
+    console.log(this.account);
   }
 }

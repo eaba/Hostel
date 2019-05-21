@@ -3,7 +3,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { CommonModule, LocationStrategy, HashLocationStrategy, APP_BASE_HREF } from '@angular/common';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeService } from '../app/services/home.service';
 import { SignalRService } from '../app/services/signalr.service';
@@ -13,6 +13,7 @@ import { HomeComponent } from '../app/components/home/home.component';
 import { RegisterComponent } from '../app/components/home/register.component';
 import { AccountComponent } from '../app/components/home/account.component';
 import { HostelErrorHandler } from './providers/errorhandler';
+import { HostelInterceptor } from './providers/httpinterceptor';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { HostelErrorHandler } from './providers/errorhandler';
       { path: 'account', component: AccountComponent },
     ])
   ],
-  providers: [{ provide: ErrorHandler, useClass: HostelErrorHandler }, { provide: LocationStrategy, useClass: HashLocationStrategy },
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HostelInterceptor, multi: true }, { provide: ErrorHandler, useClass: HostelErrorHandler }, { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: APP_BASE_HREF, useValue: '/' }],
   bootstrap: [AppComponent]
 })

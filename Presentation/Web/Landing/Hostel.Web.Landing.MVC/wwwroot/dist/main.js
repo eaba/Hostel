@@ -163,7 +163,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<form class=\"col-12\">\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"password\">Password</label>\r\n      <input type=\"password\" class=\"form-control\" id=\"password\" placeholder=\"Password\" [(ngModel)=\"account.password\" ]>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"confirm\">Confirm Password</label>\r\n      <input type=\"password\" class=\"form-control\" id=\"confirm\" placeholder=\"Confirm Password\" [(ngModel)=\"account.confirm\" ]>\r\n    </div>\r\n  </div>\r\n  <input class=\"btn btn-success\" (click)=\"RegisterAccount()\" value=\"Submit!\" [disabled]=\"!connected\">\r\n</form>\r\n"
+module.exports = "<form class=\"animated zoomIn\">\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"password\">Password</label>\r\n      <input type=\"password\" name=\"password\" class=\"form-control\" id=\"password\" placeholder=\"Password\" [(ngModel)]=\"account.password\">\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"confirm\">Confirm Password</label>\r\n      <input type=\"password\" name=\"confirm\" class=\"form-control\" id=\"confirm\" placeholder=\"Confirm Password\" [(ngModel)]=\"account.confirm\">\r\n    </div>\r\n  </div>\r\n  <input class=\"btn btn-success\" style=\"cursor:pointer\" (click)=\"RegisterAccount()\" value=\"Submit!\" [hidden]=\"!connected\">\r\n</form>\r\n"
 
 /***/ }),
 
@@ -225,7 +225,7 @@ var AccountComponent = /** @class */ (function () {
     };
     AccountComponent.prototype.RegisterAccount = function () {
         var _this = this;
-        this.account.cmd = this.commander;
+        this.account.cmd = this.signalRService.GetCommander();
         if (this.account.cmd) {
             if (this.account.confirm === this.account.password) {
                 if (this.account.email) {
@@ -239,6 +239,7 @@ var AccountComponent = /** @class */ (function () {
                 }
             }
         }
+        console.log(this.account);
     };
     AccountComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -273,7 +274,7 @@ module.exports = "body {\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<form>\r\n  <div class=\"form-row\" style=\"margin-bottom:50px\">\r\n    <div class=\"form-group\">\r\n      <button class=\"btn btn-primary\" (click)=\"SignUp()\">Sign Up</button>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group\">\r\n      <button class=\"btn btn-primary\" (click)=\"GoToPortal()\">Portal</button>\r\n    </div>\r\n  </div>\r\n</form>\r\n"
+module.exports = "<form class=\"animated bounceInDown\">\r\n  <div class=\"form-row\" style=\"margin-bottom:50px\">\r\n    <div class=\"form-group\">\r\n      <button class=\"btn btn-primary\" (click)=\"SignUp()\">Sign Up</button>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group\">\r\n      <button class=\"btn btn-primary\" (click)=\"GoToPortal()\">Portal</button>\r\n    </div>\r\n  </div>\r\n</form>\r\n"
 
 /***/ }),
 
@@ -343,7 +344,7 @@ module.exports = "body {\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<form class=\"animated fadeInDown\">\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"lastName\">Last Name</label>\r\n      <input type=\"text\" style=\"width:200px\" name=\"lastName\" class=\"form-control\" id=\"lastName\" placeholder=\"Last Name\" [(ngModel)]=\"person.lastName\">\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"firstName\">First Name</label>\r\n      <input type=\"text\" style=\"width:200px\" name=\"firstName\" class=\"form-control\" id=\"firstName\" placeholder=\"First Name\" [(ngModel)]=\"person.firstName\">\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"email\">Email</label>\r\n      <input type=\"email\" style=\"width:200px\" name=\"email\" class=\"form-control\" id=\"email\" placeholder=\"Email Address\" [(ngModel)]=\"person.email\">\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"phone\">Phone</label>\r\n      <input type=\"tel\" style=\"width:200px\" name=\"phone\" class=\"form-control\" id=\"phone\" placeholder=\"Telephone Number\" [(ngModel)]=\"person.phone\">\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"dob\">Date of Birth</label>\r\n      <input type=\"date\" style=\"width:200px\" name=\"birthday\" class=\"form-control col-md-3\" id=\"dob\" placeholder=\"Date of Birth\" [(ngModel)]=\"person.birthday\">\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"role\">Register As</label>\r\n      <select style=\"width:150px\" name=\"role\" class=\"form-control\" [(ngModel)]=\"person.role\">\r\n        <option *ngFor=\"let role of roles\" [ngValue]=\"role\">{{role}}</option>\r\n      </select>\r\n    </div>\r\n  </div>\r\n  <input class=\"btn btn-success\" (click)=\"RegisterPerson()\" value=\"Register!\" [hidden]=\"!connected\">\r\n</form>\r\n"
+module.exports = "<form class=\"animated fadeInDown\">\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"lastName\">Last Name</label>\r\n      <input type=\"text\" style=\"width:200px\" name=\"lastName\" class=\"form-control\" id=\"lastName\" placeholder=\"Last Name\" [(ngModel)]=\"person.lastName\">\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"firstName\">First Name</label>\r\n      <input type=\"text\" style=\"width:200px\" name=\"firstName\" class=\"form-control\" id=\"firstName\" placeholder=\"First Name\" [(ngModel)]=\"person.firstName\">\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"email\">Email</label>\r\n      <input type=\"email\" style=\"width:200px\" name=\"email\" class=\"form-control\" id=\"email\" placeholder=\"Email Address\" [(ngModel)]=\"person.email\">\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"phone\">Phone</label>\r\n      <input type=\"tel\" style=\"width:200px\" name=\"phone\" class=\"form-control\" id=\"phone\" placeholder=\"Telephone Number\" [(ngModel)]=\"person.phone\">\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"dob\">Date of Birth</label>\r\n      <input type=\"date\" style=\"width:200px\" name=\"birthday\" class=\"form-control\" id=\"dob\" placeholder=\"Date of Birth\" [(ngModel)]=\"person.birthday\">\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"role\">Register As</label>\r\n      <select style=\"width:150px\" name=\"role\" class=\"form-control\" [(ngModel)]=\"person.role\">\r\n        <option *ngFor=\"let role of roles\" [ngValue]=\"role\">{{role}}</option>\r\n      </select>\r\n    </div>\r\n  </div>\r\n  <input class=\"btn btn-success\" style=\"cursor:pointer\" (click)=\"RegisterPerson()\" value=\"Register!\" [hidden]=\"!connected\">\r\n</form>\r\n"
 
 /***/ }),
 
@@ -403,7 +404,7 @@ var RegisterComponent = /** @class */ (function () {
     };
     RegisterComponent.prototype.RegisterPerson = function () {
         var _this = this;
-        this.person.cmd = this.commander;
+        this.person.cmd = this.signalRService.GetCommander();
         if (this.person.cmd) {
             if (this.person.birthday) {
                 if (this.person.email) {
@@ -423,6 +424,7 @@ var RegisterComponent = /** @class */ (function () {
                 }
             }
         }
+        console.log(JSON.stringify(this.person));
     };
     RegisterComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -679,6 +681,9 @@ var SignalRService = /** @class */ (function () {
         this.hubConnection.on('accountcreated', function (data) {
             _this.serverData.next(data);
         });
+    };
+    SignalRService.prototype.GetCommander = function () {
+        return commander;
     };
     SignalRService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
