@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'register-div',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  providers: [HomeService, SignalRService]
 })
 export class RegisterComponent implements OnInit {
   responses: Observable<string>;

@@ -13,8 +13,6 @@ import { HomeComponent } from '../app/components/home/home.component';
 import { RegisterComponent } from '../app/components/home/register.component';
 import { AccountComponent } from '../app/components/home/account.component';
 import { HostelErrorHandler } from './providers/errorhandler';
-import { HttpInterceptorHandler } from '@angular/common/http/src/interceptor';
-import { HostelInterceptor } from './providers/httpinterceptor';
 
 @NgModule({
   declarations: [
@@ -37,7 +35,7 @@ import { HostelInterceptor } from './providers/httpinterceptor';
       { path: 'account', component: AccountComponent },
     ])
   ],
-  providers: [{ provide: ErrorHandler, useClass: HostelErrorHandler }, { provide: HttpInterceptorHandler, useClass: HostelInterceptor }, { provide: LocationStrategy, useClass: HashLocationStrategy },
+  providers: [{ provide: ErrorHandler, useClass: HostelErrorHandler }, { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: APP_BASE_HREF, useValue: '/' }],
   bootstrap: [AppComponent]
 })

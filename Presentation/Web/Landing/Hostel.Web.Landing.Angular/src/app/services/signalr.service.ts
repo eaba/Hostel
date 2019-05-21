@@ -3,7 +3,7 @@ import * as signalR from "@aspnet/signalr";
 import { Person } from '../models/Person.Model';
 import { Account } from '../models/Account.Model';
 import { interval, Subject } from 'rxjs';
-import { HttpTransportType, HubConnection } from '@aspnet/signalr';
+import { HttpTransportType, HubConnection, LogLevel } from '@aspnet/signalr';
 import { CONFIGURATION } from '../shared/app.constants';
 import { v4 as uuid } from 'uuid';
 const WAIT_UNTIL_ASPNETCORE_IS_READY_DELAY_IN_MS = 2000;
@@ -23,6 +23,7 @@ export class SignalRService {
   {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(CONFIGURATION.baseUrls.events + "home?commander=" + commander, HttpTransportType.WebSockets)
+      .configureLogging(LogLevel.Debug)
       .build();
   }
   private startConnection() {

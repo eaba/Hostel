@@ -96,12 +96,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _app_services_home_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../app/services/home.service */ "./src/app/services/home.service.ts");
-/* harmony import */ var _app_services_signalr_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../app/services/signalr.service */ "./src/app/services/signalr.service.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _app_components_home_home_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../app/components/home/home.component */ "./src/app/components/home/home.component.ts");
-/* harmony import */ var _app_components_home_register_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../app/components/home/register.component */ "./src/app/components/home/register.component.ts");
-/* harmony import */ var _app_components_home_account_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../app/components/home/account.component */ "./src/app/components/home/account.component.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _app_components_home_home_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../app/components/home/home.component */ "./src/app/components/home/home.component.ts");
+/* harmony import */ var _app_components_home_register_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../app/components/home/register.component */ "./src/app/components/home/register.component.ts");
+/* harmony import */ var _app_components_home_account_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../app/components/home/account.component */ "./src/app/components/home/account.component.ts");
+/* harmony import */ var _providers_errorhandler__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./providers/errorhandler */ "./src/app/providers/errorhandler.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -120,17 +119,16 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"],
-                _app_components_home_home_component__WEBPACK_IMPORTED_MODULE_10__["HomeComponent"],
-                _app_components_home_register_component__WEBPACK_IMPORTED_MODULE_11__["RegisterComponent"],
-                _app_components_home_account_component__WEBPACK_IMPORTED_MODULE_12__["AccountComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"],
+                _app_components_home_home_component__WEBPACK_IMPORTED_MODULE_8__["HomeComponent"],
+                _app_components_home_register_component__WEBPACK_IMPORTED_MODULE_9__["RegisterComponent"],
+                _app_components_home_account_component__WEBPACK_IMPORTED_MODULE_10__["AccountComponent"]
             ],
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
@@ -140,15 +138,15 @@ var AppModule = /** @class */ (function () {
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_6__["RouterModule"].forRoot([
-                    { path: '', component: _app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"], pathMatch: 'full' },
-                    { path: 'home', component: _app_components_home_home_component__WEBPACK_IMPORTED_MODULE_10__["HomeComponent"] },
-                    { path: 'register', component: _app_components_home_register_component__WEBPACK_IMPORTED_MODULE_11__["RegisterComponent"] },
-                    { path: 'account', component: _app_components_home_account_component__WEBPACK_IMPORTED_MODULE_12__["AccountComponent"] },
+                    { path: '', component: _app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"], pathMatch: 'full' },
+                    { path: 'home', component: _app_components_home_home_component__WEBPACK_IMPORTED_MODULE_8__["HomeComponent"] },
+                    { path: 'register', component: _app_components_home_register_component__WEBPACK_IMPORTED_MODULE_9__["RegisterComponent"] },
+                    { path: 'account', component: _app_components_home_account_component__WEBPACK_IMPORTED_MODULE_10__["AccountComponent"] },
                 ])
             ],
-            providers: [_app_services_home_service__WEBPACK_IMPORTED_MODULE_7__["HomeService"], _app_services_signalr_service__WEBPACK_IMPORTED_MODULE_8__["SignalRService"], { provide: _angular_common__WEBPACK_IMPORTED_MODULE_2__["LocationStrategy"], useClass: _angular_common__WEBPACK_IMPORTED_MODULE_2__["HashLocationStrategy"] },
+            providers: [{ provide: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ErrorHandler"], useClass: _providers_errorhandler__WEBPACK_IMPORTED_MODULE_11__["HostelErrorHandler"] }, { provide: _angular_common__WEBPACK_IMPORTED_MODULE_2__["LocationStrategy"], useClass: _angular_common__WEBPACK_IMPORTED_MODULE_2__["HashLocationStrategy"] },
                 { provide: _angular_common__WEBPACK_IMPORTED_MODULE_2__["APP_BASE_HREF"], useValue: '/' }],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"]]
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
@@ -245,7 +243,8 @@ var AccountComponent = /** @class */ (function () {
     AccountComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'account-div',
-            template: __webpack_require__(/*! ./account.component.html */ "./src/app/components/home/account.component.html")
+            template: __webpack_require__(/*! ./account.component.html */ "./src/app/components/home/account.component.html"),
+            providers: [_services_home_service__WEBPACK_IMPORTED_MODULE_1__["HomeService"], _services_signalr_service__WEBPACK_IMPORTED_MODULE_2__["SignalRService"]]
         }),
         __metadata("design:paramtypes", [_services_home_service__WEBPACK_IMPORTED_MODULE_1__["HomeService"], _services_signalr_service__WEBPACK_IMPORTED_MODULE_2__["SignalRService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
     ], AccountComponent);
@@ -274,7 +273,7 @@ module.exports = "body {\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<form>\r\n  <div class=\"form-row\">\r\n      <div class=\"form-group\">\r\n        <button class=\"btn btn-primary\" (click)=\"SignUp()\">Sign Up</button>\r\n      </div>\r\n      <div class=\"form-group\">\r\n        <button class=\"btn btn-primary\" (click)=\"GoToPortal()\">Portal</button>\r\n      </div>\r\n    </div>\r\n</form>\r\n"
+module.exports = "<form>\r\n  <div class=\"form-row\" style=\"margin-bottom:50px\">\r\n    <div class=\"form-group\">\r\n      <button class=\"btn btn-primary\" (click)=\"SignUp()\">Sign Up</button>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group\">\r\n      <button class=\"btn btn-primary\" (click)=\"GoToPortal()\">Portal</button>\r\n    </div>\r\n  </div>\r\n</form>\r\n"
 
 /***/ }),
 
@@ -344,7 +343,7 @@ module.exports = "body {\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<form class=\"animated fadeInDown\">\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"lastName\">Last Name</label>\r\n      <input type=\"text\" class=\"form-control\" id=\"lastName\" placeholder=\"Last Name\" [(ngModel)=\"person.lastName\" ]>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"firstName\">First Name</label>\r\n      <input type=\"text\" class=\"form-control\" id=\"firstName\" placeholder=\"First Name\" [(ngModel)=\"person.firstName\" ]>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"email\">Email</label>\r\n      <input type=\"email\" class=\"form-control\" id=\"email\" placeholder=\"Email Address\" [(ngModel)=\"person.email\" ]>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"phone\">Phone</label>\r\n      <input type=\"tel\" class=\"form-control\" id=\"phone\" placeholder=\"Telephone Number\" [(ngModel)=\"person.phone\" ]>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"dob\">Date of Birth</label>\r\n      <input type=\"date\" class=\"form-control\" id=\"dob\" placeholder=\"Date of Birth\" [(ngModel)=\"person.birthday\" ]>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"role\">Register As</label>\r\n      <div class=\"col-md-6\">\r\n        <select class=\"form-control\" [(ngModel)]=\"person.role\">\r\n          <option *ngFor=\"let role of roles\" [ngValue]=\"role\">{{role}}</option>\r\n        </select>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <input class=\"btn btn-success\" (click)=\"RegisterPerson()\" value=\"Register!\" [disabled]=\"!connected\">\r\n</form>\r\n"
+module.exports = "<form class=\"animated fadeInDown\">\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"lastName\">Last Name</label>\r\n      <input type=\"text\" class=\"form-control\" id=\"lastName\" placeholder=\"Last Name\" [(ngModel)]=\"person.lastName\">\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"firstName\">First Name</label>\r\n      <input type=\"text\" class=\"form-control\" id=\"firstName\" placeholder=\"First Name\" [(ngModel)]=\"person.firstName\">\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"email\">Email</label>\r\n      <input type=\"email\" class=\"form-control\" id=\"email\" placeholder=\"Email Address\" [(ngModel)]=\"person.email\">\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"phone\">Phone</label>\r\n      <input type=\"tel\" class=\"form-control\" id=\"phone\" placeholder=\"Telephone Number\" [(ngModel)]=\"person.phone\">\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"dob\">Date of Birth</label>\r\n      <input type=\"date\" class=\"form-control\" id=\"dob\" placeholder=\"Date of Birth\" [(ngModel)]=\"person.birthday\">\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"role\">Register As</label>\r\n      <div class=\"col-md-6\">\r\n        <select class=\"form-control\" [(ngModel)]=\"person.role\">\r\n          <option *ngFor=\"let role of roles\" [ngValue]=\"role\">{{role}}</option>\r\n        </select>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <input class=\"btn btn-success\" (click)=\"RegisterPerson()\" value=\"Register!\" [disabled]=\"!connected\">\r\n</form>\r\n"
 
 /***/ }),
 
@@ -429,6 +428,7 @@ var RegisterComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'register-div',
             template: __webpack_require__(/*! ./register.component.html */ "./src/app/components/home/register.component.html"),
+            providers: [_services_home_service__WEBPACK_IMPORTED_MODULE_1__["HomeService"], _services_signalr_service__WEBPACK_IMPORTED_MODULE_2__["SignalRService"]],
             styles: [__webpack_require__(/*! ./register.component.css */ "./src/app/components/home/register.component.css")]
         }),
         __metadata("design:paramtypes", [_services_home_service__WEBPACK_IMPORTED_MODULE_1__["HomeService"], _services_signalr_service__WEBPACK_IMPORTED_MODULE_2__["SignalRService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
@@ -512,17 +512,41 @@ var Transporter = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/providers/errorhandler.ts":
+/*!*******************************************!*\
+  !*** ./src/app/providers/errorhandler.ts ***!
+  \*******************************************/
+/*! exports provided: HostelErrorHandler */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HostelErrorHandler", function() { return HostelErrorHandler; });
+var HostelErrorHandler = /** @class */ (function () {
+    function HostelErrorHandler() {
+    }
+    HostelErrorHandler.prototype.handleError = function (error) {
+        // console.error(Object.getOwnPropertyNames(error))
+        // Object.getOwnPropertyNames(error).forEach(p => console.error(error[p]))
+        console.error(error.fileName, error.lineNumber, ':', error.columnNumber, '\n', error.message, error.rejection);
+    };
+    return HostelErrorHandler;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/home.service.ts":
 /*!******************************************!*\
   !*** ./src/app/services/home.service.ts ***!
   \******************************************/
-/*! exports provided: HomeService, HostelInterceptor */
+/*! exports provided: HomeService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeService", function() { return HomeService; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HostelInterceptor", function() { return HostelInterceptor; });
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
@@ -585,24 +609,6 @@ var HomeService = /** @class */ (function () {
     return HomeService;
 }());
 
-var HostelInterceptor = /** @class */ (function () {
-    function HostelInterceptor() {
-    }
-    HostelInterceptor.prototype.intercept = function (req, next) {
-        if (!req.headers.has('Content-Type')) {
-            req = req.clone({
-                headers: req.headers.set('Content-Type', 'application/json')
-            });
-        }
-        req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
-        return next.handle(req);
-    };
-    HostelInterceptor = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()
-    ], HostelInterceptor);
-    return HostelInterceptor;
-}());
-
 
 
 /***/ }),
@@ -652,6 +658,7 @@ var SignalRService = /** @class */ (function () {
     SignalRService.prototype.createConnection = function () {
         this.hubConnection = new _aspnet_signalr__WEBPACK_IMPORTED_MODULE_1__["HubConnectionBuilder"]()
             .withUrl(_shared_app_constants__WEBPACK_IMPORTED_MODULE_3__["CONFIGURATION"].baseUrls.events + "home?commander=" + commander, _aspnet_signalr__WEBPACK_IMPORTED_MODULE_1__["HttpTransportType"].WebSockets)
+            .configureLogging(_aspnet_signalr__WEBPACK_IMPORTED_MODULE_1__["LogLevel"].Debug)
             .build();
     };
     SignalRService.prototype.startConnection = function () {

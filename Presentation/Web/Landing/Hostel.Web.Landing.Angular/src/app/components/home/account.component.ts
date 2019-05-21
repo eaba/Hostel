@@ -6,7 +6,8 @@ import { Account } from '../../models/Account.Model';
 import { Router } from '@angular/router';
 @Component({
   selector: 'account-div',
-  templateUrl: './account.component.html'
+  templateUrl: './account.component.html',
+  providers: [HomeService, SignalRService]
 })
 export class AccountComponent implements OnInit {
   account: Account = new Account();

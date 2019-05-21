@@ -4,15 +4,7 @@
     
 </head>
 <body>
-
-    <partial name="_CookieConsentPartial" />
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-    </div>
-
-
+    @RenderBody()
     @RenderSection("Scripts", required: false)
 </body>
 </html>
