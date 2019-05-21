@@ -23,24 +23,13 @@ export class HomeService {
     this.personActionUrl = CONFIGURATION.baseUrls.api + 'person';
     this.accountActionUrl = CONFIGURATION.baseUrls.api + 'account';
   }
-  public createPerson(person: Person): Observable<string> {
-    let data = new Transporter();
-    data.Commander = person.cmd;
-    data.Command = "CreatePerson";
-    data.CommandId = uuid();
-    data.Payload = person;
-    const jsonData: string = JSON.stringify({ payload: data });
-    return this.http
-      .post<string>(this.personActionUrl, jsonData)
+  public createPerson(person: string): Observable<string> {
+    return this.http.post<string>(this.personActionUrl, person)
       .pipe(catchError(this.handleError));
   }
   public createAccount(account: Account): Observable<string> {
-    let data = new Transporter();
-    data.Commander = account.cmd;
-    data.Command = "CreateAccount";
-    data.CommandId = uuid();
-    data.Payload = account;
-    const jsonData: string = JSON.stringify({ payload: data });
+    let data = { Commander: account.cmd, Command: "CreateAccount", CommandId: uuid(), Payload: account};
+    const jsonData = JSON.stringify(data);
 
     return this.http
       .post<string>(this.accountActionUrl, jsonData)

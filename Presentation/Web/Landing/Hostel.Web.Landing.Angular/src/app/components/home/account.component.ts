@@ -4,6 +4,7 @@ import { HomeService } from '../../services/home.service';
 import { SignalRService } from '../../services/signalr.service';
 import { Account } from '../../models/Account.Model';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'account-div',
   templateUrl: './account.component.html',
@@ -14,7 +15,7 @@ export class AccountComponent implements OnInit {
   responses: Observable<string>;
   commander: string;
   connected: boolean;
-  constructor(private homeService: HomeService, private signalRService: SignalRService, public router: Router) {
+  constructor(private homeService: HomeService, private signalRService: SignalRService, public router: Router, private toastr: ToastrService) {
 
   }
   ngOnInit() {
@@ -46,6 +47,7 @@ export class AccountComponent implements OnInit {
               .subscribe(data => {
                 this.account = new Account();
                 let rep = JSON.parse(data);
+                //this.toastr.success('Hello world!', 'Toastr fun!');
               });
           }            
         }

@@ -90,17 +90,20 @@ var AppComponent = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppModule", function() { return AppModule; });
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
-/* harmony import */ var angular_font_awesome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! angular-font-awesome */ "./node_modules/angular-font-awesome/dist/angular-font-awesome.es5.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _app_components_home_home_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../app/components/home/home.component */ "./src/app/components/home/home.component.ts");
-/* harmony import */ var _app_components_home_register_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../app/components/home/register.component */ "./src/app/components/home/register.component.ts");
-/* harmony import */ var _app_components_home_account_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../app/components/home/account.component */ "./src/app/components/home/account.component.ts");
-/* harmony import */ var _providers_errorhandler__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./providers/errorhandler */ "./src/app/providers/errorhandler.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
+/* harmony import */ var angular_font_awesome__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! angular-font-awesome */ "./node_modules/angular-font-awesome/dist/angular-font-awesome.es5.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _app_components_home_home_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../app/components/home/home.component */ "./src/app/components/home/home.component.ts");
+/* harmony import */ var _app_components_home_register_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../app/components/home/register.component */ "./src/app/components/home/register.component.ts");
+/* harmony import */ var _app_components_home_account_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../app/components/home/account.component */ "./src/app/components/home/account.component.ts");
+/* harmony import */ var _providers_errorhandler__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./providers/errorhandler */ "./src/app/providers/errorhandler.ts");
+/* harmony import */ var _providers_httpinterceptor__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./providers/httpinterceptor */ "./src/app/providers/httpinterceptor.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -119,34 +122,39 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["NgModule"])({
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"],
-                _app_components_home_home_component__WEBPACK_IMPORTED_MODULE_8__["HomeComponent"],
-                _app_components_home_register_component__WEBPACK_IMPORTED_MODULE_9__["RegisterComponent"],
-                _app_components_home_account_component__WEBPACK_IMPORTED_MODULE_10__["AccountComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"],
+                _app_components_home_home_component__WEBPACK_IMPORTED_MODULE_10__["HomeComponent"],
+                _app_components_home_register_component__WEBPACK_IMPORTED_MODULE_11__["RegisterComponent"],
+                _app_components_home_account_component__WEBPACK_IMPORTED_MODULE_12__["AccountComponent"]
             ],
             imports: [
-                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
+                _angular_common__WEBPACK_IMPORTED_MODULE_4__["CommonModule"],
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
-                _angular_router__WEBPACK_IMPORTED_MODULE_6__["RouterModule"],
-                angular_font_awesome__WEBPACK_IMPORTED_MODULE_1__["AngularFontAwesomeModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
-                _angular_router__WEBPACK_IMPORTED_MODULE_6__["RouterModule"].forRoot([
-                    { path: '', component: _app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"], pathMatch: 'full' },
-                    { path: 'home', component: _app_components_home_home_component__WEBPACK_IMPORTED_MODULE_8__["HomeComponent"] },
-                    { path: 'register', component: _app_components_home_register_component__WEBPACK_IMPORTED_MODULE_9__["RegisterComponent"] },
-                    { path: 'account', component: _app_components_home_account_component__WEBPACK_IMPORTED_MODULE_10__["AccountComponent"] },
+                _angular_router__WEBPACK_IMPORTED_MODULE_8__["RouterModule"],
+                angular_font_awesome__WEBPACK_IMPORTED_MODULE_3__["AngularFontAwesomeModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_1__["BrowserAnimationsModule"],
+                ngx_toastr__WEBPACK_IMPORTED_MODULE_2__["ToastrModule"].forRoot(),
+                _angular_router__WEBPACK_IMPORTED_MODULE_8__["RouterModule"].forRoot([
+                    { path: '', component: _app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"], pathMatch: 'full' },
+                    { path: 'home', component: _app_components_home_home_component__WEBPACK_IMPORTED_MODULE_10__["HomeComponent"] },
+                    { path: 'register', component: _app_components_home_register_component__WEBPACK_IMPORTED_MODULE_11__["RegisterComponent"] },
+                    { path: 'account', component: _app_components_home_account_component__WEBPACK_IMPORTED_MODULE_12__["AccountComponent"] },
                 ])
             ],
-            providers: [{ provide: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ErrorHandler"], useClass: _providers_errorhandler__WEBPACK_IMPORTED_MODULE_11__["HostelErrorHandler"] }, { provide: _angular_common__WEBPACK_IMPORTED_MODULE_2__["LocationStrategy"], useClass: _angular_common__WEBPACK_IMPORTED_MODULE_2__["HashLocationStrategy"] },
-                { provide: _angular_common__WEBPACK_IMPORTED_MODULE_2__["APP_BASE_HREF"], useValue: '/' }],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
+            providers: [{ provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HTTP_INTERCEPTORS"], useClass: _providers_httpinterceptor__WEBPACK_IMPORTED_MODULE_14__["HostelInterceptor"], multi: true }, { provide: _angular_core__WEBPACK_IMPORTED_MODULE_5__["ErrorHandler"], useClass: _providers_errorhandler__WEBPACK_IMPORTED_MODULE_13__["HostelErrorHandler"] }, { provide: _angular_common__WEBPACK_IMPORTED_MODULE_4__["LocationStrategy"], useClass: _angular_common__WEBPACK_IMPORTED_MODULE_4__["HashLocationStrategy"] },
+                { provide: _angular_common__WEBPACK_IMPORTED_MODULE_4__["APP_BASE_HREF"], useValue: '/' }],
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
@@ -182,6 +190,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_signalr_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/signalr.service */ "./src/app/services/signalr.service.ts");
 /* harmony import */ var _models_Account_Model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../models/Account.Model */ "./src/app/models/Account.Model.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -196,11 +205,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AccountComponent = /** @class */ (function () {
-    function AccountComponent(homeService, signalRService, router) {
+    function AccountComponent(homeService, signalRService, router, toastr) {
         this.homeService = homeService;
         this.signalRService = signalRService;
         this.router = router;
+        this.toastr = toastr;
         this.account = new _models_Account_Model__WEBPACK_IMPORTED_MODULE_3__["Account"]();
     }
     AccountComponent.prototype.ngOnInit = function () {
@@ -234,6 +245,7 @@ var AccountComponent = /** @class */ (function () {
                             .subscribe(function (data) {
                             _this.account = new _models_Account_Model__WEBPACK_IMPORTED_MODULE_3__["Account"]();
                             var rep = JSON.parse(data);
+                            //this.toastr.success('Hello world!', 'Toastr fun!');
                         });
                     }
                 }
@@ -247,7 +259,7 @@ var AccountComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./account.component.html */ "./src/app/components/home/account.component.html"),
             providers: [_services_home_service__WEBPACK_IMPORTED_MODULE_1__["HomeService"], _services_signalr_service__WEBPACK_IMPORTED_MODULE_2__["SignalRService"]]
         }),
-        __metadata("design:paramtypes", [_services_home_service__WEBPACK_IMPORTED_MODULE_1__["HomeService"], _services_signalr_service__WEBPACK_IMPORTED_MODULE_2__["SignalRService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
+        __metadata("design:paramtypes", [_services_home_service__WEBPACK_IMPORTED_MODULE_1__["HomeService"], _services_signalr_service__WEBPACK_IMPORTED_MODULE_2__["SignalRService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"]])
     ], AccountComponent);
     return AccountComponent;
 }());
@@ -363,6 +375,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_signalr_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/signalr.service */ "./src/app/services/signalr.service.ts");
 /* harmony import */ var _models_Person_Model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../models/Person.Model */ "./src/app/models/Person.Model.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/index.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_6__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -377,11 +392,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var RegisterComponent = /** @class */ (function () {
-    function RegisterComponent(homeService, signalRService, router) {
+    function RegisterComponent(homeService, signalRService, router, toastr) {
         this.homeService = homeService;
         this.signalRService = signalRService;
         this.router = router;
+        this.toastr = toastr;
         this.person = new _models_Person_Model__WEBPACK_IMPORTED_MODULE_3__["Person"]();
         this.roles = ['Owner', 'Tenant'];
     }
@@ -412,10 +430,12 @@ var RegisterComponent = /** @class */ (function () {
                         if (this.person.lastName) {
                             if (this.person.phone) {
                                 if (this.person.role) {
-                                    this.homeService.createPerson(this.person)
+                                    var data = { Commander: this.person.cmd, Command: "CreateAccount", CommandId: Object(uuid__WEBPACK_IMPORTED_MODULE_6__["v4"])(), Payload: JSON.stringify(this.person) };
+                                    this.homeService.createPerson(JSON.stringify(data))
                                         .subscribe(function (data) {
                                         _this.person = new _models_Person_Model__WEBPACK_IMPORTED_MODULE_3__["Person"]();
                                         var rep = JSON.parse(data);
+                                        //this.toastr.success('Hello world!', 'Toastr fun!');
                                     });
                                 }
                             }
@@ -433,7 +453,7 @@ var RegisterComponent = /** @class */ (function () {
             providers: [_services_home_service__WEBPACK_IMPORTED_MODULE_1__["HomeService"], _services_signalr_service__WEBPACK_IMPORTED_MODULE_2__["SignalRService"]],
             styles: [__webpack_require__(/*! ./register.component.css */ "./src/app/components/home/register.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_home_service__WEBPACK_IMPORTED_MODULE_1__["HomeService"], _services_signalr_service__WEBPACK_IMPORTED_MODULE_2__["SignalRService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
+        __metadata("design:paramtypes", [_services_home_service__WEBPACK_IMPORTED_MODULE_1__["HomeService"], _services_signalr_service__WEBPACK_IMPORTED_MODULE_2__["SignalRService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"]])
     ], RegisterComponent);
     return RegisterComponent;
 }());
@@ -494,26 +514,6 @@ var Person = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/models/transporter.model.ts":
-/*!*********************************************!*\
-  !*** ./src/app/models/transporter.model.ts ***!
-  \*********************************************/
-/*! exports provided: Transporter */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Transporter", function() { return Transporter; });
-var Transporter = /** @class */ (function () {
-    function Transporter() {
-    }
-    return Transporter;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/providers/errorhandler.ts":
 /*!*******************************************!*\
   !*** ./src/app/providers/errorhandler.ts ***!
@@ -539,6 +539,35 @@ var HostelErrorHandler = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/providers/httpinterceptor.ts":
+/*!**********************************************!*\
+  !*** ./src/app/providers/httpinterceptor.ts ***!
+  \**********************************************/
+/*! exports provided: HostelInterceptor */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HostelInterceptor", function() { return HostelInterceptor; });
+var HostelInterceptor = /** @class */ (function () {
+    function HostelInterceptor() {
+    }
+    HostelInterceptor.prototype.intercept = function (req, next) {
+        if (!req.headers.has('Content-Type')) {
+            req = req.clone({
+                headers: req.headers.set('Content-Type', 'application/json')
+            });
+        }
+        req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
+        return next.handle(req);
+    };
+    return HostelInterceptor;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/home.service.ts":
 /*!******************************************!*\
   !*** ./src/app/services/home.service.ts ***!
@@ -553,10 +582,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _models_transporter_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../models/transporter.model */ "./src/app/models/transporter.model.ts");
-/* harmony import */ var _shared_app_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/app.constants */ "./src/app/shared/app.constants.ts");
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/index.js");
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _shared_app_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/app.constants */ "./src/app/shared/app.constants.ts");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/index.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_5__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -572,31 +600,19 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
 var HomeService = /** @class */ (function () {
     function HomeService(http) {
         this.http = http;
-        this.personActionUrl = _shared_app_constants__WEBPACK_IMPORTED_MODULE_5__["CONFIGURATION"].baseUrls.api + 'person';
-        this.accountActionUrl = _shared_app_constants__WEBPACK_IMPORTED_MODULE_5__["CONFIGURATION"].baseUrls.api + 'account';
+        this.personActionUrl = _shared_app_constants__WEBPACK_IMPORTED_MODULE_4__["CONFIGURATION"].baseUrls.api + 'person';
+        this.accountActionUrl = _shared_app_constants__WEBPACK_IMPORTED_MODULE_4__["CONFIGURATION"].baseUrls.api + 'account';
     }
     HomeService.prototype.createPerson = function (person) {
-        var data = new _models_transporter_model__WEBPACK_IMPORTED_MODULE_4__["Transporter"]();
-        data.Commander = person.cmd;
-        data.Command = "CreatePerson";
-        data.CommandId = Object(uuid__WEBPACK_IMPORTED_MODULE_6__["v4"])();
-        data.Payload = person;
-        var jsonData = JSON.stringify({ payload: data });
-        return this.http
-            .post(this.personActionUrl, jsonData)
+        return this.http.post(this.personActionUrl, person)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
     HomeService.prototype.createAccount = function (account) {
-        var data = new _models_transporter_model__WEBPACK_IMPORTED_MODULE_4__["Transporter"]();
-        data.Commander = account.cmd;
-        data.Command = "CreateAccount";
-        data.CommandId = Object(uuid__WEBPACK_IMPORTED_MODULE_6__["v4"])();
-        data.Payload = account;
-        var jsonData = JSON.stringify({ payload: data });
+        var data = { Commander: account.cmd, Command: "CreateAccount", CommandId: Object(uuid__WEBPACK_IMPORTED_MODULE_5__["v4"])(), Payload: account };
+        var jsonData = JSON.stringify(data);
         return this.http
             .post(this.accountActionUrl, jsonData)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
@@ -709,7 +725,7 @@ __webpack_require__.r(__webpack_exports__);
 var CONFIGURATION = {
     baseUrls: {
         events: 'https://events.hostel.com/',
-        api: 'https://hostel.com/'
+        api: 'https://hostel.com/api/'
     }
 };
 

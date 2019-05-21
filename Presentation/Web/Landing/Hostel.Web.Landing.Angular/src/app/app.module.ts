@@ -1,4 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { CommonModule, LocationStrategy, HashLocationStrategy, APP_BASE_HREF } from '@angular/common';
 import { NgModule, ErrorHandler } from '@angular/core';
@@ -29,6 +31,8 @@ import { HostelInterceptor } from './providers/httpinterceptor';
     AngularFontAwesomeModule,
     HttpClientModule,
     FormsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
     RouterModule.forRoot([
       { path: '', component: AppComponent, pathMatch: 'full' },
       { path: 'home', component: HomeComponent },

@@ -4,6 +4,8 @@ import { HomeService } from '../../services/home.service';
 import { SignalRService } from '../../services/signalr.service';
 import { Person } from '../../models/Person.Model';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { v4 as uuid } from 'uuid';
 @Component({
   selector: 'register-div',
   templateUrl: './register.component.html',
@@ -16,8 +18,7 @@ export class RegisterComponent implements OnInit {
   commander: string;
   connected: boolean;
   roles: string[];
-  constructor(private homeService: HomeService, private signalRService: SignalRService, public router: Router
-  ) {
+  constructor(private homeService: HomeService, private signalRService: SignalRService, public router: Router, private toastr: ToastrService) {
     this.roles = ['Owner', 'Tenant'];
   }
   ngOnInit() {
@@ -51,10 +52,12 @@ export class RegisterComponent implements OnInit {
               {
                 if (this.person.role)
                 {
-                  this.homeService.createPerson(this.person)
+                  let data = { Commander: this.person.cmd, Command: "CreateAccount", CommandId: uuid(), Payload: JSON.stringify(this.person) };
+                  this.homeService.createPerson(JSON.stringify(data))
                     .subscribe(data => {
                       this.person = new Person();
                       let rep = JSON.parse(data);
+                      //this.toastr.success('Hello world!', 'Toastr fun!');
                     });
                 }
               }
