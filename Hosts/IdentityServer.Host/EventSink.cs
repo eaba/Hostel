@@ -1,4 +1,5 @@
-﻿using IdentityServer4.Events;
+﻿using Akka.Actor;
+using IdentityServer4.Events;
 using IdentityServer4.Services;
 using MassTransit;
 using System.Threading.Tasks;
@@ -7,15 +8,16 @@ namespace IdentityServer.Host
 {
     public class EventSink: IEventSink
     {
-        private readonly IBusControl _bus;
+        private readonly IActorRef _actorRef;
         private ISendEndpoint _sendEndPoint;
-        public EventSink(IBusControl bus)
+        public EventSink(IActorRef actorRef)
         {
-            _bus = bus;
+            _actorRef = actorRef;
         }
         public async Task PersistAsync(Event evt)
         {
-            switch(evt)
+            _actorRef.Tell(evt);
+            /*switch(evt)
             {                
                 case ApiAuthenticationFailureEvent apiFailure:
                     {
@@ -112,7 +114,7 @@ namespace IdentityServer.Host
 
                     }
                     break;
-            }
+            }*/
             await Task.CompletedTask;
         }
     }

@@ -41,7 +41,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Domain\Commands\MassTransit.Command\MassTransit.Command.csproj" />
+    <ProjectReference Include="..\..\Extensions\Akka.Extension\Akka.Extension.csproj" />
+    <ProjectReference Include="..\..\Logger\AkkaDotNet.MassTransit.Logger\Akka.MassTransit.Logger.csproj" />
     <ProjectReference Include="..\..\Shared\Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="host.hocon">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="IdentityServer4.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

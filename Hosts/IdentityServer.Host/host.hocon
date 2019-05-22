@@ -1,0 +1,92 @@
+﻿akka    		  
+{            
+             
+			stdout-loglevel = DEBUG
+			loglevel = DEBUG
+			log-config-on-start = on     
+			loggers = ["Akka.MassTransit.Logger.QueueLogger, Akka.MassTransit.Logger", "Akka.MassTransit.Logger.TraceLogger, Akka.MassTransit.Logger"]
+			queue-uri = "rabbitmq://localhost/logging_akka"
+			trace-uri = "rabbitmq://localhost/trace_akka"
+          actor 
+            {              
+				  debug 
+				  {
+					  receive = on
+					  autoreceive = on
+					  lifecycle = on
+					  event-stream = on
+					  unhandled = on
+				  }  
+				  serialization-settings.json 
+				  {
+                        preserve-object-references = false
+                        encode-type-names = false
+                  }
+			} 
+          persistence
+          {
+			max-concurrent-recoveries = 5
+	       journal 
+            {
+	                  plugin = "akka.persistence.journal.sql-server"
+		               sql-server 
+						{
+			                    # qualified type name of the SQL Server persistence journal actor
+			                    class = "Akka.Persistence.SqlServer.Journal.BatchingSqlServerJournal, Akka.Persistence.SqlServer"
+
+			                    # dispatcher used to drive journal actor
+			                    plugin-dispatcher = "akka.actor.default-dispatcher"
+
+			                    # connection string used for database access
+								connection-string = "Data Source=QUARRY\\SQLEXPRESS;Initial Catalog=Hostel;user id=hostel; password=hostel;MultipleActiveResultSets=True"
+
+			                    # default SQL commands timeout
+			                    connection-timeout = 60s
+
+			                    # SQL server schema name to table corresponding with persistent journal
+			                    schema-name = dbo
+
+			                    # SQL server table corresponding with persistent journal
+			                    table-name = Hostel_EventJournal
+
+			                    # should corresponding journal table be initialized automatically
+			                    auto-initialize = on
+
+			                    # timestamp provider used for generation of journal entries timestamps
+			                    timestamp-provider = "Akka.Persistence.Sql.Common.Journal.DefaultTimestampProvider, Akka.Persistence.Sql.Common"
+
+			                    # metadata table
+			                    metadata-table-name = Hostel_Metadata
+		                }
+	            }
+
+	          snapshot-store 
+				{
+	                plugin = "akka.persistence.snapshot-store.sql-server"
+		          sql-server 
+                  {
+
+			                  # qualified type name of the SQL Server persistence journal actor
+			                  class = "Akka.Persistence.SqlServer.Snapshot.SqlServerSnapshotStore, Akka.Persistence.SqlServer"
+
+			                  # dispatcher used to drive journal actor
+			                  plugin-dispatcher = ""akka.actor.default-dispatcher""
+
+			                  # connection string used for database access
+			                  connection-string = "Data Source=QUARRY\\SQLEXPRESS;Initial Catalog=Hostel;user id=hostel; password=hostel;MultipleActiveResultSets=True"
+
+			                  # default SQL commands timeout
+			                  connection-timeout = 60s
+
+			                  # SQL server schema name to table corresponding with persistent journal
+			                  schema-name = dbo
+
+			                  # SQL server table corresponding with persistent journal
+			                  table-name = Hostel_SnapshotStore
+
+			                  # should corresponding journal table be initialized automatically
+			                  auto-initialize = on
+		              }
+	          }
+        }
+}
