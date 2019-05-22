@@ -8,3 +8,5 @@ https://stackoverflow.com/questions/6041811/close-all-tabs-in-visual-studio
 https://www.itprotoday.com/net/swimming-net-connection-pool
 https://www.c-sharpcorner.com/article/introduction-to-angular-7-animations-using-bootstrap-4/
 https://simpledns.com/kb/163/how-to-bind-an-ssl-certificate-to-the-http-api
+https://www.teradata.com/Blogs/AI-without-machine-learning
+http://techgenix.com/ai-machine-learning/
