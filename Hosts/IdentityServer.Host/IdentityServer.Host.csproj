@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -40,6 +40,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" PrivateAssets="All" />
     <PackageReference Include="newtonsoft.json" Version="12.0.2" />
     <PackageReference Include="System.Runtime" Version="4.3.1" />
   </ItemGroup>
@@ -51,7 +52,6 @@
     <ProjectReference Include="..\..\Logger\AkkaDotNet.MassTransit.Logger\Akka.MassTransit.Logger.csproj" />
     <ProjectReference Include="..\..\Shared\Shared.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="host.hocon">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
