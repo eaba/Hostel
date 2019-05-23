@@ -9,6 +9,7 @@ using IdentityServer4.Services;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -54,8 +55,7 @@ namespace IdentityServer.Host
                 .AddTokenProvider(TokenOptions.DefaultProvider, dataProtectionProviderType)
                 .AddTokenProvider("email", emailTokenProviderType)
                 .AddTokenProvider("sms", phoneNumberProviderType);
-
-            services.AddMvc();
+            
             services.AddSingleton<IProfileService, ProfileService>();
             services.AddSingleton<IEventSink, EventSink>();
             services.Configure<IdentityOptions>(options =>
@@ -149,6 +149,7 @@ namespace IdentityServer.Host
             services.AddSingleton<IPublishEndpoint>(provider => provider.GetRequiredService<IBusControl>());
             services.AddSingleton<ISendEndpointProvider>(provider => provider.GetRequiredService<IBusControl>());
             services.AddSingleton<IBus>(provider => provider.GetRequiredService<IBusControl>());
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1); ;
             services.AddSingleton<IHostedService, IdentityService>();
 
         }
@@ -156,7 +157,7 @@ namespace IdentityServer.Host
         public void Configure(IApplicationBuilder app)
         {
             app.UseRewriter(new RewriteOptions().AddRedirectToHttps());
-            //app.UseStaticFiles();
+            app.UseStaticFiles();
             app.UseIdentityServer();
             app.UseMvcWithDefaultRoute();
         }

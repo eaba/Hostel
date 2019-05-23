@@ -30,7 +30,7 @@ namespace IdentityServer.Host
             .UseUrls("https://login.hostel.com:443", "http://login.hostel.com:80")
             .UseStartup<Startup>()
             .Build();
-            //SeedData.EnsureSeedData(host.Services, configuration);
+            SeedData.EnsureSeedData(host.Services, configuration);
             host.Run();
         }
     }

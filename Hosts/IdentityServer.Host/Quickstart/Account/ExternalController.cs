@@ -29,13 +29,8 @@ namespace IdentityServer4.Quickstart.UI
         public ExternalController(
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
-            IEventService events,
-            TestUserStore users = null)
+            IEventService events)
         {
-            // if the TestUserStore is not in DI, then we'll just use the global users collection
-            // this is where you would plug in your own custom identity management library (e.g. ASP.NET Identity)
-            _users = users ?? new TestUserStore(TestUsers.Users);
-
             _interaction = interaction;
             _clientStore = clientStore;
             _events = events;
