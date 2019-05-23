@@ -42,46 +42,53 @@ namespace IdentityServer.Host
         
         private static void EnsureSeedData(ConfigurationDbContext context, IConfiguration configuration)
         {
-            if (!context.Clients.Any())
+            try
             {
-                //Console.WriteLine("Clients being populated");
-                foreach (var client in Config.GetClients(configuration).ToList())
+                if (!context.Clients.Any())
                 {
-                    context.Clients.Add(client.ToEntity());
+                    //Console.WriteLine("Clients being populated");
+                    foreach (var client in Config.GetClients(configuration).ToList())
+                    {
+                        context.Clients.Add(client.ToEntity());
+                    }
+                    context.SaveChanges();
                 }
-                context.SaveChanges();
-            }
-            else
-            {
-                //Console.WriteLine("Clients already populated");
-            }
+                else
+                {
+                    //Console.WriteLine("Clients already populated");
+                }
 
-            if (!context.IdentityResources.Any())
-            {
-                //Console.WriteLine("IdentityResources being populated");
-                foreach (var resource in Config.GetIdentityResources().ToList())
+                if (!context.IdentityResources.Any())
                 {
-                    context.IdentityResources.Add(resource.ToEntity());
+                    //Console.WriteLine("IdentityResources being populated");
+                    foreach (var resource in Config.GetIdentityResources().ToList())
+                    {
+                        context.IdentityResources.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
                 }
-                context.SaveChanges();
-            }
-            else
-            {
-                //Console.WriteLine("IdentityResources already populated");
-            }
+                else
+                {
+                    //Console.WriteLine("IdentityResources already populated");
+                }
 
-            if (!context.ApiResources.Any())
-            {
-                //Console.WriteLine("ApiResources being populated");
-                foreach (var resource in Config.GetApiResources().ToList())
+                if (!context.ApiResources.Any())
                 {
-                    context.ApiResources.Add(resource.ToEntity());
+                    //Console.WriteLine("ApiResources being populated");
+                    foreach (var resource in Config.GetApiResources().ToList())
+                    {
+                        context.ApiResources.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
                 }
-                context.SaveChanges();
+                else
+                {
+                    //Console.WriteLine("ApiResources already populated");
+                }
             }
-            else
+            catch(Exception ex)
             {
-                //Console.WriteLine("ApiResources already populated");
+                Console.WriteLine(ex.ToString());
             }
         }
     }

@@ -9,11 +9,13 @@ namespace IdentityServer.Host
     {
         static void Main(string[] args)
         {
+            IConfiguration configuration = null;
             var host = WebHost.CreateDefaultBuilder(args)
             .ConfigureAppConfiguration((context, config) =>
             {
                 //var configuration = config.Build();
                 config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                configuration = config.Build();
             })
             //We need to do this since we are not using localhost but configuring the host file on windows
             //To easily edit host file I used HostsMan => https://github.com/portapps/hostsman-portable
@@ -28,6 +30,7 @@ namespace IdentityServer.Host
             .UseUrls("https://login.hostel.com:443", "http://login.hostel.com:80")
             .UseStartup<Startup>()
             .Build();
+            SeedData.EnsureSeedData(host.Services, configuration);
             host.Run();
         }
     }
