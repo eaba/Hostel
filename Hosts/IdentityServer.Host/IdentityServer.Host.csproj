@@ -42,6 +42,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\Commands\MassTransit.Command\MassTransit.Command.csproj" />
+    <ProjectReference Include="..\..\Domain\Events\MassTransit.Event\MassTransit.Event.csproj" />
     <ProjectReference Include="..\..\Extensions\Akka.Extension\Akka.Extension.csproj" />
     <ProjectReference Include="..\..\Logger\AkkaDotNet.MassTransit.Logger\Akka.MassTransit.Logger.csproj" />
     <ProjectReference Include="..\..\Shared\Shared.csproj" />

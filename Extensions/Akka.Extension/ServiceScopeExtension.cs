@@ -1,20 +1,21 @@
 ﻿using Akka.Actor;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Akka.Extension
 {
     public class ServiceScopeExtension : IExtension
     {
-        private IServiceScopeFactory _serviceScopeFactory;
+        private IServiceScopeFactory _serviceProvider;
 
-        public void Initialize(IServiceScopeFactory serviceScopeFactory)
+        public void Initialize(IServiceScopeFactory serviceProvider)
         {
-            _serviceScopeFactory = serviceScopeFactory;
+            _serviceProvider = serviceProvider;
         }
 
         public IServiceScope CreateScope()
         {
-            return _serviceScopeFactory.CreateScope();
+            return _serviceProvider.CreateScope();
         }
     }
 }

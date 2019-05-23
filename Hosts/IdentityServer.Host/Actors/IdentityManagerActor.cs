@@ -20,7 +20,10 @@ namespace IdentityServer.Host.Actors
             Command<IMassTransitCommand>(command => {
                 PrepareCommand(command);
             });
-            Command<CreateAccount>(account => { });
+            Command<CreateAccount>(account => {
+                var child = Context.ActorOf(ProcessorActor.Prop());
+                child.Tell(account);
+            });
             
         }
 
@@ -31,14 +34,6 @@ namespace IdentityServer.Host.Actors
             return Props.Create(() => new IdentityManagerActor(persistenceId));
         }
         
-        protected override SupervisorStrategy SupervisorStrategy()
-        {
-            return new OneForOneStrategy(maxNrOfRetries: 100, withinTimeMilliseconds: 1000, loggingEnabled: true,
-                decider: Decider.From(x =>
-                {
-                    return Directive.Restart;
-                }));
-        }
         private void PrepareCommand(IMassTransitCommand command)
         {
             switch (command.Command.ToLower())
