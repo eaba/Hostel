@@ -22,7 +22,6 @@ namespace IdentityServer.Host
             using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 scope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
-
                 {
                     var context = scope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
                     context.Database.Migrate();
@@ -32,7 +31,6 @@ namespace IdentityServer.Host
                 {
                     var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
                     context.Database.Migrate();
-
                 }
             }
 
