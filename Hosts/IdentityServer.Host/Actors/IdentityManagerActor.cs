@@ -3,6 +3,7 @@ using IdentityServer4.Events;
 using Akka.Persistence;
 using Shared;
 using MassTransit.Command;
+using Newtonsoft.Json;
 
 namespace IdentityServer.Host.Actors
 {
@@ -12,15 +13,19 @@ namespace IdentityServer.Host.Actors
         public IdentityManagerActor(string persistenceId)
         {
             PersistenceId = persistenceId;
-            Command<Event>(evt => {
-                Persist(evt, e =>{
-
+            Command<Event>(evt => 
+            {
+                Persist(evt, e =>
+                {
+                    Context.System.Log.Log(Akka.Event.LogLevel.DebugLevel, string.Empty, JsonConvert.SerializeObject(evt, Formatting.Indented));
                 });
             });
-            Command<IMassTransitCommand>(command => {
+            Command<IMassTransitCommand>(command => 
+            {
                 PrepareCommand(command);
             });
-            Command<CreateAccount>(account => {
+            Command<CreateAccount>(account => 
+            {
                 var child = Context.ActorOf(ProcessorActor.Prop());
                 child.Tell(account);
             });

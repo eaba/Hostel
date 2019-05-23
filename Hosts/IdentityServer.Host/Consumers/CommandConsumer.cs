@@ -15,8 +15,8 @@ namespace IdentityServer.Host.Consumers
         }
         public Task Consume(ConsumeContext<IMassTransitCommand> context)
         {
-            _
-            throw new NotImplementedException();
+            _actorRef.Tell(context.Message);
+            return Task.CompletedTask;
         }
     }
 }

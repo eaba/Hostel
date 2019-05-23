@@ -43,7 +43,7 @@ namespace IdentityServer.Host
 
             var cert = new X509Certificate2(Path.Combine(Environment.ContentRootPath, "IdentityServer4.pfx"), "IdentityServer4");
 
-            string connectionString = Configuration["Database:Identity"];
+            string connectionString = Configuration["Database"];
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
             services.AddDbContext<ApplicationDbContext>(options =>
