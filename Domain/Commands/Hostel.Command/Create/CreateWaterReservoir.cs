@@ -3,7 +3,7 @@ using Shared;
 
 namespace Hostel.Command.Create
 {
-    public class CreateWaterReservoir : Message, ICommand
+    public sealed class CreateWaterReservoir : Message, ICommand
     {
         public string Commander => string.Empty;
         public string CommandId => string.Empty;

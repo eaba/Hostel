@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Hostel.Command.Create
 {
-    public class CreateSepticTank : Message, ICommand
+    public sealed class CreateSepticTank : Message, ICommand
     {
         public string Commander => string.Empty;
         public string CommandId => string.Empty;

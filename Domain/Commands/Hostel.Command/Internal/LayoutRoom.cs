@@ -1,7 +1,7 @@
 ﻿
 namespace Hostel.Command.Internal
 {
-    public class LayoutRoom
+    public sealed class LayoutRoom
     {
     }
 }

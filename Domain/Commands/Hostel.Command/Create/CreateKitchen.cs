@@ -3,7 +3,7 @@ using Shared;
 
 namespace Hostel.Command.Create
 {
-    public class CreateKitchen : Message, ICommand
+    public sealed class CreateKitchen : Message, ICommand
     {
         public readonly KitchenSpec Kitchen;
         public string Commander => string.Empty;

@@ -3,7 +3,7 @@ using Shared;
 
 namespace Hostel.Command
 {
-    public class ConstructHostel : Message, ICommand
+    public sealed class ConstructHostel : Message, ICommand
     {
         public Construction Construction { get; }
 

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Hostel.Command.SepticTank
 {
-    class NotifySepticTank
+    public sealed class NotifySepticTank
     {
     }
 }

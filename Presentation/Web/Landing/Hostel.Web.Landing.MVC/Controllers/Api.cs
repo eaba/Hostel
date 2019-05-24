@@ -33,7 +33,7 @@ namespace Hostel.Web.Landing.MVC.Controllers
                 var commandid = payload["CommandId"];
                 var commander = payload["Commander"];
                 var payld = JsonConvert.DeserializeObject<Dictionary<string, string>>(payload["Payload"]);
-                var create = new CreatePerson(command, commander, commandid, payld);
+                var create = new MassTransitCommand("CreatePerson", commander, commandid, payld);
                 await SendToQueue("hostel_queue", create);
                 return $"{command}: Your request has been sent...we are working on it!!";
             }
@@ -54,7 +54,7 @@ namespace Hostel.Web.Landing.MVC.Controllers
                 var commandid = payload["CommandId"];
                 var commander = payload["Commander"];
                 var payld = JsonConvert.DeserializeObject<Dictionary<string, string>>(payload["Payload"]);
-                var create = new CreatePerson(command, commander, commandid, payld);
+                var create = new MassTransitCommand("CreateAccount", commander, commandid, payld);
                 await SendToQueue("hostel_identity_queue", create);
                 return $"{command}: Your request has been sent...we are working on it!!";
             }

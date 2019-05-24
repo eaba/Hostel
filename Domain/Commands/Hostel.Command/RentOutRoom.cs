@@ -4,7 +4,7 @@ using Shared;
 
 namespace Hostel.Command
 {
-    public class RentOutRoom : Message, ICommand
+    public sealed class RentOutRoom : Message, ICommand
     {
         public readonly RentOut RentOut;
         public string Commander { get; }

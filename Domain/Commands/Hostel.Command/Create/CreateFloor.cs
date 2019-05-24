@@ -3,7 +3,7 @@ using Shared;
 
 namespace Hostel.Command.Create
 {
-    public class CreateFloor: Message, ICommand
+    public sealed class CreateFloor: Message, ICommand
     {
         public readonly FloorSpec Floor;
         public string Commander => string.Empty;

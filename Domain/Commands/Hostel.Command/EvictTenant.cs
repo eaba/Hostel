@@ -2,7 +2,7 @@
 
 namespace Hostel.Command
 {
-    public class EvictTenant : Message, ICommand
+    public sealed class EvictTenant : Message, ICommand
     {
         public string Commander => throw new System.NotImplementedException();
 

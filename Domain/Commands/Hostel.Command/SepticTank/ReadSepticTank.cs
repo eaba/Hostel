@@ -2,7 +2,7 @@
 
 namespace Hostel.Command.SepticTank
 {
-    public class ReadSepticTank : Message, ICommand
+    public sealed class ReadSepticTank : Message, ICommand
     {
         public string Commander => throw new System.NotImplementedException();
 
