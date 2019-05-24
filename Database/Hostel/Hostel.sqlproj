@@ -104,6 +104,8 @@
     <Build Include="dbo\Stored Procedures\InstallToiletSensor.sql" />
     <Build Include="dbo\Stored Procedures\InstallBathRoomSensor.sql" />
     <Build Include="dbo\Stored Procedures\InstallRoomSensor.sql" />
+    <Build Include="dbo\Stored Procedures\CreatePerson.sql" />
+    <Build Include="dbo\Stored Procedures\CreatePerson_Birthday.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Hostel.refactorlog" />
