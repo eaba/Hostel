@@ -1,6 +1,7 @@
 ﻿using Hostel.Command;
 using Hostel.Event;
 using Hostel.Repository;
+using Hostel.Repository.Write;
 using Hostel.State.Floor.Units;
 using Shared;
 using Shared.Repository;

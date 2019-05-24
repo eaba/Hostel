@@ -1,6 +1,7 @@
 ﻿using Hostel.Command.Create;
 using Hostel.Event.Created;
 using Hostel.Repository;
+using Hostel.Repository.Write;
 using Hostel.State.Floor;
 using Shared;
 using Shared.Repository;
