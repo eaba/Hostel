@@ -10,3 +10,7 @@ https://www.c-sharpcorner.com/article/introduction-to-angular-7-animations-using
 https://simpledns.com/kb/163/how-to-bind-an-ssl-certificate-to-the-http-api
 https://www.teradata.com/Blogs/AI-without-machine-learning
 http://techgenix.com/ai-machine-learning/
+https://msdn.microsoft.com/en-us/magazine/mt422577.aspx
+https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs
+https://exceptionnotfound.net/implementing-cqrs-in-net-part-2-handling-commands-and-events/
+https://radekmaziarka.pl/2018/01/08/cqrs-third-step-simple-read-model/
