@@ -4,6 +4,7 @@ using Akka.Persistence;
 using Shared;
 using MassTransit.Command;
 using Newtonsoft.Json;
+using IdentityServer.Host.Commands;
 
 namespace IdentityServer.Host.Actors
 {

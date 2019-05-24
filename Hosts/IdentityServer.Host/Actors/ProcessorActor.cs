@@ -3,7 +3,6 @@ using Akka.Extension;
 using IdentityServer.Host.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
-using MassTransit.Command;
 using MassTransit;
 using System;
 using System.Threading.Tasks;
@@ -12,6 +11,7 @@ using System.Security.Claims;
 using IdentityModel;
 using Shared;
 using MassTransit.Event;
+using IdentityServer.Host.Commands;
 
 namespace IdentityServer.Host.Actors
 {
