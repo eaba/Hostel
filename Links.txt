@@ -14,3 +14,11 @@ https://msdn.microsoft.com/en-us/magazine/mt422577.aspx
 https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs
 https://exceptionnotfound.net/implementing-cqrs-in-net-part-2-handling-commands-and-events/
 https://radekmaziarka.pl/2018/01/08/cqrs-third-step-simple-read-model/
+https://dev.to/barryosull/projection-building-blocks-what-youll-need-to-build-projections--5g1n
+https://medium.com/@hugo.oliveira.rocha/what-they-dont-tell-you-about-event-sourcing-6afc23c69e9a
+https://martinfowler.com/eaaDev/EventSourcing.html
+https://martinfowler.com/bliki/CQRS.html
+https://www.nexocode.com/blog/posts/cqrs-and-event-sourcing/
+https://www.oreilly.com/library/view/developing-reactive-microservices/9781491975640/ch04.html
+https://www.bouvet.no/bouvet-deler/utbrudd/a-simple-todo-application-a-comparison-on-traditional-vs-cqrs-es-architecture
+https://www.nexocode.com/blog/posts/cqrs-and-event-sourcing/
