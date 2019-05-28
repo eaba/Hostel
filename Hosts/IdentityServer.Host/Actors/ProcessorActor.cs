@@ -18,11 +18,14 @@ namespace IdentityServer.Host.Actors
     public class ProcessorActor:ReceiveActor
     {
         private UserManager<HostelUser> _userManager;
-        private ISendEndpoint _sendEndPoint;
+        private ISendEndpoint _homeSendEndPoint;
+        private ISendEndpoint _portalSendEndPoint;
         private Uri _queue => new Uri("rabbitmq://localhost/hostel_home_queue");
+        private Uri _queuePortal => new Uri("rabbitmq://localhost/hostel_portal_queue");
         public ProcessorActor()
         {
             ReceiveAsync<CreateAccount>(CreateAccount);
+            ReceiveAsync<AddHostelClaim>(AddHostelClaim);
         }
         protected override void PreStart()
         {
@@ -30,7 +33,8 @@ namespace IdentityServer.Host.Actors
             {
                 _userManager = context.ServiceProvider.GetRequiredService<UserManager<HostelUser>>();
                 var bus = context.ServiceProvider.GetService<IBusControl>();
-                _sendEndPoint = bus.GetSendEndpoint(_queue).GetAwaiter().GetResult();
+                _homeSendEndPoint = bus.GetSendEndpoint(_queue).GetAwaiter().GetResult();
+                _portalSendEndPoint = bus.GetSendEndpoint(_queuePortal).GetAwaiter().GetResult();
             }
             base.PreStart();
         }
@@ -48,8 +52,7 @@ namespace IdentityServer.Host.Actors
                 {
                     UserName = payload["Email"],
                     Email = payload["Email"],
-                    PhoneNumber = payload["Phone"],
-                    Hostel = "Baafog"
+                    PhoneNumber = payload["Phone"]
                 };
                 var created = await _userManager.CreateAsync(user, payload["Password"]);
                 if (created.Succeeded)
@@ -57,10 +60,7 @@ namespace IdentityServer.Host.Actors
                     var userClaims = new List<Claim>();
                     var userRole = payload["Role"];
                     userClaims.Add(new Claim(JwtClaimTypes.Role, userRole));
-                    userClaims.AddRange(new Claim[]{
-                            new Claim("PreferredUserName", payload["Email"]),
-                            new Claim("Role", userRole)
-                        });
+                    userClaims.Add(new Claim("PreferredUserName", payload["Email"]));
                     var claim = await _userManager.AddClaimsAsync(user, userClaims);
                     if (!claim.Succeeded)
                     {
@@ -69,6 +69,13 @@ namespace IdentityServer.Host.Actors
                         response["Type"] = "AddClaimsAsync";
                         response["Errors"] = string.Join(", ", claim.Errors);
                         response["Message"] = "Your account created was aborted";
+                    }
+                    else
+                    {
+                        response["Created"] = "true";
+                        response["Type"] = "CreateAccount";
+                        response["Errors"] = string.Join(", ", created.Errors);
+                        response["Message"] = "Your account created successfully!!";
                     }
                 }
                 else
@@ -87,22 +94,75 @@ namespace IdentityServer.Host.Actors
             await SendToQueue(@event);
             await Self.GracefulStop(TimeSpan.FromSeconds(10));
         }
+        private async Task AddHostelClaim(AddHostelClaim command)
+        {
+            var payload = command.Payload;
+            var response = new Dictionary<string, string>();
+            try
+            {
+                var user = await _userManager.FindByEmailAsync(payload["Email"]);
+                if (user != null)
+                {
+                    var userClaims = new List<Claim>();
+                    var userHostel = payload["Hostel"];
+                    userClaims.Add(new Claim("Hostel", userHostel));
+                    var claim = await _userManager.AddClaimsAsync(user, userClaims);
+                    if (!claim.Succeeded)
+                    {
+                        response["Created"] = "false";
+                        response["Type"] = "AddUserHostelClaim";
+                        response["Errors"] = string.Join(", ", claim.Errors);
+                        response["Message"] = "Your account created was aborted";
+                    }
+                }
+                else
+                {
+                    response["Created"] = "false";
+                    response["Type"] = "AddUserHostelClaim";
+                    response["Message"] = $"No user with '{payload["Email"]}' was found!";
+                }
+            }
+            catch (Exception e)
+            {
+                response["Message"] = e.Message;
+            }
+            var @event = new MassTransitEvent("AddedHostelClaim", command.Commander, command.CommandId, response);
+            await SendToPortalQueue(@event);
+            await Self.GracefulStop(TimeSpan.FromSeconds(10));
+        }
         private async Task SendToQueue(IMassTransitEvent evnt)
         {
-            if (_sendEndPoint != null)
+            if (_homeSendEndPoint != null)
             {
-                await _sendEndPoint.Send(evnt);
+                await _homeSendEndPoint.Send(evnt);
             }
             else
             {
                 using (var context = Context.CreateScope())
                 {
                     var bus = context.ServiceProvider.GetService<IBusControl>();
-                    _sendEndPoint = await bus.GetSendEndpoint(_queue);
-                    await _sendEndPoint.Send(evnt);
+                    _homeSendEndPoint = await bus.GetSendEndpoint(_queue);
+                    await _homeSendEndPoint.Send(evnt);
                 }
             }
             
+        }
+        private async Task SendToPortalQueue(IMassTransitEvent evnt)
+        {
+            if (_portalSendEndPoint != null)
+            {
+                await _portalSendEndPoint.Send(evnt);
+            }
+            else
+            {
+                using (var context = Context.CreateScope())
+                {
+                    var bus = context.ServiceProvider.GetService<IBusControl>();
+                    _portalSendEndPoint = await bus.GetSendEndpoint(_queuePortal);
+                    await _portalSendEndPoint.Send(evnt);
+                }
+            }
+
         }
     }
 }
