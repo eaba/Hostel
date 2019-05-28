@@ -1,4 +1,5 @@
-﻿using Akka.Persistence;
+﻿using Akka.Actor;
+using Akka.Persistence;
 using Shared.Repository;
 using System;
 using System.Data.SqlClient;
@@ -24,6 +25,7 @@ namespace Shared.Actors
             State = defaultState ?? throw new ArgumentNullException(nameof(defaultState));
             Command<ICommand>(command =>
             {
+                SaveCommand(command);
                 var handlerResult = _handler.Handle(State, command, Repository);
                 if (handlerResult.Success)
                 {
@@ -58,14 +60,37 @@ namespace Shared.Actors
             Repository.Close();
             base.PostStop();
         }
+        private void DeleteCommand(IEvent @event)
+        {
+            if (State.PendingCommands.ContainsKey(@event.CommandId))
+            {
+                State.PendingCommands.Remove(@event.CommandId);
+            }
+        }
+        private void SaveCommand(ICommand command)
+        {
+            if(!State.PendingCommands.ContainsKey(command.CommandId))
+            {
+                State.PendingCommands.Add(command.CommandId, command);
+            }
+        }
         protected virtual void OnSnapshotOffer(TState state)
         {
 
         }
         protected virtual void OnPersist(IEvent persistedEvent)
         {
+            DeleteCommand(persistedEvent);
             State = State.Update(persistedEvent);
             SaveSnapshotIfNecessary();
+        }
+        protected override void OnReplaySuccess()
+        {
+            base.OnReplaySuccess();
+            foreach (var command in State.PendingCommands)
+            {
+                Self.Tell(command.Value);
+            }
         }
         private void SaveSnapshotIfNecessary()
         {

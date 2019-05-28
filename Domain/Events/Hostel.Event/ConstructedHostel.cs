@@ -6,7 +6,6 @@ namespace Hostel.Event
     public class ConstructedHostel : IEvent
     {
         public string Commander => string.Empty;
-
         public string CommandId => string.Empty;
         public Construction Construction { get; }
         public ConstructedHostel(Construction detail)

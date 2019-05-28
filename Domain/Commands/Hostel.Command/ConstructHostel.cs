@@ -1,5 +1,6 @@
 ﻿using Hostel.Model;
 using Shared;
+using System;
 
 namespace Hostel.Command
 {
@@ -7,9 +8,8 @@ namespace Hostel.Command
     {
         public Construction Construction { get; }
 
-        public string Commander => string.Empty;
-
-        public string CommandId => string.Empty;
+        public string Commander => Guid.NewGuid().ToString();
+        public string CommandId => Guid.NewGuid().ToString();
 
         public ConstructHostel(Construction construction)
         {
