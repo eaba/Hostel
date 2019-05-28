@@ -1,5 +1,6 @@
 ﻿using Shared;
 using System;
+using System.Collections.Immutable;
 
 namespace Hostel.State.Sensor
 {
@@ -10,19 +11,18 @@ namespace Hostel.State.Sensor
         public string Role { get; }
         public Reading Current { get; }
         public Reading Previous { get; }
-        public SensorState(string sensorid, string tag, string role):this(sensorid, tag, role, null, null)
+        public ImmutableDictionary<string, ICommand> PendingCommands { get; }
+        public SensorState(string sensorid, string tag, string role):this(sensorid, tag, role, null, null, ImmutableDictionary<string, ICommand>.Empty)
         {
-            SensorId = sensorid;
-            Tag = tag;
-            Role = role;
         }
-        public SensorState(string sensorid, string tag, string role, Reading current, Reading previous)
+        public SensorState(string sensorid, string tag, string role, Reading current, Reading previous, ImmutableDictionary<string, ICommand> pendingCommands)
         {
             SensorId = sensorid;
             Tag = tag;
             Role = role;
             Current = current;
             Previous = previous;
+            PendingCommands = pendingCommands;
         }
         public SensorState Update(IEvent evnt)
         {
