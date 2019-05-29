@@ -29,8 +29,9 @@ namespace Shared.Actors
                 var handlerResult = _handler.Handle(State, command, Repository);
                 if (handlerResult.Success)
                 {
-                    Persist(handlerResult.Event, OnPersist);
+                    Persist(handlerResult.Event, @event => OnPersist(@event, command.CommandId));
                 }
+                NotifyUI(command, handlerResult);
             });
             Recover<IEvent>(evnt => { State = State.Update(evnt); });
             Recover<SnapshotOffer>(offer =>
@@ -60,11 +61,11 @@ namespace Shared.Actors
             Repository.Close();
             base.PostStop();
         }
-        private void DeleteCommand(IEvent @event)
+        private void DeleteCommand(IEvent @event, string commandid)
         {
-            if (State.PendingCommands.ContainsKey(@event.CommandId))
+            if (State.PendingCommands.ContainsKey(commandid))
             {
-                State.PendingCommands.Remove(@event.CommandId);
+                State.PendingCommands.Remove(commandid);
             }
         }
         private void SaveCommand(ICommand command)
@@ -78,12 +79,17 @@ namespace Shared.Actors
         {
 
         }
-        protected virtual void OnPersist(IEvent persistedEvent)
+        protected virtual void NotifyUI(ICommand command, HandlerResult result)
         {
-            DeleteCommand(persistedEvent);
+
+        }
+        protected virtual void OnPersist(IEvent persistedEvent, string commandid)
+        {
+            DeleteCommand(persistedEvent, commandid);
             State = State.Update(persistedEvent);
             SaveSnapshotIfNecessary();
         }
+        
         protected override void OnReplaySuccess()
         {
             base.OnReplaySuccess();

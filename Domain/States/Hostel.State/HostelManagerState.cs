@@ -9,16 +9,19 @@ namespace Hostel.State
     {
         public readonly Construction ConstructionRecord;
         public ImmutableDictionary<string, ICommand> PendingCommands { get; }
+        public ImmutableHashSet<IMassTransitEvent> PendingRsponses { get; }
+
         public readonly bool Constructed;
-        public HostelManagerState(bool constructed, Construction record):this(constructed, record, ImmutableDictionary<string, ICommand>.Empty)
+        public HostelManagerState(bool constructed, Construction record):this(constructed, record, ImmutableDictionary<string, ICommand>.Empty, ImmutableHashSet<IMassTransitEvent>.Empty)
         {
             Constructed = constructed;
         }
-        public HostelManagerState(bool constructed, Construction record, ImmutableDictionary<string, ICommand> pendingCommands)
+        public HostelManagerState(bool constructed, Construction record, ImmutableDictionary<string, ICommand> pendingCommands, ImmutableHashSet<IMassTransitEvent> pendingResponses)
         {
             Constructed = constructed;
             ConstructionRecord = record;
             PendingCommands = pendingCommands;
+            PendingRsponses = pendingResponses;
         }
         public HostelManagerState Update(IEvent evnt)
         {
@@ -28,7 +31,7 @@ namespace Hostel.State
                     {
                         var construct = hostel.Construction;
                         var constructed = !string.IsNullOrWhiteSpace(hostel.Construction.Detail.HostelId);
-                        return new HostelManagerState(constructed, construct, PendingCommands);
+                        return new HostelManagerState(constructed, construct, PendingCommands, PendingRsponses);
                     }
                 default: return this;
             }

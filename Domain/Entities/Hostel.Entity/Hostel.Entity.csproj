@@ -10,8 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Extensions\Akka.Extension\Akka.Extension.csproj" />
     <ProjectReference Include="..\..\..\Shared\Shared.csproj" />
     <ProjectReference Include="..\..\Commands\Hostel.Command\Hostel.Command.csproj" />
+    <ProjectReference Include="..\..\Events\MassTransit.Event\MassTransit.Event.csproj" />
     <ProjectReference Include="..\..\Repositories\Hostel.Repository\Hostel.Repository.csproj" />
     <ProjectReference Include="..\..\States\Hostel.State\Hostel.State.csproj" />
   </ItemGroup>

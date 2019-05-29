@@ -1,4 +1,5 @@
 ﻿using Akka.Actor;
+using Akka.Extension;
 using Hostel.Command;
 using Hostel.Command.Create;
 using Hostel.Command.Internal;
@@ -8,14 +9,20 @@ using Hostel.Event;
 using Hostel.Event.Created;
 using Hostel.State;
 using Hostel.State.Floor;
+using MassTransit;
 using Shared;
 using Shared.Actors;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using MassTransit.Event;
 
 namespace Hostel.Entity
 {
     public class HostelManagerActor:HostelActor<HostelManagerState>
     {
         private string _connectionString;
+        public ISendEndpoint _sendEndPoint;
+
         public HostelManagerActor(ICommandHandler<HostelManagerState> handler, HostelManagerState defaultState, string persistenceId, string connectionstring)
             : base(handler, defaultState, persistenceId, connectionstring)
         {
@@ -30,7 +37,34 @@ namespace Hostel.Entity
             Self.Tell(new ConstructHostel(state.ConstructionRecord));
             base.OnSnapshotOffer(state);
         }
-        protected override void OnPersist(IEvent persistedEvent)
+        protected override void NotifyUI(ICommand command, HandlerResult result)
+        {
+            var mEvent = new MassTransitEvent(command.Commander, command.CommandId, result);
+            PustToUIQueue(mEvent, command.ReplyToQueue);
+            base.NotifyUI(command, result);
+        }
+        private void PustToUIQueue(IMassTransitEvent @event, string queue)
+        {
+            using (var context = Context.CreateScope())
+            {
+                var busControl = context.ServiceProvider.GetService<IBusControl>();
+                _sendEndPoint = busControl.GetSendEndpoint(new Uri(queue)).ConfigureAwait(false).GetAwaiter().GetResult();//ConfigureAwait(false) to Prevent Deadlock[https://msdn.microsoft.com/en-us/magazine/mt238404.aspx]
+                if (_sendEndPoint != null)
+                {
+                    foreach (var me in State.PendingRsponses)
+                    {
+                        _sendEndPoint.Send(me);
+                    }
+                    State.PendingRsponses.Clear();
+                    _sendEndPoint.Send(@event);
+                }
+                else
+                {
+                    State.PendingRsponses.Add(@event);
+                }
+            }
+        }
+        protected override void OnPersist(IEvent persistedEvent, string commandid)
         {
             switch(persistedEvent)
             {
@@ -91,7 +125,7 @@ namespace Hostel.Entity
                     }
                     break;
             }
-            base.OnPersist(persistedEvent);
+            base.OnPersist(persistedEvent, commandid);
         }
         public static Props Prop(ICommandHandler<HostelManagerState> handler, HostelManagerState defaultState, string persistenceId, string connectionstring)
         {

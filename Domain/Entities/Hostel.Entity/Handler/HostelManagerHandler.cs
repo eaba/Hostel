@@ -25,9 +25,9 @@ namespace Hostel.Entity.Handler
                             {
                                 return new HandlerResult(new ConstructedHostel(hostel));
                             }
-                            return new HandlerResult($"Hostel {hostel.Detail.Name} could not be constructed at this time!", string.Empty, string.Empty);
+                            return new HandlerResult($"Hostel {hostel.Detail.Name} could not be constructed at this time!");
                         }
-                        return new HandlerResult($"Hostel {hostel.Detail.Name} alread exist. Did the government demonish your hostel?", string.Empty, string.Empty);
+                        return new HandlerResult($"Hostel {hostel.Detail.Name} alread exist. Did the government demonish your hostel?");
                     }
                 case CreateFloor createFloor:
                     {
@@ -36,7 +36,7 @@ namespace Hostel.Entity.Handler
                         {
                             return new HandlerResult(new CreatedFloor(floor));
                         }
-                        return new HandlerResult($"Floor {floor.Tag} could not be created at this time!", createFloor.Commander, createFloor.CommandId);
+                        return new HandlerResult($"Floor {floor.Tag} could not be created at this time!");
                     }
                 case CreateSepticTank createSeptic:
                     {
@@ -45,7 +45,7 @@ namespace Hostel.Entity.Handler
                         {
                             return new HandlerResult(new CreatedSepticTank(tank));
                         }
-                        return new HandlerResult($"SepticTank {tank.Tag} could not be created at this time!", createSeptic.Commander, createSeptic.CommandId);
+                        return new HandlerResult($"SepticTank {tank.Tag} could not be created at this time!");
                     }
                 case CreateWaterReservoir createWater:
                     {
@@ -54,9 +54,18 @@ namespace Hostel.Entity.Handler
                         {
                             return new HandlerResult(new CreatedWaterReservoir(water));
                         }
-                        return new HandlerResult($"Water Reservoir {water.Tag} could not be created at this time!", createWater.Commander, createWater.CommandId);
+                        return new HandlerResult($"Water Reservoir {water.Tag} could not be created at this time!");
                     }
-                default: return HandlerResult.NotHandled(command, command.Commander, command.CommandId);
+                case CreatePerson person:
+                    {
+                        var input = person.Payload;
+                        if (repository.CreatePerson(input))
+                        {
+                            return new HandlerResult(new PersonCreated(input));
+                        }
+                        return new HandlerResult($"Registration Failed");
+                    }
+                default: return HandlerResult.NotHandled(command);
             }
         }
     }
