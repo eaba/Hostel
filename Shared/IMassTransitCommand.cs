@@ -8,6 +8,7 @@ namespace Shared
         string Command { get; }
         string Commander { get; }
         string CommandId { get; }
+        string ReplyToQueue { get; }
         Dictionary<string, string> Payload { get; }
     }
 }

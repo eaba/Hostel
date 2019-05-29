@@ -9,12 +9,15 @@ namespace MassTransit.Command
         public string Commander { get; private set; }
         public string CommandId { get; private set; }
         public Dictionary<string, string> Payload { get; private set; }
-        public MassTransitCommand(string command, string commander, string commandid, Dictionary<string, string> payload)
+        public string ReplyToQueue { get; }
+
+        public MassTransitCommand(string replytoqueue, string command, string commander, string commandid, Dictionary<string, string> payload)
         {
             Command = command;
             Commander = commander;
             CommandId = commandid;
             Payload = payload;
+            ReplyToQueue = replytoqueue;
         }
     }
 }

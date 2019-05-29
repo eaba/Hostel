@@ -26,7 +26,8 @@ namespace Hostel.Entity
         public HostelManagerActor(ICommandHandler<HostelManagerState> handler, HostelManagerState defaultState, string persistenceId, string connectionstring)
             : base(handler, defaultState, persistenceId, connectionstring)
         {
-            _connectionString = connectionstring;  
+            _connectionString = connectionstring;
+            Command<IMassTransitCommand>(command => { PrepareCommand(command); });
         }
         protected override void OnRecoverComplete()
         {
@@ -143,7 +144,12 @@ namespace Hostel.Entity
         {
             switch(command.Command.ToLower())
             {
-               
+                case "createperson":
+                    {
+                        var person = new CreatePerson(command.ReplyToQueue, command.Commander, command.CommandId, command.Payload);
+                        Self.Tell(person);
+                    }
+                    break;
             }
         }
     }
