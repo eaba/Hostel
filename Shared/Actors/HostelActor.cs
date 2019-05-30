@@ -32,7 +32,7 @@ namespace Shared.Actors
                 {
                     Persist(handlerResult.Event, @event => OnPersist(@event, command.CommandId));
                 }
-                if(!string.IsNullOrWhiteSpace(command.ReplyToQueue) || !string.IsNullOrWhiteSpace(command.CommandId))
+                if(!string.IsNullOrWhiteSpace(command.ReplyToQueue) && !string.IsNullOrWhiteSpace(command.CommandId) && !string.IsNullOrWhiteSpace(command.Commander))
                 {
                     NotifyUI(command, handlerResult);
                 }
