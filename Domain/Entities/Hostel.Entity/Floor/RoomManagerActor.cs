@@ -32,7 +32,7 @@ namespace Hostel.Entity.Floor
         {
             base.PreStart();
         }
-        protected override void OnPersist(IEvent persistedEvent)
+        protected override void OnPersist(IEvent persistedEvent, string commandid)
         {
             switch (persistedEvent)
             {
@@ -47,7 +47,7 @@ namespace Hostel.Entity.Floor
                     }
                     break;
             }
-            base.OnPersist(persistedEvent);
+            base.OnPersist(persistedEvent, commandid);
         }
         public static Props Prop(ICommandHandler<RoomManagerState> handler, RoomManagerState defaultState, string persistenceId, string connectionString)
         {

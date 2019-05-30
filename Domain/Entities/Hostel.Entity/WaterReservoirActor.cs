@@ -21,7 +21,7 @@ namespace Hostel.Entity
         {
             return Props.Create(() => new WaterReservoirActor(handler, defaultState, persistenceId, connectionstring));
         }
-        protected override void OnPersist(IEvent persistedEvent)
+        protected override void OnPersist(IEvent persistedEvent, string commandid)
         {
             switch (persistedEvent)
             {
@@ -38,7 +38,7 @@ namespace Hostel.Entity
                     }
                     break;
             }
-            base.OnPersist(persistedEvent);
+            base.OnPersist(persistedEvent, commandid);
         }
         protected override void OnSnapshotOffer(WaterReservoirState state)
         {
