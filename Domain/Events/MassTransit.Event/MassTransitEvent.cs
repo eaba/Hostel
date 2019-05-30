@@ -18,7 +18,7 @@ namespace MassTransit.Event
 
         public MassTransitEvent(string commander, string commandid, HandlerResult result)
         {
-            Event = result.Event.GetType().ToString();
+            Event = result.Event.GetType().Name;
             Commander = commander;
             CommandId = commandid;
             Success = result.Success;

@@ -1,5 +1,6 @@
 ﻿using Akka.Actor;
 using Akka.Persistence;
+using Newtonsoft.Json;
 using Shared.Repository;
 using System;
 using System.Data.SqlClient;
@@ -32,6 +33,8 @@ namespace Shared.Actors
                     Persist(handlerResult.Event, @event => OnPersist(@event, command.CommandId));
                 }
                 NotifyUI(command, handlerResult);
+                var state = JsonConvert.SerializeObject(State, Formatting.Indented);
+                Context.System.Log.Log(Akka.Event.LogLevel.InfoLevel, "", state);
             });
             Recover<IEvent>(evnt => { State = State.Update(evnt); });
             Recover<SnapshotOffer>(offer =>
