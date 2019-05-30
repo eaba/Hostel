@@ -12,10 +12,12 @@ namespace Hostel.State.Sensor
         public Reading Current { get; }
         public Reading Previous { get; }
         public ImmutableDictionary<string, ICommand> PendingCommands { get; }
-        public SensorState(string sensorid, string tag, string role):this(sensorid, tag, role, null, null, ImmutableDictionary<string, ICommand>.Empty)
+        public ImmutableHashSet<IMassTransitEvent> PendingResponses { get; }
+
+        public SensorState(string sensorid, string tag, string role):this(sensorid, tag, role, null, null, ImmutableDictionary<string, ICommand>.Empty, ImmutableHashSet <IMassTransitEvent>.Empty)
         {
         }
-        public SensorState(string sensorid, string tag, string role, Reading current, Reading previous, ImmutableDictionary<string, ICommand> pendingCommands)
+        public SensorState(string sensorid, string tag, string role, Reading current, Reading previous, ImmutableDictionary<string, ICommand> pendingCommands, ImmutableHashSet<IMassTransitEvent> pendingResponses)
         {
             SensorId = sensorid;
             Tag = tag;
@@ -23,6 +25,7 @@ namespace Hostel.State.Sensor
             Current = current;
             Previous = previous;
             PendingCommands = pendingCommands;
+            PendingResponses = pendingResponses;
         }
         public SensorState Update(IEvent evnt)
         {

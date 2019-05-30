@@ -17,10 +17,12 @@ namespace Hostel.State
         public int AlertHeight { get; }
         public ImmutableDictionary<string, ICommand> PendingCommands { get; }
         public IEnumerable<SensorSpec> Sensors { get; }
-        public SepticTankState(string id, int height, int alert, IEnumerable<SensorSpec> sensors) :this(id, height, alert, sensors, null, null, ImmutableDictionary<string, ICommand>.Empty)
+        public ImmutableHashSet<IMassTransitEvent> PendingResponses { get; }
+
+        public SepticTankState(string id, int height, int alert, IEnumerable<SensorSpec> sensors) :this(id, height, alert, sensors, null, null, ImmutableDictionary<string, ICommand>.Empty, ImmutableHashSet<IMassTransitEvent>.Empty)
         {
         }
-        public SepticTankState(string id, int height, int alert, IEnumerable<SensorSpec> sensors, Reading current, Reading previous, ImmutableDictionary<string, ICommand> pendingCommands)
+        public SepticTankState(string id, int height, int alert, IEnumerable<SensorSpec> sensors, Reading current, Reading previous, ImmutableDictionary<string, ICommand> pendingCommands, ImmutableHashSet<IMassTransitEvent> pendingResponses)
         {
             Height = height;
             AlertHeight = alert;
@@ -29,6 +31,7 @@ namespace Hostel.State
             Current = current;
             SepticTankId = id;
             PendingCommands = pendingCommands;
+            PendingResponses = pendingResponses;
         }
         public SepticTankState Update(IEvent evnt)
         {
@@ -36,12 +39,12 @@ namespace Hostel.State
             {
                 case InstalledSensor sensor:
                     {
-                        return new SepticTankState(SepticTankId, Height, AlertHeight, sensor.Sensors, Current, Previous, PendingCommands);
+                        return new SepticTankState(SepticTankId, Height, AlertHeight, sensor.Sensors, Current, Previous, PendingCommands, PendingResponses);
                     }
                 case CreatedSepticTank tank:
                     {
                         var spec = tank.SepticTankSpec;
-                        return new SepticTankState(spec.SepticTankId, spec.Height, spec.AlertHeight, spec.Sensors, Current, Previous, PendingCommands);
+                        return new SepticTankState(spec.SepticTankId, spec.Height, spec.AlertHeight, spec.Sensors, Current, Previous, PendingCommands, PendingResponses);
                     }
                 default: return this;
             }

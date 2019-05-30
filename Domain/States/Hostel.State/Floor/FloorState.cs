@@ -9,13 +9,16 @@ namespace Hostel.State.Floor
     {
         public FloorSpec FloorSpec { get; }
         public ImmutableDictionary<string, ICommand> PendingCommands { get; }
-        public FloorState(FloorSpec spec):this(spec, ImmutableDictionary<string, ICommand>.Empty)
+        public ImmutableHashSet<IMassTransitEvent> PendingResponses { get; }
+
+        public FloorState(FloorSpec spec):this(spec, ImmutableDictionary<string, ICommand>.Empty, ImmutableHashSet<IMassTransitEvent>.Empty)
         {
         }
-        public FloorState(FloorSpec spec, ImmutableDictionary<string, ICommand> pendingCommands)
+        public FloorState(FloorSpec spec, ImmutableDictionary<string, ICommand> pendingCommands, ImmutableHashSet<IMassTransitEvent> pendingResponses)
         {
             FloorSpec = spec;
             PendingCommands = pendingCommands;
+            PendingResponses = pendingResponses;
         }
 
         public FloorState Update(IEvent evnt)
@@ -25,7 +28,7 @@ namespace Hostel.State.Floor
                 case CreatedFloor createdFloor:
                     {
                         var floor = createdFloor.Floor;
-                        return new FloorState(floor, PendingCommands);
+                        return new FloorState(floor, PendingCommands, PendingResponses);
                     }
                 default: return this;
             }

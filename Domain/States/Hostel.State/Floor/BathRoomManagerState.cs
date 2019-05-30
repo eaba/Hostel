@@ -14,15 +14,18 @@ namespace Hostel.State.Floor
         public string Tag { get; }
         public IEnumerable<BathRoomSpec> BathRooms { get; }
         public ImmutableDictionary<string, ICommand> PendingCommands { get; }
-        public BathRoomManagerState(string floor, IEnumerable<BathRoomSpec> bathRooms, string tag):this(floor, bathRooms, tag, ImmutableDictionary<string, ICommand>.Empty)
+        public ImmutableHashSet<IMassTransitEvent> PendingResponses { get; }
+
+        public BathRoomManagerState(string floor, IEnumerable<BathRoomSpec> bathRooms, string tag):this(floor, bathRooms, tag, ImmutableDictionary<string, ICommand>.Empty, ImmutableHashSet<IMassTransitEvent>.Empty)
         {
         }
-        public BathRoomManagerState(string floor, IEnumerable<BathRoomSpec> bathRooms, string tag, ImmutableDictionary<string, ICommand> pendingCommands)
+        public BathRoomManagerState(string floor, IEnumerable<BathRoomSpec> bathRooms, string tag, ImmutableDictionary<string, ICommand> pendingCommands, ImmutableHashSet<IMassTransitEvent> pendingResponses)
         {
             FloorId = floor;
             Tag = tag;
             BathRooms = bathRooms;
             PendingCommands = pendingCommands;
+            PendingResponses = pendingResponses;
         }
         public BathRoomManagerState Update(IEvent evnt)
         {
@@ -33,7 +36,7 @@ namespace Hostel.State.Floor
                         var bathroom = createdBathRoom.BathRoom;
                         var bathrooms = BathRooms.Where(x => x.Tag != bathroom.Tag).ToList();
                         bathrooms.Add(bathroom);
-                        return new BathRoomManagerState(FloorId, bathrooms, bathroom.Tag, PendingCommands);
+                        return new BathRoomManagerState(FloorId, bathrooms, bathroom.Tag, PendingCommands, PendingResponses);
                     }
                 default: return this;
             }

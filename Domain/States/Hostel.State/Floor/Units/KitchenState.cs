@@ -16,10 +16,12 @@ namespace Hostel.State.Floor.Units
         public IEnumerable<Reading> Current { get; }
         public IEnumerable<Reading> Previous { get; }
         public ImmutableDictionary<string, ICommand> PendingCommands { get; }
-        public KitchenState(string id, string tag, IEnumerable<SensorSpec> sensors) : this(id,tag, sensors, Enumerable.Empty<Reading>(), Enumerable.Empty<Reading>(), ImmutableDictionary<string, ICommand>.Empty)
+        public ImmutableHashSet<IMassTransitEvent> PendingResponses { get; }
+
+        public KitchenState(string id, string tag, IEnumerable<SensorSpec> sensors) : this(id,tag, sensors, Enumerable.Empty<Reading>(), Enumerable.Empty<Reading>(), ImmutableDictionary<string, ICommand>.Empty, ImmutableHashSet<IMassTransitEvent>.Empty)
         {
         }
-        public KitchenState(string id, string tag, IEnumerable<SensorSpec> sensors, IEnumerable<Reading> current, IEnumerable<Reading> previous, ImmutableDictionary<string, ICommand> pendingCommands)
+        public KitchenState(string id, string tag, IEnumerable<SensorSpec> sensors, IEnumerable<Reading> current, IEnumerable<Reading> previous, ImmutableDictionary<string, ICommand> pendingCommands, ImmutableHashSet<IMassTransitEvent> pendingResponses)
         {
             Tag = tag;
             Sensors = sensors;
@@ -27,6 +29,7 @@ namespace Hostel.State.Floor.Units
             Current = current;
             Previous = previous;
             PendingCommands = pendingCommands;
+            PendingResponses = pendingResponses;
         }
         public KitchenState Update(IEvent evnt)
         {

@@ -15,15 +15,19 @@ namespace Hostel.State.Floor
         public string Tag { get; }
         public IEnumerable<RoomSpecs> Rooms { get; }
         public ImmutableDictionary<string, ICommand> PendingCommands { get; }
-        public RoomManagerState(string floor, IEnumerable<RoomSpecs> rooms, string tag):this(floor, rooms, tag, ImmutableDictionary<string, ICommand>.Empty)
+        public ImmutableHashSet<IMassTransitEvent> PendingResponses { get; }
+
+        public RoomManagerState(string floor, IEnumerable<RoomSpecs> rooms, string tag):this(floor, rooms, tag, ImmutableDictionary<string, ICommand>.Empty, ImmutableHashSet<IMassTransitEvent>.Empty)
         {
         }
-        public RoomManagerState(string floor, IEnumerable<RoomSpecs> rooms, string tag, ImmutableDictionary<string, ICommand> pendingCommands)
+        public RoomManagerState(string floor, IEnumerable<RoomSpecs> rooms, string tag, ImmutableDictionary<string, ICommand> pendingCommands, ImmutableHashSet<IMassTransitEvent> pendingResponses)
         {
             FloorId = floor;
             Tag = tag;
             Rooms = rooms;
             PendingCommands = pendingCommands;
+            PendingResponses = pendingResponses;
+
         }
         public RoomManagerState Update(IEvent evnt)
         {
@@ -34,7 +38,7 @@ namespace Hostel.State.Floor
                         var room = createdRoom.Room;
                         var rooms = Rooms.Where(x => x.Tag != room.Tag).ToList();
                         rooms.Add(room);
-                        return new RoomManagerState(FloorId, rooms, room.Tag, PendingCommands);
+                        return new RoomManagerState(FloorId, rooms, room.Tag, PendingCommands, PendingResponses);
                     }
                 default: return this;
             }

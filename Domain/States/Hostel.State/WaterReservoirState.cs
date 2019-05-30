@@ -17,10 +17,12 @@ namespace Hostel.State
         public int AlertHeight { get; }
         public IEnumerable<SensorSpec> Sensors { get; }
         public ImmutableDictionary<string, ICommand> PendingCommands { get; }
-        public WaterReservoirState(string id, int height, int alert, IEnumerable<SensorSpec> sensors) : this(id, height, alert, sensors, null, null, ImmutableDictionary<string, ICommand>.Empty)
+        public ImmutableHashSet<IMassTransitEvent> PendingResponses { get; }
+
+        public WaterReservoirState(string id, int height, int alert, IEnumerable<SensorSpec> sensors) : this(id, height, alert, sensors, null, null, ImmutableDictionary<string, ICommand>.Empty, ImmutableHashSet<IMassTransitEvent>.Empty)
         {
         }
-        public WaterReservoirState(string id, int height, int alert, IEnumerable<SensorSpec> sensors, Reading current, Reading previous, ImmutableDictionary<string, ICommand> pendingCommands)
+        public WaterReservoirState(string id, int height, int alert, IEnumerable<SensorSpec> sensors, Reading current, Reading previous, ImmutableDictionary<string, ICommand> pendingCommands, ImmutableHashSet<IMassTransitEvent> pendingResponses)
         {
             Height = height;
             AlertHeight = alert;
@@ -29,6 +31,7 @@ namespace Hostel.State
             Current = current;
             ReservoirId = id;
             PendingCommands = pendingCommands;
+            PendingResponses = pendingResponses;
         }
         public WaterReservoirState Update(IEvent evnt)
         {
@@ -36,12 +39,12 @@ namespace Hostel.State
             {
                 case InstalledSensor sensor:
                     {
-                        return new WaterReservoirState(ReservoirId, Height, AlertHeight, sensor.Sensors, Current, Previous, PendingCommands);
+                        return new WaterReservoirState(ReservoirId, Height, AlertHeight, sensor.Sensors, Current, Previous, PendingCommands, PendingResponses);
                     }
                 case CreatedWaterReservoir reservoir:
                     {
                         var spec = reservoir.ReservoirSpec;
-                        return new WaterReservoirState(spec.ReservoirId, spec.Height, spec.AlertHeight, spec.Sensors, Current, Previous, PendingCommands);
+                        return new WaterReservoirState(spec.ReservoirId, spec.Height, spec.AlertHeight, spec.Sensors, Current, Previous, PendingCommands, PendingResponses);
                     }
                 default: return this;
             }
