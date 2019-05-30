@@ -5,8 +5,9 @@ namespace Hostel.Command.Create
 {
     public sealed class CreateWaterReservoir : Message, ICommand
     {
-        public string Commander => string.Empty;
-        public string CommandId => string.Empty;
+        public string Commander { get; }
+        public string CommandId { get; }
+        public string ReplyToQueue { get; }
         public ReservoirSpec Spec { get; }
         public CreateWaterReservoir(ReservoirSpec spec)
         {

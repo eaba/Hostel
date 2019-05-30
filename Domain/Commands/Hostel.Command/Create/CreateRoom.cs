@@ -8,6 +8,7 @@ namespace Hostel.Command.Create
         public readonly RoomSpecs Room;
         public string Commander { get; }
         public string CommandId { get; }
+        public string ReplyToQueue { get; }
         public CreateRoom(RoomSpecs room)
         {
             Room = room;

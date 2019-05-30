@@ -6,8 +6,9 @@ namespace Hostel.Command.Create
     public sealed class CreateToilet : Message, ICommand
     {
         public readonly ToiletSpec Toilet;
-        public string Commander => string.Empty;
-        public string CommandId => string.Empty;
+        public string Commander { get; }
+        public string CommandId { get; }
+        public string ReplyToQueue { get; }
         public CreateToilet(ToiletSpec toilet)
         {
            Toilet = toilet;

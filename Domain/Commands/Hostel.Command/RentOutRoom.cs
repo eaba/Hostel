@@ -9,6 +9,7 @@ namespace Hostel.Command
         public readonly RentOut RentOut;
         public string Commander { get; }
         public string CommandId { get; }
+        public string ReplyToQueue { get; }
         public RentOutRoom(RentOut rentOut, string commander, string commandid)
         {
             RentOut = rentOut;
