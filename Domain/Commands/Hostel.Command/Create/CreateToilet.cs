@@ -11,7 +11,7 @@ namespace Hostel.Command.Create
         public string ReplyToQueue { get; }
         public CreateToilet(ToiletSpec toilet)
         {
-           Toilet = toilet;
+            Toilet = toilet;
         }
     }
 }

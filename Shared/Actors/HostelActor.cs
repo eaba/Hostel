@@ -32,7 +32,10 @@ namespace Shared.Actors
                 {
                     Persist(handlerResult.Event, @event => OnPersist(@event, command.CommandId));
                 }
-                NotifyUI(command, handlerResult);
+                if(!string.IsNullOrWhiteSpace(command.ReplyToQueue) || !string.IsNullOrWhiteSpace(command.CommandId))
+                {
+                    NotifyUI(command, handlerResult);
+                }
                 var state = JsonConvert.SerializeObject(State, Formatting.Indented);
                 Context.System.Log.Log(Akka.Event.LogLevel.InfoLevel, "", state);
             });
@@ -66,16 +69,22 @@ namespace Shared.Actors
         }
         private void DeleteCommand(IEvent @event, string commandid)
         {
-            if (State.PendingCommands.ContainsKey(commandid))
+            if(!string.IsNullOrWhiteSpace(commandid))
             {
-                State.PendingCommands.Remove(commandid);
+                if (State.PendingCommands.ContainsKey(commandid))
+                {
+                    State.PendingCommands.Remove(commandid);
+                }
             }
         }
         private void SaveCommand(ICommand command)
         {
-            if(!State.PendingCommands.ContainsKey(command.CommandId))
+            if(!string.IsNullOrWhiteSpace(command.CommandId))
             {
-                State.PendingCommands.Add(command.CommandId, command);
+                if (!State.PendingCommands.ContainsKey(command.CommandId))
+                {
+                    State.PendingCommands.Add(command.CommandId, command);
+                }
             }
         }
         protected virtual void OnSnapshotOffer(TState state)

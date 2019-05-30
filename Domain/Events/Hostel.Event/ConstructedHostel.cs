@@ -5,8 +5,9 @@ namespace Hostel.Event
 {
     public class ConstructedHostel : IEvent
     {
-        public string Commander => string.Empty;
-        public string CommandId => string.Empty;
+        public string ReplyToQueue { get; }
+        public string Commander { get; }
+        public string CommandId { get; }
         public Construction Construction { get; }
         public ConstructedHostel(Construction detail)
         {

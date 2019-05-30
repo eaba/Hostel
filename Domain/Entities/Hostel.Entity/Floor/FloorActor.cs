@@ -85,7 +85,7 @@ namespace Hostel.Entity.Floor
             if (Context.Child(roomManagerTag).IsNobody())
             {
                 var rm = Context.ActorOf(RoomManagerActor.Prop(new RoomManagerHandler(), new RoomManagerState(State.FloorSpec.FloorId, State.FloorSpec.Rooms, roomManagerTag), roomManagerTag, _connectionString), roomManagerTag);
-                rm.Tell(new LayoutRoom());
+                rm.Tell(new LayoutRoom ());
             }
             var toiletManagerTag = $"{State.FloorSpec.Tag}-Toilet-Manager";
             if (Context.Child(toiletManagerTag).IsNobody())

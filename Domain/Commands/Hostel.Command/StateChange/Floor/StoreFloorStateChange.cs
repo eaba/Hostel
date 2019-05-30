@@ -10,8 +10,10 @@ namespace Hostel.Command.StateChange.Floor
         public string Commander { get; }
         public string CommandId { get; }
         public string ReplyToQueue { get; }
-        public StoreFloorStateChange(FloorState state)
+        public StoreFloorStateChange(FloorState state, string commander, string commandid)
         {
+            Commander = commander;
+            CommandId = commandid;
             State = state;
         }
     }

@@ -9,9 +9,11 @@ namespace Hostel.Command.Create
         public string CommandId { get; }
         public string ReplyToQueue { get; }
         public ReservoirSpec Spec { get; }
-        public CreateWaterReservoir(ReservoirSpec spec)
+        public CreateWaterReservoir(ReservoirSpec spec, string commander, string commandid)
         {
             Spec = spec;
+            Commander = commander;
+            CommandId = commandid;
         }
     }
 }

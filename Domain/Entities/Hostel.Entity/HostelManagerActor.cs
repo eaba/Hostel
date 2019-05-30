@@ -77,7 +77,7 @@ namespace Hostel.Entity
                             if(Context.Child(floor.Tag).IsNobody())
                             {
                                 floor.HostelId = hostel.Construction.Detail.HostelId;
-                                var createFloor = new CreateFloor(floor);
+                                var createFloor = new CreateFloor(floor, hostel.Commander, hostel.CommandId);
                                 Self.Tell(createFloor);
                                 Context.System.Log.Info($"FloorActor", $"Creating Floor - {floor.Tag}");
                             }
@@ -86,14 +86,14 @@ namespace Hostel.Entity
                         {
                             var septicSpec = construct.SepticTank;
                             septicSpec.HostelId = hostel.Construction.Detail.HostelId;
-                            var septic = new CreateSepticTank(septicSpec);
+                            var septic = new CreateSepticTank(septicSpec, hostel.Commander, hostel.CommandId);
                             Self.Tell(septic);
                         }
                         if(Context.Child(construct.Reservoir.Tag).IsNobody())
                         {
                             var waterSpec = construct.Reservoir;
                             waterSpec.HostelId = hostel.Construction.Detail.HostelId; ;
-                            var water = new CreateWaterReservoir(waterSpec);
+                            var water = new CreateWaterReservoir(waterSpec, hostel.Commander, hostel.CommandId);
                             Self.Tell(water);
                         }
                     }

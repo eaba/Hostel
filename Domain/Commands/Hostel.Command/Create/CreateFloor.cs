@@ -6,13 +6,15 @@ namespace Hostel.Command.Create
     public sealed class CreateFloor: Message, ICommand
     {
         public readonly FloorSpec Floor;
-        public string Commander => string.Empty;
-        public string CommandId => string.Empty;
+        public string Commander { get; }
+        public string CommandId { get; }
         public string ReplyToQueue { get; }
 
-        public CreateFloor(FloorSpec floor)
+        public CreateFloor(FloorSpec floor, string commander, string commandid)
         {
             Floor = floor;
+            Commander = commander;
+            CommandId = commandid;
         }
     }
 }
