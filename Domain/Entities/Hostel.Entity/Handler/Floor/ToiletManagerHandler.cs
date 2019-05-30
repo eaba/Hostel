@@ -21,9 +21,9 @@ namespace Hostel.Entity.Handler.Floor
                         {
                             return new HandlerResult(new CreatedToilet(toilet.Toilet));
                         }
-                        return new HandlerResult($"Toilet {toilet.Toilet.Tag} could not be created at this time!", "", "");
+                        return new HandlerResult($"Toilet {toilet.Toilet.Tag} could not be created at this time!");
                     }
-                default: return HandlerResult.NotHandled(command, command.Commander, command.CommandId);
+                default: return HandlerResult.NotHandled(command);
             }
         }
     }

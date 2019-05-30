@@ -52,16 +52,16 @@ namespace Hostel.Entity
                 _sendEndPoint = busControl.GetSendEndpoint(new Uri(queue)).ConfigureAwait(false).GetAwaiter().GetResult();//ConfigureAwait(false) to Prevent Deadlock[https://msdn.microsoft.com/en-us/magazine/mt238404.aspx]
                 if (_sendEndPoint != null)
                 {
-                    foreach (var me in State.PendingRsponses)
+                    foreach (var me in State.PendingResponses)
                     {
                         _sendEndPoint.Send(me);
                     }
-                    State.PendingRsponses.Clear();
+                    State.PendingResponses.Clear();
                     _sendEndPoint.Send(@event);
                 }
                 else
                 {
-                    State.PendingRsponses.Add(@event);
+                    State.PendingResponses.Add(@event);
                 }
             }
         }

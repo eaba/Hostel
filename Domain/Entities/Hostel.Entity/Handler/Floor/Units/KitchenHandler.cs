@@ -20,9 +20,9 @@ namespace Hostel.Entity.Handler.Floor.Units
                         {
                             return new HandlerResult(new InstalledSensor(newstate.Sensors));
                         }
-                        return new HandlerResult($"Sensors for {state.Type} could not be installed at this time!", string.Empty, string.Empty);
+                        return new HandlerResult($"Sensors for {state.Type} could not be installed at this time!");
                     }
-                default: return HandlerResult.NotHandled(command, command.Commander, command.CommandId);
+                default: return HandlerResult.NotHandled(command);
             }
         }
     }

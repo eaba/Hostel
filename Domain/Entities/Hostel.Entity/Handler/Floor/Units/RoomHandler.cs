@@ -14,7 +14,7 @@ namespace Hostel.Entity.Handler.Floor.Units
             switch (command)
             {
                 
-                default: return HandlerResult.NotHandled(command, command.Commander, command.CommandId);
+                default: return HandlerResult.NotHandled(command);
             }
         }
     }

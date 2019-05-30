@@ -20,9 +20,9 @@ namespace Hostel.Entity.Handler.Floor
                         {
                             return new HandlerResult(new CreatedRoom(room.Room));
                         }
-                        return new HandlerResult($"Room {room.Room.Tag} could not be created at this time!", "", "");
+                        return new HandlerResult($"Room {room.Room.Tag} could not be created at this time!");
                     }
-                default: return HandlerResult.NotHandled(command, command.Commander, command.CommandId);
+                default: return HandlerResult.NotHandled(command);
             }
         }
     }

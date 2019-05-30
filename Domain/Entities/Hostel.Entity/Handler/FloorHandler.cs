@@ -21,9 +21,9 @@ namespace Hostel.Entity.Handler
                         {
                             return new HandlerResult(new CreatedKitchen(kitchen));
                         }
-                        return new HandlerResult($"Kitchen {kitchen.Tag} could not be created at this time!", createKitchen.Commander, createKitchen.CommandId);
+                        return new HandlerResult($"Kitchen {kitchen.Tag} could not be created at this time!");
                     }
-                default: return HandlerResult.NotHandled(command, command.Commander, command.CommandId);
+                default: return HandlerResult.NotHandled(command);
             }
         }
     }
