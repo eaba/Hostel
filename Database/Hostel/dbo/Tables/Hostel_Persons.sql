@@ -7,7 +7,7 @@
     [DateRegistered] BIGINT           NOT NULL,
     [RoleId]         UNIQUEIDENTIFIER NOT NULL,
     CONSTRAINT [PK_Hostel_Owner] PRIMARY KEY CLUSTERED ([PersonId] ASC),
-    CONSTRAINT [FK_Hostel_Persons_Hostel_Roles] FOREIGN KEY ([PersonId]) REFERENCES [dbo].[Hostel_Roles] ([RoleId]),
+    CONSTRAINT [FK_Hostel_Persons_Hostel_Roles] FOREIGN KEY ([RoleId]) REFERENCES [dbo].[Hostel_Roles] ([RoleId]),
     CONSTRAINT [UniqueEmail] UNIQUE NONCLUSTERED ([Email] ASC),
     CONSTRAINT [UniquePhone] UNIQUE NONCLUSTERED ([Phone] ASC)
 );

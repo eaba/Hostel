@@ -32,6 +32,7 @@ namespace Hostel.Repository.Write
                  new DataTypes("@month", SqlDbType.Int, 0, birthday.Month.ToString(), ParameterDirection.Input, false, false, ""),
                  new DataTypes("@year", SqlDbType.Int, 0, birthday.Year.ToString(), ParameterDirection.Input, false, false, ""),
             };
+            dbps.Add(new DbProperties("CreatePerson_Birthday", dataTypes, "", false, ""));
             var x = repository.Update(dbps);
             var personId = repository.OutPuts.Where(i => i.Identifier == "CreatePerson").FirstOrDefault().Value;
             if (x > 0 || !string.IsNullOrWhiteSpace(personId))

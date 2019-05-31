@@ -37,7 +37,7 @@ namespace Shared.Actors
                     NotifyUI(command, handlerResult);
                 }
                 var state = JsonConvert.SerializeObject(State, Formatting.Indented);
-                Context.System.Log.Info(State.GetType().Name, $"{State.GetType().Name}:{state}");
+                Context.System.Log.Info($"{State.GetType().Name}:{state}");
             });
             Recover<IEvent>(evnt => { State = State.Update(evnt); });
             Recover<SnapshotOffer>(offer =>

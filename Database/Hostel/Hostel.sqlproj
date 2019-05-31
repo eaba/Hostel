@@ -110,4 +110,7 @@
   <ItemGroup>
     <RefactorLog Include="Hostel.refactorlog" />
   </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.RoleType.sql" />
+  </ItemGroup>
 </Project>
