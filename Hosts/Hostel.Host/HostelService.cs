@@ -22,7 +22,6 @@ namespace Hostel.Host
     public class HostelService : IHostedService
     {
         private readonly IConfiguration _configuration;
-        private readonly IServiceProvider _serviceProvider;
         private ActorSystem _actorSystem;
         private IBusControl _busControl;
         public HostelService(IBusControl busControl, IActorRef provider, ActorSystem actorSystem)
