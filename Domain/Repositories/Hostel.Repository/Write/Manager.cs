@@ -12,16 +12,16 @@ namespace Hostel.Repository.Write
         public static bool CreatePerson(this IRepository<IDbProperties> repository, Dictionary<string, string> inputs)
         {
             var dbps = new List<DbProperties>();
-            var birthday = DateTime.Parse(inputs["Birthday"]);
+            var birthday = DateTime.Parse(inputs["birthday"]);
             var date = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
             var dataTypes = new List<IDataTypes>
                         {
-                            new DataTypes("@firstName", SqlDbType.NVarChar, 50, inputs["FirstName"], ParameterDirection.Input, false, false, ""),
-                            new DataTypes("@lastName", SqlDbType.NVarChar, 50, inputs["LastName"], ParameterDirection.Input, false, false, ""),
-                            new DataTypes("@phone", SqlDbType.NVarChar, 50, inputs["Phone"], ParameterDirection.Input, false, false, ""),
-                            new DataTypes("@email", SqlDbType.NVarChar, 50, inputs["Email"], ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@firstName", SqlDbType.NVarChar, 50, inputs["firstName"], ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@lastName", SqlDbType.NVarChar, 50, inputs["lastName"], ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@phone", SqlDbType.NVarChar, 50, inputs["phone"], ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@email", SqlDbType.NVarChar, 50, inputs["email"], ParameterDirection.Input, false, false, ""),
                             new DataTypes("@date", SqlDbType.NVarChar, 50, date, ParameterDirection.Input, false, false, ""),
-                            new DataTypes("@role", SqlDbType.NVarChar, 50, inputs["Role"], ParameterDirection.Input, false, false, ""),
+                            new DataTypes("@role", SqlDbType.NVarChar, 50, inputs["role"], ParameterDirection.Input, false, false, ""),
                             new DataTypes("@person", SqlDbType.UniqueIdentifier, 0, string.Empty, ParameterDirection.Output, false, false, "@person")
                         };
             dbps.Add(new DbProperties("CreatePerson", dataTypes, string.Empty, true, "@person", "CreatePerson"));
@@ -36,7 +36,7 @@ namespace Hostel.Repository.Write
             var personId = repository.OutPuts.Where(i => i.Identifier == "CreatePerson").FirstOrDefault().Value;
             if (x > 0 || !string.IsNullOrWhiteSpace(personId))
             {
-                inputs["Person"] = personId;
+                inputs["person"] = personId;
                 return true;
             }
             return false;
