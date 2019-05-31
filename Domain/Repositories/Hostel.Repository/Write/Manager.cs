@@ -27,7 +27,7 @@ namespace Hostel.Repository.Write
             dbps.Add(new DbProperties("CreatePerson", dataTypes, string.Empty, true, "@person", "CreatePerson"));
             dataTypes = new List<IDataTypes>
             {
-                 new DataTypes("@person", SqlDbType.UniqueIdentifier, 0, "", ParameterDirection.Input, false, true, "@person"),
+                 new DataTypes("@person", SqlDbType.NVarChar, 50, "", ParameterDirection.Input, false, true, "@person"),
                  new DataTypes("@day", SqlDbType.Int, 0, birthday.Day.ToString(), ParameterDirection.Input, false, false, ""),
                  new DataTypes("@month", SqlDbType.Int, 0, birthday.Month.ToString(), ParameterDirection.Input, false, false, ""),
                  new DataTypes("@year", SqlDbType.Int, 0, birthday.Year.ToString(), ParameterDirection.Input, false, false, ""),

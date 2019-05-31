@@ -90,6 +90,8 @@ namespace Shared.Repository.Impl
                     catch (Exception e)
                     {
                         tran.Rollback();
+                        Console.WriteLine(property.StoredProcedureName);
+                        Console.WriteLine(e.ToString());
                         throw e;
                     }
                 }
