@@ -57,11 +57,11 @@ namespace Hostel.Host
 
             services.AddSingleton(provider =>
             {
-                var cons = Construct();
+                //var cons = Construct();
                 var actorSystem = provider.GetService<ActorSystem>();
-                var hostelManagerActor = actorSystem.ActorOf(HostelManagerActor.Prop(new HostelManagerHandler(), new HostelManagerState(false, cons.Construction), "HostelManager", Configuration.GetConnectionString("Database")), "HostelManager");
+                var hostelManagerActor = actorSystem.ActorOf(HostelManagerActor.Prop(new HostelManagerHandler(), new HostelManagerState(false), "HostelManager", Configuration.GetConnectionString("Database")), "HostelManager");
                 HostActorRef.ActorRef = hostelManagerActor;
-                HostActorRef.ActorRef.Tell(cons);
+                //HostActorRef.ActorRef.Tell(cons);
                 HostActorRef.ActorIsReady = true;
                 HostActorRef.ProcessCached();
                 return hostelManagerActor;

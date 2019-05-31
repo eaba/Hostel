@@ -12,7 +12,7 @@ namespace Hostel.State
         public ImmutableHashSet<IMassTransitEvent> PendingResponses { get; }
 
         public readonly bool Constructed;
-        public HostelManagerState(bool constructed, Construction record):this(constructed, record, ImmutableDictionary<string, ICommand>.Empty, ImmutableHashSet<IMassTransitEvent>.Empty)
+        public HostelManagerState(bool constructed):this(constructed, null, ImmutableDictionary<string, ICommand>.Empty, ImmutableHashSet<IMassTransitEvent>.Empty)
         {
         }
         public HostelManagerState(bool constructed, Construction record, ImmutableDictionary<string, ICommand> pendingCommands, ImmutableHashSet<IMassTransitEvent> pendingResponses)
