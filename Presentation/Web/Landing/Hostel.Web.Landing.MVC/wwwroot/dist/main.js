@@ -225,12 +225,15 @@ var AccountComponent = /** @class */ (function () {
         });
     };
     AccountComponent.prototype.subscribeToEvents = function () {
-        this.signalRService.serverData.subscribe(function (data) {
-            var response = JSON.parse(data);
-            var cmd = response.Command;
-            if (cmd === 'AccountCreated') {
-                //alert with message
+        var _this = this;
+        this.signalRService.accountCreated.subscribe(function (event) {
+            console.log(event);
+            if (event.Success) {
+                var payload = JSON.parse(event.Payload);
                 window.open("https://portal.hostel.com", "_blank");
+            }
+            else {
+                _this.toastr.error('Account Creation Failed', event.Error);
             }
         });
     };
@@ -412,11 +415,14 @@ var RegisterComponent = /** @class */ (function () {
     };
     RegisterComponent.prototype.subscribeToEvents = function () {
         var _this = this;
-        this.signalRService.serverData.subscribe(function (data) {
-            var response = JSON.parse(data);
-            var cmd = response.Command;
-            if (cmd === 'PersonCreated') {
-                _this.router.navigateByUrl('/account', { state: { email: response.Email, role: response.Role } });
+        this.signalRService.personCreated.subscribe(function (event) {
+            console.log(event);
+            if (event.Success) {
+                var payload = JSON.parse(event.Payload);
+                _this.router.navigateByUrl('/account', { state: { email: payload.email, role: payload.role } });
+            }
+            else {
+                _this.toastr.error('Failed Registration', event.Error);
             }
         });
     };
@@ -434,8 +440,7 @@ var RegisterComponent = /** @class */ (function () {
                                     this.homeService.createPerson(JSON.stringify(data))
                                         .subscribe(function (data) {
                                         _this.person = new _models_Person_Model__WEBPACK_IMPORTED_MODULE_3__["Person"]();
-                                        var rep = JSON.parse(data);
-                                        //this.toastr.success('Hello world!', 'Toastr fun!');
+                                        _this.toastr.info('Hi!', data);
                                     });
                                 }
                             }
@@ -481,6 +486,26 @@ var Account = /** @class */ (function () {
         this.role = '';
     }
     return Account;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/models/Event.ts":
+/*!*********************************!*\
+  !*** ./src/app/models/Event.ts ***!
+  \*********************************/
+/*! exports provided: PushEvent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PushEvent", function() { return PushEvent; });
+var PushEvent = /** @class */ (function () {
+    function PushEvent() {
+    }
+    return PushEvent;
 }());
 
 
@@ -647,6 +672,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_app_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/app.constants */ "./src/app/shared/app.constants.ts");
 /* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/index.js");
 /* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _models_Event__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../models/Event */ "./src/app/models/Event.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -662,11 +688,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var WAIT_UNTIL_ASPNETCORE_IS_READY_DELAY_IN_MS = 2000;
 var commander = Object(uuid__WEBPACK_IMPORTED_MODULE_4__["v4"])();
 var SignalRService = /** @class */ (function () {
     function SignalRService() {
-        this.serverData = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        this.personCreated = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        this.accountCreated = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
         this.connectionEstablished = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
         this.createConnection();
         this.registerOnServerEvents();
@@ -691,11 +719,21 @@ var SignalRService = /** @class */ (function () {
     };
     SignalRService.prototype.registerOnServerEvents = function () {
         var _this = this;
-        this.hubConnection.on('personcreated', function (data) {
-            _this.serverData.next(data);
+        this.hubConnection.on('personcreated', function (payload, id, success, error) {
+            var pEvent = new _models_Event__WEBPACK_IMPORTED_MODULE_5__["PushEvent"]();
+            pEvent.Success = success;
+            pEvent.Id = id;
+            pEvent.Error = error;
+            pEvent.Payload = payload;
+            _this.personCreated.next(pEvent);
         });
-        this.hubConnection.on('accountcreated', function (data) {
-            _this.serverData.next(data);
+        this.hubConnection.on('accountcreated', function (payload, id, success, error) {
+            var pEvent = new _models_Event__WEBPACK_IMPORTED_MODULE_5__["PushEvent"]();
+            pEvent.Success = success;
+            pEvent.Id = id;
+            pEvent.Error = error;
+            pEvent.Payload = payload;
+            _this.accountCreated.next(pEvent);
         });
     };
     SignalRService.prototype.GetCommander = function () {

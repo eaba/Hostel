@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="src\app\models\Event.ts" />
     <None Remove="src\app\providers\errorhandler.ts" />
     <None Remove="src\app\providers\httpinterceptor.ts" />
     <None Remove="tsconfig.json" />
@@ -31,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="src\app\models\Event.ts" />
     <TypeScriptCompile Include="src\app\providers\errorhandler.ts" />
     <TypeScriptCompile Include="src\app\providers\httpinterceptor.ts" />
   </ItemGroup>

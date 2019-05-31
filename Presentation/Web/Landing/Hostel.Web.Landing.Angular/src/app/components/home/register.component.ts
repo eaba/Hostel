@@ -6,6 +6,7 @@ import { Person } from '../../models/Person.Model';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { v4 as uuid } from 'uuid';
+import { PushEvent } from '../../models/Event';
 @Component({
   selector: 'register-div',
   templateUrl: './register.component.html',
@@ -13,7 +14,6 @@ import { v4 as uuid } from 'uuid';
   providers: [HomeService, SignalRService]
 })
 export class RegisterComponent implements OnInit {
-  responses: Observable<string>;
   person: Person = new Person();
   commander: string;
   connected: boolean;
@@ -28,13 +28,17 @@ export class RegisterComponent implements OnInit {
     });
   }
   private subscribeToEvents(): void {
-    this.signalRService.serverData.subscribe((data: any) => {
-      let response = JSON.parse(data);
-      let cmd = response.Command;
-      if (cmd === 'PersonCreated') {
-        this.router.navigateByUrl('/account', { state: { email: response.Email, role:response.Role } });
+    this.signalRService.personCreated.subscribe((event: PushEvent) =>
+    {
+      console.log(event);
+      if (event.Success) {
+        let payload = JSON.parse(event.Payload);
+        this.router.navigateByUrl('/account', { state: { email: payload.email, role: payload.role } });
       }
-    });
+      else {
+        this.toastr.error('Failed Registration', event.Error);
+      }      
+    });    
   }
   public RegisterPerson() {//this is AI folks ;)
     this.person.cmd = this.signalRService.GetCommander();
@@ -54,10 +58,10 @@ export class RegisterComponent implements OnInit {
                 {
                   let data = { Commander: this.person.cmd, Command: "CreateAccount", CommandId: uuid(), Payload: JSON.stringify(this.person) };
                   this.homeService.createPerson(JSON.stringify(data))
-                    .subscribe(data => {
+                    .subscribe(data =>
+                    {
                       this.person = new Person();
-                      let rep = JSON.parse(data);
-                      //this.toastr.success('Hello world!', 'Toastr fun!');
+                      this.toastr.info('Hi!', data);
                     });
                 }
               }

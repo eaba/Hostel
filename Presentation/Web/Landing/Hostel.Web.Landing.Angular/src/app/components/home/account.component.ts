@@ -5,6 +5,7 @@ import { SignalRService } from '../../services/signalr.service';
 import { Account } from '../../models/Account.Model';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { PushEvent } from '../../models/Event';
 @Component({
   selector: 'account-div',
   templateUrl: './account.component.html',
@@ -28,12 +29,14 @@ export class AccountComponent implements OnInit {
     });
   }
   private subscribeToEvents(): void {
-    this.signalRService.serverData.subscribe((data: any) => {
-      let response = JSON.parse(data);
-      let cmd = response.Command;
-      if (cmd === 'AccountCreated') {
-        //alert with message
+    this.signalRService.accountCreated.subscribe((event: PushEvent) => {
+      console.log(event);
+      if (event.Success) {
+        let payload = JSON.parse(event.Payload);
         window.open("https://portal.hostel.com", "_blank");
+      }
+      else {
+        this.toastr.error('Account Creation Failed', event.Error);
       }
     });
   }

@@ -6,11 +6,13 @@ import { interval, Subject } from 'rxjs';
 import { HttpTransportType, HubConnection, LogLevel } from '@aspnet/signalr';
 import { CONFIGURATION } from '../shared/app.constants';
 import { v4 as uuid } from 'uuid';
+import { PushEvent } from '../models/Event';
 const WAIT_UNTIL_ASPNETCORE_IS_READY_DELAY_IN_MS = 2000;
 const commander = uuid();
 @Injectable()
 export class SignalRService {
-  serverData = new Subject<string>();
+  personCreated = new Subject<PushEvent>();
+  accountCreated = new Subject<PushEvent>();
   connectionEstablished = new Subject<Boolean>();
   private hubConnection: HubConnection;
   constructor() {
@@ -38,11 +40,21 @@ export class SignalRService {
   }
   public registerOnServerEvents(): void
   {
-    this.hubConnection.on('personcreated', (data: string) => {
-      this.serverData.next(data);
+    this.hubConnection.on('personcreated', (payload: any, id: string, success: boolean, error: string) => {
+      let pEvent = new PushEvent();
+      pEvent.Success = success;
+      pEvent.Id = id;
+      pEvent.Error = error;
+      pEvent.Payload = payload;
+      this.personCreated.next(pEvent);
     });
-    this.hubConnection.on('accountcreated', (data: string) => {
-      this.serverData.next(data);
+    this.hubConnection.on('accountcreated', (payload: any, id: string, success: boolean, error: string) => {
+      let pEvent = new PushEvent();
+      pEvent.Success = success;
+      pEvent.Id = id;
+      pEvent.Error = error;
+      pEvent.Payload = payload;
+      this.accountCreated.next(pEvent);
     });
   }
   public GetCommander(): string {
