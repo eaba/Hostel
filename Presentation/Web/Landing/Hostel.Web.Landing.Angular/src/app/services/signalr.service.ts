@@ -40,21 +40,17 @@ export class SignalRService {
   }
   public registerOnServerEvents(): void
   {
-    this.hubConnection.on('personcreated', (payload: any, id: string, success: boolean, error: string) => {
-      let pEvent = new PushEvent();
-      pEvent.Success = success;
-      pEvent.Id = id;
-      pEvent.Error = error;
-      pEvent.Payload = payload;
-      this.personCreated.next(pEvent);
+    this.hubConnection.on('personcreated', (event: string) => {
+      let json = JSON.parse(event);
+      let evnt = new PushEvent();
+      evnt.Success = json.Success;
+      evnt.Id = json.Id;
+      evnt.Error = json.Error;
+      evnt.Payload = json.Payload;
+      this.personCreated.next(evnt);
     });
-    this.hubConnection.on('accountcreated', (payload: any, id: string, success: boolean, error: string) => {
-      let pEvent = new PushEvent();
-      pEvent.Success = success;
-      pEvent.Id = id;
-      pEvent.Error = error;
-      pEvent.Payload = payload;
-      this.accountCreated.next(pEvent);
+    this.hubConnection.on('accountcreated', (event: PushEvent) => {
+      this.accountCreated.next(event);
     });
   }
   public GetCommander(): string {

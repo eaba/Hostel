@@ -1,5 +1,6 @@
 ﻿using MassTransit;
 using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
 using Shared;
 using SignalR.Host.Hubs;
 using System;
@@ -17,7 +18,8 @@ namespace SignalR.Host.Consumers
         public async Task Consume(ConsumeContext<IMassTransitEvent> context)
         {
             var message = context.Message;
-            await _hub.Clients.Group(message.Commander).SendAsync(message.Event.ToLower(), message.Payload, message.CommandId, message.Success, message.Error);
+            var @event = new { message.Success, message.Error, Id = message.CommandId, message.Payload};
+            await _hub.Clients.Group(message.Commander).SendAsync(message.Event.ToLower(), JsonConvert.SerializeObject(@event, Formatting.Indented));
         }
     }
 }

@@ -36,7 +36,7 @@ export class AccountComponent implements OnInit {
         window.open("https://portal.hostel.com", "_blank");
       }
       else {
-        this.toastr.error('Account Creation Failed', event.Error);
+        this.toastr.error(event.Error, 'Account Creation Failed', { timeOut: 15000, positionClass: 'toast-top-center' });
       }
     });
   }

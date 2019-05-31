@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
         this.router.navigateByUrl('/account', { state: { email: payload.email, role: payload.role } });
       }
       else {
-        this.toastr.error('Failed Registration', event.Error);
+        this.toastr.error(event.Error, 'Failed Registration', { timeOut: 15000, positionClass: 'toast-top-center' });
       }      
     });    
   }
@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
                     .subscribe(data =>
                     {
                       this.person = new Person();
-                      this.toastr.info('Hi!', data);
+                      this.toastr.info(data, 'Hi!', { timeOut: 15000, positionClass: 'toast-top-center' });
                     });
                 }
               }

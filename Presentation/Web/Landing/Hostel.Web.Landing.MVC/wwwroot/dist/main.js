@@ -233,7 +233,7 @@ var AccountComponent = /** @class */ (function () {
                 window.open("https://portal.hostel.com", "_blank");
             }
             else {
-                _this.toastr.error('Account Creation Failed', event.Error);
+                _this.toastr.error(event.Error, 'Account Creation Failed', { timeOut: 15000, positionClass: 'toast-top-center' });
             }
         });
     };
@@ -422,7 +422,7 @@ var RegisterComponent = /** @class */ (function () {
                 _this.router.navigateByUrl('/account', { state: { email: payload.email, role: payload.role } });
             }
             else {
-                _this.toastr.error('Failed Registration', event.Error);
+                _this.toastr.error(event.Error, 'Failed Registration', { timeOut: 15000, positionClass: 'toast-top-center' });
             }
         });
     };
@@ -440,7 +440,7 @@ var RegisterComponent = /** @class */ (function () {
                                     this.homeService.createPerson(JSON.stringify(data))
                                         .subscribe(function (data) {
                                         _this.person = new _models_Person_Model__WEBPACK_IMPORTED_MODULE_3__["Person"]();
-                                        _this.toastr.info('Hi!', data);
+                                        _this.toastr.info(data, 'Hi!', { timeOut: 15000, positionClass: 'toast-top-center' });
                                     });
                                 }
                             }
@@ -719,21 +719,17 @@ var SignalRService = /** @class */ (function () {
     };
     SignalRService.prototype.registerOnServerEvents = function () {
         var _this = this;
-        this.hubConnection.on('personcreated', function (payload, id, success, error) {
-            var pEvent = new _models_Event__WEBPACK_IMPORTED_MODULE_5__["PushEvent"]();
-            pEvent.Success = success;
-            pEvent.Id = id;
-            pEvent.Error = error;
-            pEvent.Payload = payload;
-            _this.personCreated.next(pEvent);
+        this.hubConnection.on('personcreated', function (event) {
+            var json = JSON.parse(event);
+            var evnt = new _models_Event__WEBPACK_IMPORTED_MODULE_5__["PushEvent"]();
+            evnt.Success = json.Success;
+            evnt.Id = json.Id;
+            evnt.Error = json.Error;
+            evnt.Payload = json.Payload;
+            _this.personCreated.next(evnt);
         });
-        this.hubConnection.on('accountcreated', function (payload, id, success, error) {
-            var pEvent = new _models_Event__WEBPACK_IMPORTED_MODULE_5__["PushEvent"]();
-            pEvent.Success = success;
-            pEvent.Id = id;
-            pEvent.Error = error;
-            pEvent.Payload = payload;
-            _this.accountCreated.next(pEvent);
+        this.hubConnection.on('accountcreated', function (event) {
+            _this.accountCreated.next(event);
         });
     };
     SignalRService.prototype.GetCommander = function () {
