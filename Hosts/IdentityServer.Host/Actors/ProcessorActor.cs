@@ -89,12 +89,9 @@ namespace IdentityServer.Host.Actors
                 }
                 catch (Exception e)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(e.ToString());
                     response["Success"] = "false";
                     response["Errors"] = e.Message;
                     response["Message"] = e.Message;
-                    Console.ResetColor();
                 }
                 var @event = new MassTransitEvent("AccountCreated", command.Commander, command.CommandId, response);
                 await SendToQueue(@event);

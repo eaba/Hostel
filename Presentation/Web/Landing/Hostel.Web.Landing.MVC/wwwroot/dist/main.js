@@ -233,7 +233,8 @@ var AccountComponent = /** @class */ (function () {
         this.signalRService.accountCreated.subscribe(function (event) {
             console.log(event);
             if (event.Success) {
-                window.open("https://portal.hostel.com", "_blank");
+                _this.toastr.success('Account created successfully! Go to https://portal.hostel.com to login. Thanks and Welcome onboard!!', 'Welcome', { timeOut: 30000, positionClass: 'toast-top-center' });
+                //window.open("https://portal.hostel.com", "_blank");
             }
             else {
                 _this.toastr.error(event.Error, 'Account Creation Failed', { timeOut: 15000, positionClass: 'toast-top-center' });
