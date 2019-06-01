@@ -53,7 +53,10 @@ namespace IdentityServer.Host.Actors
                     {
                         UserName = payload["Email"],
                         Email = payload["Email"],
-                        PhoneNumber = payload["Phone"]
+                        PhoneNumber = payload["Phone"],
+                        EmailConfirmed = true,
+                        PhoneNumberConfirmed = true,
+                        TwoFactorEnabled = false
                     };
                     var created = await userManager.CreateAsync(user, payload["Password"]);
                     if (created.Succeeded)

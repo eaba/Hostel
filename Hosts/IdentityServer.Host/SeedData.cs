@@ -31,6 +31,47 @@ namespace IdentityServer.Host
                 {
                     var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
                     context.Database.Migrate();
+                    var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<HostelUser>>();
+                    var alice = userMgr.FindByNameAsync("fake@gmail.com").Result;
+                    if (alice == null)
+                    {
+                        alice = new HostelUser
+                        {
+                            UserName = "fake@gmail.com",
+                            Email = "fake@gmail.com",
+                            EmailConfirmed = true,
+                            PhoneNumber = "2348136786808",
+                            PhoneNumberConfirmed = true,
+                            TwoFactorEnabled = true
+                        };
+                        var result = userMgr.CreateAsync(alice, "alicechukwu").Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
+
+                        result = userMgr.AddClaimsAsync(alice, new Claim[]{
+                            new Claim(JwtClaimTypes.Role, "Tester"),
+                            new Claim(JwtClaimTypes.PreferredUserName, "fake@gmail.com"),
+                            new Claim(JwtClaimTypes.Name, "Ebere Abanonu"),
+                            new Claim(JwtClaimTypes.GivenName, "Ebere"),
+                            new Claim(JwtClaimTypes.FamilyName, "Abanonu"),
+                            new Claim(JwtClaimTypes.Email, "fake@yahoo.com"),
+                            new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
+                            new Claim(JwtClaimTypes.WebSite, "http://alice.com"),
+                            new Claim(JwtClaimTypes.Address, @"{ 'street_address': 'One Hacker Way', 'locality': 'Heidelberg', 'postal_code': 69118, 'country': 'Germany' }", IdentityServer4.IdentityServerConstants.ClaimValueTypes.Json),
+                            new Claim("TimeZone", "W. Central Africa Standard Time"),
+                        }).Result;
+                        if (!result.Succeeded)
+                        {
+                            throw new Exception(result.Errors.First().Description);
+                        }
+                        //Console.WriteLine("alice created");
+                    }
+                    else
+                    {
+                        //Console.WriteLine("alice already exists");
+                    }
                 }
             }
 
