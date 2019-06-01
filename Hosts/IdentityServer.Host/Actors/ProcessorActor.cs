@@ -17,7 +17,6 @@ namespace IdentityServer.Host.Actors
 {
     public class ProcessorActor:ReceiveActor
     {
-        private UserManager<HostelUser> _userManager;
         private ISendEndpoint _homeSendEndPoint;
         private ISendEndpoint _portalSendEndPoint;
         private Uri _queue => new Uri("rabbitmq://localhost/hostel_home_queue");
@@ -31,7 +30,6 @@ namespace IdentityServer.Host.Actors
         {
             using (var context = Context.CreateScope())
             {
-                _userManager = context.ServiceProvider.GetRequiredService<UserManager<HostelUser>>();
                 var bus = context.ServiceProvider.GetService<IBusControl>();
                 _homeSendEndPoint = bus.GetSendEndpoint(_queue).GetAwaiter().GetResult();
                 _portalSendEndPoint = bus.GetSendEndpoint(_queuePortal).GetAwaiter().GetResult();
@@ -44,88 +42,103 @@ namespace IdentityServer.Host.Actors
         }
         private async Task CreateAccount(CreateAccount command)
         {
-            var payload = command.Payload;
-            var response = new Dictionary<string, string>();
-            try
+            using (var context = Context.CreateScope())
             {
-                var user = new HostelUser
+                var userManager = context.ServiceProvider.GetRequiredService<UserManager<HostelUser>>();
+                var payload = command.Payload;
+                var response = new Dictionary<string, string>();
+                try
                 {
-                    UserName = payload["Email"],
-                    Email = payload["Email"],
-                    PhoneNumber = payload["Phone"]
-                };
-                var created = await _userManager.CreateAsync(user, payload["Password"]);
-                if (created.Succeeded)
-                {
-                    var userClaims = new List<Claim>();
-                    var userRole = payload["Role"];
-                    userClaims.Add(new Claim(JwtClaimTypes.Role, userRole));
-                    userClaims.Add(new Claim("PreferredUserName", payload["Email"]));
-                    var claim = await _userManager.AddClaimsAsync(user, userClaims);
-                    if (!claim.Succeeded)
+                    var user = new HostelUser
                     {
-                        await _userManager.DeleteAsync(user);
-                        response["Success"] = "false";
-                        response["Errors"] = string.Join(", ", claim.Errors);
-                        response["Message"] = "Your account created was aborted";
+                        UserName = payload["Email"],
+                        Email = payload["Email"],
+                        PhoneNumber = payload["Phone"]
+                    };
+                    var created = await userManager.CreateAsync(user, payload["Password"]);
+                    if (created.Succeeded)
+                    {
+                        var userClaims = new List<Claim>();
+                        var userRole = payload["Role"];
+                        userClaims.Add(new Claim(JwtClaimTypes.Role, userRole));
+                        userClaims.Add(new Claim("PreferredUserName", payload["Email"]));
+                        var claim = await userManager.AddClaimsAsync(user, userClaims);
+                        if (!claim.Succeeded)
+                        {
+                            await userManager.DeleteAsync(user);
+                            response["Success"] = "false";
+                            response["Errors"] = string.Join(", ", claim.Errors);
+                            response["Message"] = "Your account created was aborted";
+                        }
+                        else
+                        {
+                            response["Success"] = "true";
+                            response["Errors"] = string.Join(", ", created.Errors);
+                            response["Message"] = "Your account created successfully!!";
+                        }
                     }
                     else
                     {
-                        response["Success"] = "true";
+                        response["Success"] = "false";
                         response["Errors"] = string.Join(", ", created.Errors);
-                        response["Message"] = "Your account created successfully!!";
+                        response["Message"] = "Your account was not created";
                     }
                 }
-                else
+                catch (Exception e)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(e.ToString());
                     response["Success"] = "false";
-                    response["Errors"] = string.Join(", ", created.Errors);
-                    response["Message"] = "Your account was not created";
-                }                
+                    response["Errors"] = e.Message;
+                    response["Message"] = e.Message;
+                    Console.ResetColor();
+                }
+                var @event = new MassTransitEvent("AccountCreated", command.Commander, command.CommandId, response);
+                await SendToQueue(@event);
+                await Self.GracefulStop(TimeSpan.FromSeconds(10));
             }
-            catch(Exception e)
-            {
-                response["Message"] = e.Message;
-            }
-            var @event = new MassTransitEvent("AccountCreated", command.Commander, command.CommandId, response);
-            await SendToQueue(@event);
-            await Self.GracefulStop(TimeSpan.FromSeconds(10));
+            
         }
         private async Task AddHostelClaim(AddHostelClaim command)
         {
-            var payload = command.Payload;
-            var response = new Dictionary<string, string>();
-            try
+            using (var context = Context.CreateScope())
             {
-                var user = await _userManager.FindByEmailAsync(payload["Email"]);
-                if (user != null)
+                var userManager = context.ServiceProvider.GetRequiredService<UserManager<HostelUser>>();
+                var payload = command.Payload;
+                var response = new Dictionary<string, string>();
+                try
                 {
-                    var userClaims = new List<Claim>();
-                    var userHostel = payload["Hostel"];
-                    userClaims.Add(new Claim("Hostel", userHostel));
-                    var claim = await _userManager.AddClaimsAsync(user, userClaims);
-                    if (!claim.Succeeded)
+                    var user = await userManager.FindByEmailAsync(payload["Email"]);
+                    if (user != null)
+                    {
+                        var userClaims = new List<Claim>();
+                        var userHostel = payload["Hostel"];
+                        userClaims.Add(new Claim("Hostel", userHostel));
+                        var claim = await userManager.AddClaimsAsync(user, userClaims);
+                        if (!claim.Succeeded)
+                        {
+                            response["Created"] = "false";
+                            response["Errors"] = string.Join(", ", claim.Errors);
+                            response["Message"] = "Your account created was aborted";
+                        }
+                    }
+                    else
                     {
                         response["Created"] = "false";
-                        response["Type"] = "AddUserHostelClaim";
-                        response["Errors"] = string.Join(", ", claim.Errors);
-                        response["Message"] = "Your account created was aborted";
+                        response["Errors"] = $"No user with '{payload["Email"]}' was found!";
+                        response["Message"] = $"No user with '{payload["Email"]}' was found!";
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    response["Created"] = "false";
-                    response["Type"] = "AddUserHostelClaim";
-                    response["Message"] = $"No user with '{payload["Email"]}' was found!";
+                    response["Success"] = "false";
+                    response["Errors"] = e.Message;
+                    response["Message"] = e.Message;
                 }
-            }
-            catch (Exception e)
-            {
-                response["Message"] = e.Message;
-            }
-            var @event = new MassTransitEvent("AddedHostelClaim", command.Commander, command.CommandId, response);
-            await SendToPortalQueue(@event);
-            await Self.GracefulStop(TimeSpan.FromSeconds(10));
+                var @event = new MassTransitEvent("AddedHostelClaim", command.Commander, command.CommandId, response);
+                await SendToPortalQueue(@event);
+                await Self.GracefulStop(TimeSpan.FromSeconds(10));
+            }                
         }
         private async Task SendToQueue(IMassTransitEvent evnt)
         {
