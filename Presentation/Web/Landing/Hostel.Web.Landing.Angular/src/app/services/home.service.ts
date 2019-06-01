@@ -27,16 +27,14 @@ export class HomeService {
     return this.http.post<string>(this.personActionUrl, person)
       .pipe(catchError(this.handleError));
   }
-  public createAccount(account: Account): Observable<string> {
-    let data = { Commander: account.cmd, Command: "CreateAccount", CommandId: uuid(), Payload: account};
-    const jsonData = JSON.stringify(data);
-
+  public createAccount(account: string): Observable<string> {
     return this.http
-      .post<string>(this.accountActionUrl, jsonData)
+      .post<string>(this.accountActionUrl, account)
       .pipe(catchError(this.handleError));
   }
   
   private handleError(error: Response) {
+    console.log(error);
     return throwError(error || 'Server error');
   }
 }

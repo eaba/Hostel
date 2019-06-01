@@ -49,8 +49,14 @@ export class SignalRService {
       evnt.Payload = json.Payload;
       this.personCreated.next(evnt);
     });
-    this.hubConnection.on('accountcreated', (event: PushEvent) => {
-      this.accountCreated.next(event);
+    this.hubConnection.on('accountcreated', (event: string) => {
+      let json = JSON.parse(event);
+      let evnt = new PushEvent();
+      evnt.Success = json.Success;
+      evnt.Id = json.Id;
+      evnt.Error = json.Error;
+      evnt.Payload = json.Payload;
+      this.accountCreated.next(evnt);
     });
   }
   public GetCommander(): string {

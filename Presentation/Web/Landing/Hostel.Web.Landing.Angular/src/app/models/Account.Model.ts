@@ -1,9 +1,10 @@
 export class Account {
-  cmd = ''; //hack
-  email = '';
-  password = '';
-  confirm = '';
-  role = '';
+  cmd: string = '';
+  email: string  = '';
+  password: string  = '';
+  confirm: string  = '';
+  role: string  = '';
+  phone: string  = '';
   constructor() {
   }
 }

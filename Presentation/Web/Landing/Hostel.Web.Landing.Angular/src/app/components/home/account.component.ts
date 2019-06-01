@@ -5,6 +5,7 @@ import { SignalRService } from '../../services/signalr.service';
 import { Account } from '../../models/Account.Model';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { v4 as uuid } from 'uuid';
 import { PushEvent } from '../../models/Event';
 @Component({
   selector: 'account-div',
@@ -43,20 +44,25 @@ export class AccountComponent implements OnInit {
   }
   public RegisterAccount() {//this is AI folks ;)
     this.account.cmd = this.signalRService.GetCommander();
-    if (this.account.cmd) {
-      if (this.account.confirm === this.account.password) {
-        if (this.account.email) {
-          if (this.account.role) {
-            this.homeService.createAccount(this.account)
-              .subscribe(data => {
+    if (this.account.cmd)
+    {
+      if (this.account.confirm === this.account.password)
+      {
+        if (this.account.email)
+        {
+          if (this.account.role)
+          {
+            let data = { Commander: this.account.cmd, Command: "CreateAccount", CommandId: uuid(), Payload: JSON.stringify({ Email: this.account.email, Password: this.account.password, Role: this.account.role, Phone: this.account.phone }) };
+            this.homeService.createAccount(JSON.stringify(data))
+              .subscribe(data =>
+              {
                 this.account = new Account();
-                let rep = JSON.parse(data);
-                //this.toastr.success('Hello world!', 'Toastr fun!');
+                this.toastr.info(data, 'Hi!', { timeOut: 15000, positionClass: 'toast-top-center' });
               });
           }            
         }
       }
     }
-    console.log(this.account);
+    //console.log(this.account);
   }
 }

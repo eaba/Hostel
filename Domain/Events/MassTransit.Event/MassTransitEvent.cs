@@ -32,6 +32,14 @@ namespace MassTransit.Event
                     break;
             }
         }
-
+        public MassTransitEvent(string @event, string commander, string commandid, Dictionary<string, string> result)
+        {
+            Event = @event;
+            Commander = commander;
+            CommandId = commandid;
+            Success = Convert.ToBoolean(result["Success"]);
+            Error = result["Errors"];
+            Payload = result;
+        }
     }
 }

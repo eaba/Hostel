@@ -17,7 +17,7 @@ namespace IdentityServer.Host.Actors
             {
                 Persist(evt, e =>
                 {
-                    Context.System.Log.Log(Akka.Event.LogLevel.DebugLevel, string.Empty, JsonConvert.SerializeObject(evt, Formatting.Indented));
+                    Context.System.Log.Info(JsonConvert.SerializeObject(e, Formatting.Indented));
                 });
             });
             Command<IMassTransitCommand>(command => 

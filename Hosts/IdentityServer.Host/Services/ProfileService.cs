@@ -84,7 +84,6 @@ namespace IdentityServer.Host.Services
         {
             var claims = new List<Claim>
             {
-                new Claim("Hostel", user.Hostel, ClaimValueTypes.String),
                 new Claim(JwtClaimTypes.Subject, user.Id, ClaimValueTypes.String),
                 new Claim(JwtClaimTypes.PreferredUserName, user.UserName),
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
@@ -107,7 +106,7 @@ namespace IdentityServer.Host.Services
                     new Claim(JwtClaimTypes.PhoneNumberVerified, user.PhoneNumberConfirmed ? "true" : "false", ClaimValueTypes.Boolean)
                 });
             }
-            return claims;
+            return await Task.FromResult(claims);
         }
     }
 }

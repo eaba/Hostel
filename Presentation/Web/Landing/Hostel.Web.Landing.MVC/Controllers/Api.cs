@@ -29,7 +29,7 @@ namespace Hostel.Web.Landing.MVC.Controllers
             string command = string.Empty;
             try
             {
-                command = payload["Command"];
+                command = "CreatePerson";
                 var commandid = payload["CommandId"];
                 var commander = payload["Commander"];
                 var payld = JsonConvert.DeserializeObject<Dictionary<string, string>>(payload["Payload"]);
@@ -50,7 +50,7 @@ namespace Hostel.Web.Landing.MVC.Controllers
             string command = string.Empty;
             try
             {
-                command = payload["Command"];
+                command = "CreateAccount";
                 var commandid = payload["CommandId"];
                 var commander = payload["Commander"];
                 var payld = JsonConvert.DeserializeObject<Dictionary<string, string>>(payload["Payload"]);

@@ -65,23 +65,20 @@ namespace IdentityServer.Host.Actors
                     if (!claim.Succeeded)
                     {
                         await _userManager.DeleteAsync(user);
-                        response["Created"] = "false";
-                        response["Type"] = "AddClaimsAsync";
+                        response["Success"] = "false";
                         response["Errors"] = string.Join(", ", claim.Errors);
                         response["Message"] = "Your account created was aborted";
                     }
                     else
                     {
-                        response["Created"] = "true";
-                        response["Type"] = "CreateAccount";
+                        response["Success"] = "true";
                         response["Errors"] = string.Join(", ", created.Errors);
                         response["Message"] = "Your account created successfully!!";
                     }
                 }
                 else
                 {
-                    response["Created"] = "false";
-                    response["Type"] = "CreateAsync";
+                    response["Success"] = "false";
                     response["Errors"] = string.Join(", ", created.Errors);
                     response["Message"] = "Your account was not created";
                 }                

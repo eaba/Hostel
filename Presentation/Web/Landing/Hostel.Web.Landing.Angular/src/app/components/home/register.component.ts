@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
     {
       if (event.Success) {
         let payload = event.Payload;
-        this.router.navigateByUrl('/account', { state: { email: payload.email, role: payload.role } });
+        this.router.navigateByUrl('/account', { state: { email: payload.email, role: payload.role, phone: payload.phone } });
       }
       else {
         this.toastr.error(event.Error, 'Failed Registration', { timeOut: 15000, positionClass: 'toast-top-center' });
@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
               {
                 if (this.person.role)
                 {
-                  let data = { Commander: this.person.cmd, Command: "CreateAccount", CommandId: uuid(), Payload: JSON.stringify(this.person) };
+                  let data = { Commander: this.person.cmd, Command: "CreatePerson", CommandId: uuid(), Payload: JSON.stringify(this.person) };
                   this.homeService.createPerson(JSON.stringify(data))
                     .subscribe(data =>
                     {
