@@ -22,9 +22,9 @@ export class AccountComponent implements OnInit {
   }
   ngOnInit() {
     let data = history.state;
-    console.log(data.email);
     this.account.email = data.email;
     this.account.role = data.role;
+    this.account.phone = data.phone
     this.subscribeToEvents();
     this.signalRService.connectionEstablished.subscribe((state: boolean) => {
       this.connected = state;

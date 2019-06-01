@@ -171,7 +171,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<form class=\"animated zoomIn\">\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"password\">Password</label>\r\n      <input type=\"password\" name=\"password\" class=\"form-control\" id=\"password\" placeholder=\"Password\" [(ngModel)]=\"account.password\">\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-6\">\r\n      <label for=\"confirm\">Confirm Password</label>\r\n      <input type=\"password\" name=\"confirm\" class=\"form-control\" id=\"confirm\" placeholder=\"Confirm Password\" [(ngModel)]=\"account.confirm\">\r\n    </div>\r\n  </div>\r\n  <input class=\"btn btn-success\" style=\"cursor:pointer\" (click)=\"RegisterAccount()\" value=\"Submit!\" [hidden]=\"!connected\">\r\n</form>\r\n"
+module.exports = "<form class=\"animated zoomIn\">\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-8\">\r\n      <label for=\"password\">Password</label>\r\n      <input type=\"password\" name=\"password\" class=\"form-control\" id=\"password\" placeholder=\"Password\" [(ngModel)]=\"account.password\">\r\n    </div>\r\n  </div>\r\n  <div class=\"form-row\">\r\n    <div class=\"form-group col-md-10\">\r\n      <label for=\"confirm\">Confirm Password</label>\r\n      <input type=\"password\" name=\"confirm\" class=\"form-control\" id=\"confirm\" placeholder=\"Confirm Password\" [(ngModel)]=\"account.confirm\">\r\n    </div>\r\n  </div>\r\n  <input class=\"btn btn-success\" style=\"cursor:pointer\" (click)=\"RegisterAccount()\" value=\"Submit!\" [hidden]=\"!connected\">\r\n</form>\r\n"
 
 /***/ }),
 
@@ -191,6 +191,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _models_Account_Model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../models/Account.Model */ "./src/app/models/Account.Model.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/index.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_6__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -200,6 +202,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -217,9 +220,9 @@ var AccountComponent = /** @class */ (function () {
     AccountComponent.prototype.ngOnInit = function () {
         var _this = this;
         var data = history.state;
-        console.log(data);
         this.account.email = data.email;
         this.account.role = data.role;
+        this.account.phone = data.phone;
         this.subscribeToEvents();
         this.signalRService.connectionEstablished.subscribe(function (state) {
             _this.connected = state;
@@ -244,17 +247,17 @@ var AccountComponent = /** @class */ (function () {
             if (this.account.confirm === this.account.password) {
                 if (this.account.email) {
                     if (this.account.role) {
-                        this.homeService.createAccount(this.account)
+                        var data = { Commander: this.account.cmd, Command: "CreateAccount", CommandId: Object(uuid__WEBPACK_IMPORTED_MODULE_6__["v4"])(), Payload: JSON.stringify({ Email: this.account.email, Password: this.account.password, Role: this.account.role, Phone: this.account.phone }) };
+                        this.homeService.createAccount(JSON.stringify(data))
                             .subscribe(function (data) {
                             _this.account = new _models_Account_Model__WEBPACK_IMPORTED_MODULE_3__["Account"]();
-                            var rep = JSON.parse(data);
-                            //this.toastr.success('Hello world!', 'Toastr fun!');
+                            _this.toastr.info(data, 'Hi!', { timeOut: 15000, positionClass: 'toast-top-center' });
                         });
                     }
                 }
             }
         }
-        console.log(this.account);
+        //console.log(this.account);
     };
     AccountComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -418,7 +421,7 @@ var RegisterComponent = /** @class */ (function () {
         this.signalRService.personCreated.subscribe(function (event) {
             if (event.Success) {
                 var payload = event.Payload;
-                _this.router.navigateByUrl('/account', { state: { email: payload.email, role: payload.role } });
+                _this.router.navigateByUrl('/account', { state: { email: payload.email, role: payload.role, phone: payload.phone } });
             }
             else {
                 _this.toastr.error(event.Error, 'Failed Registration', { timeOut: 15000, positionClass: 'toast-top-center' });
@@ -435,7 +438,7 @@ var RegisterComponent = /** @class */ (function () {
                         if (this.person.lastName) {
                             if (this.person.phone) {
                                 if (this.person.role) {
-                                    var data = { Commander: this.person.cmd, Command: "CreateAccount", CommandId: Object(uuid__WEBPACK_IMPORTED_MODULE_6__["v4"])(), Payload: JSON.stringify(this.person) };
+                                    var data = { Commander: this.person.cmd, Command: "CreatePerson", CommandId: Object(uuid__WEBPACK_IMPORTED_MODULE_6__["v4"])(), Payload: JSON.stringify(this.person) };
                                     this.homeService.createPerson(JSON.stringify(data))
                                         .subscribe(function (data) {
                                         _this.person = new _models_Person_Model__WEBPACK_IMPORTED_MODULE_3__["Person"]();
@@ -478,11 +481,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Account", function() { return Account; });
 var Account = /** @class */ (function () {
     function Account() {
-        this.cmd = ''; //hack
+        this.cmd = '';
         this.email = '';
         this.password = '';
         this.confirm = '';
         this.role = '';
+        this.phone = '';
     }
     return Account;
 }());
@@ -611,8 +615,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _shared_app_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/app.constants */ "./src/app/shared/app.constants.ts");
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/index.js");
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(uuid__WEBPACK_IMPORTED_MODULE_5__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -622,7 +624,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 
@@ -639,13 +640,12 @@ var HomeService = /** @class */ (function () {
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
     HomeService.prototype.createAccount = function (account) {
-        var data = { Commander: account.cmd, Command: "CreateAccount", CommandId: Object(uuid__WEBPACK_IMPORTED_MODULE_5__["v4"])(), Payload: account };
-        var jsonData = JSON.stringify(data);
         return this.http
-            .post(this.accountActionUrl, jsonData)
+            .post(this.accountActionUrl, account)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError));
     };
     HomeService.prototype.handleError = function (error) {
+        console.log(error);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error || 'Server error');
     };
     HomeService = __decorate([
@@ -732,7 +732,13 @@ var SignalRService = /** @class */ (function () {
             _this.personCreated.next(evnt);
         });
         this.hubConnection.on('accountcreated', function (event) {
-            _this.accountCreated.next(event);
+            var json = JSON.parse(event);
+            var evnt = new _models_Event__WEBPACK_IMPORTED_MODULE_5__["PushEvent"]();
+            evnt.Success = json.Success;
+            evnt.Id = json.Id;
+            evnt.Error = json.Error;
+            evnt.Payload = json.Payload;
+            _this.accountCreated.next(evnt);
         });
     };
     SignalRService.prototype.GetCommander = function () {
