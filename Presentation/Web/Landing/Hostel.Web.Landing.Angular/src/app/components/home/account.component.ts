@@ -20,7 +20,8 @@ export class AccountComponent implements OnInit {
 
   }
   ngOnInit() {
-    let data = JSON.parse(history.state.data);
+    let data = history.state;
+    console.log(data.email);
     this.account.email = data.email;
     this.account.role = data.role;
     this.subscribeToEvents();
@@ -31,8 +32,8 @@ export class AccountComponent implements OnInit {
   private subscribeToEvents(): void {
     this.signalRService.accountCreated.subscribe((event: PushEvent) => {
       console.log(event);
-      if (event.Success) {
-        let payload = JSON.parse(event.Payload);
+      if (event.Success)
+      {
         window.open("https://portal.hostel.com", "_blank");
       }
       else {

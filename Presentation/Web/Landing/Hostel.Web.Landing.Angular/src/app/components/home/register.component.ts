@@ -30,9 +30,8 @@ export class RegisterComponent implements OnInit {
   private subscribeToEvents(): void {
     this.signalRService.personCreated.subscribe((event: PushEvent) =>
     {
-      console.log(event);
       if (event.Success) {
-        let payload = JSON.parse(event.Payload);
+        let payload = event.Payload;
         this.router.navigateByUrl('/account', { state: { email: payload.email, role: payload.role } });
       }
       else {
@@ -70,6 +69,6 @@ export class RegisterComponent implements OnInit {
         }
       }
     }
-    console.log(JSON.stringify(this.person));
+    //console.log(JSON.stringify(this.person));
   }
 }

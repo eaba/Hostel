@@ -216,7 +216,8 @@ var AccountComponent = /** @class */ (function () {
     }
     AccountComponent.prototype.ngOnInit = function () {
         var _this = this;
-        var data = JSON.parse(history.state.data);
+        var data = history.state;
+        console.log(data);
         this.account.email = data.email;
         this.account.role = data.role;
         this.subscribeToEvents();
@@ -229,7 +230,6 @@ var AccountComponent = /** @class */ (function () {
         this.signalRService.accountCreated.subscribe(function (event) {
             console.log(event);
             if (event.Success) {
-                var payload = JSON.parse(event.Payload);
                 window.open("https://portal.hostel.com", "_blank");
             }
             else {
@@ -416,9 +416,8 @@ var RegisterComponent = /** @class */ (function () {
     RegisterComponent.prototype.subscribeToEvents = function () {
         var _this = this;
         this.signalRService.personCreated.subscribe(function (event) {
-            console.log(event);
             if (event.Success) {
-                var payload = JSON.parse(event.Payload);
+                var payload = event.Payload;
                 _this.router.navigateByUrl('/account', { state: { email: payload.email, role: payload.role } });
             }
             else {
@@ -449,7 +448,7 @@ var RegisterComponent = /** @class */ (function () {
                 }
             }
         }
-        console.log(JSON.stringify(this.person));
+        //console.log(JSON.stringify(this.person));
     };
     RegisterComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -504,6 +503,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PushEvent", function() { return PushEvent; });
 var PushEvent = /** @class */ (function () {
     function PushEvent() {
+        this.Success = false;
+        this.Error = '';
+        this.Id = '';
+        this.Payload = [];
     }
     return PushEvent;
 }());
