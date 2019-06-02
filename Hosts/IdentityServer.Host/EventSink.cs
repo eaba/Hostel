@@ -8,15 +8,12 @@ namespace IdentityServer.Host
 {
     public class EventSink: IEventSink
     {
-        private readonly IActorRef _actorRef;
-        private ISendEndpoint _sendEndPoint;
-        public EventSink(IActorRef actorRef)
+        public EventSink()
         {
-            _actorRef = actorRef;
         }
         public async Task PersistAsync(Event evt)
         {
-            _actorRef.Tell(evt);
+            IdentityActorStatic.Identity.Tell(evt);
             await Task.CompletedTask;
         }
     }

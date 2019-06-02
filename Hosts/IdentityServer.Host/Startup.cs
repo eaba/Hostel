@@ -140,10 +140,11 @@ namespace IdentityServer.Host
                 return actorSystem;
             });
 
-            services.AddSingleton<IActorRef>(provider =>
+            services.AddSingleton(provider =>
             {
                 var actorSystem = provider.GetService<ActorSystem>();
                 var identityActor = actorSystem.ActorOf(IdentityManagerActor.Prop("IdentityServer4"), "IdentityServer4");
+                IdentityActorStatic.Identity = identityActor;
                 return identityActor;
             });
             services.AddSingleton<IPublishEndpoint>(provider => provider.GetRequiredService<IBusControl>());
