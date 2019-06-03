@@ -1,7 +1,6 @@
 ﻿using Akka.Actor;
 using IdentityServer4.Events;
 using IdentityServer4.Services;
-using MassTransit;
 using System.Threading.Tasks;
 
 namespace IdentityServer.Host
