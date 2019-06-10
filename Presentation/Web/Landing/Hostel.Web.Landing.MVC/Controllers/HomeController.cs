@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Hostel.Web.Landing.MVC.Models;
-using Newtonsoft.Json;
-using Shared;
-using MassTransit.Command;
-using MassTransit;
-using System.Collections.Concurrent;
-using System.Net.Http;
 
 namespace Hostel.Web.Landing.MVC.Controllers
 {

@@ -5,9 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Hostel.Web.Portal.MVC.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hostel.Web.Portal.MVC.Controllers
 {
+    [Authorize]
+    [Route("/")]
     public class HomeController : Controller
     {
         public IActionResult Index()
