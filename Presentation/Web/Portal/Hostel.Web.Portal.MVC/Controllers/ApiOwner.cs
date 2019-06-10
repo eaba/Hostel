@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hostel.Web.Portal.MVC.Controllers
 {
-    [Authorize]
+    [Authorize("owner")]
     [EnableCors("CorsPolicy")]
     [ApiController]
     [Route("api")]

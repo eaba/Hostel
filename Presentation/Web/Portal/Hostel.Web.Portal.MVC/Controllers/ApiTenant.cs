@@ -6,7 +6,7 @@ using System.Collections.Concurrent;
 
 namespace Hostel.Web.Portal.MVC.Controllers
 {
-    [Authorize]
+    [Authorize("tenant")]
     [EnableCors("CorsPolicy")]
     [ApiController]
     [Route("api")]

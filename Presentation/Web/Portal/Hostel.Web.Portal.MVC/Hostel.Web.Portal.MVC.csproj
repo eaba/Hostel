@@ -12,4 +12,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Landing\Hostel.Web.Landing.MVC\Hostel.Web.Landing.MVC.csproj" />
+  </ItemGroup>
+
 </Project>
