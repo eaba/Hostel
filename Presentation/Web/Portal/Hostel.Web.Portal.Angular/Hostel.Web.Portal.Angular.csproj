@@ -6,18 +6,38 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="src\app\home\home.component.ts" />
+    <None Remove="src\app\_models\AuthObject.ts" />
+    <None Remove="src\app\_models\Role.ts" />
+    <None Remove="src\app\_services\authorization.service.ts" />
+    <None Remove="src\app\_services\home.service.ts" />
+    <None Remove="src\app\_services\owner.service.ts" />
+    <None Remove="src\app\_services\signalr.service.ts" />
+    <None Remove="src\app\_services\tenant.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="src\app\home\" />
+    <Folder Include="src\app\404\" />
     <Folder Include="src\app\tenant\" />
     <Folder Include="src\app\owner\" />
-    <Folder Include="src\app\_services\" />
-    <Folder Include="src\app\_models\" />
     <Folder Include="src\app\_helpers\" />
     <Folder Include="src\app\_guards\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="src\app\home\home.component.ts" />
+    <TypeScriptCompile Include="src\app\_models\AuthObject.ts" />
+    <TypeScriptCompile Include="src\app\_models\Role.ts" />
+    <TypeScriptCompile Include="src\app\_services\authorization.service.ts" />
+    <TypeScriptCompile Include="src\app\_services\home.service.ts" />
+    <TypeScriptCompile Include="src\app\_services\owner.service.ts" />
+    <TypeScriptCompile Include="src\app\_services\signalr.service.ts" />
+    <TypeScriptCompile Include="src\app\_services\tenant.service.ts" />
   </ItemGroup>
 
 </Project>

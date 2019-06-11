@@ -42,7 +42,7 @@ namespace Hostel.Web.Portal.MVC
             .AddCookie(options =>
             {
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
-                options.Cookie.Name = "hostelrefresh";
+                options.Cookie.Name = CookieAuthenticationDefaults.AuthenticationScheme;
             })
             .AddAutomaticTokenRefresh()
             .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
