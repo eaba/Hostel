@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-//import { slideInAnimation } from './components/home/home.animation';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -13,7 +12,4 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'app';
-  prepareRoute(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
-  }
 }

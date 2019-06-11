@@ -7,7 +7,6 @@ import { AuthObject } from '../_models/AuthObject';
 @Component({
   selector: 'home-div',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
   providers: [HomeService]
 })
 export class HomeComponent implements OnInit {
