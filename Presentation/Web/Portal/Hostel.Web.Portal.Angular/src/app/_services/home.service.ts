@@ -9,7 +9,6 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { CONFIGURATION } from '../shared/app.constants';
-import { v4 as uuid } from 'uuid';
 
 @Injectable()
 export class HomeService {
@@ -21,12 +20,11 @@ export class HomeService {
     this.logoutUrl = CONFIGURATION.baseUrls.home + 'logout';
   }
   public getAuthObject(): Observable<string> {
-    return this.http.post<string>(this.authObjectUrl, "")
+    return this.http.get<string>(this.authObjectUrl)
       .pipe(catchError(this.handleError));
   }
   public logout(account: string): Observable<string> {
-    return this.http
-      .post<string>(this.logoutUrl, "")
+    return this.http.get<string>(this.logoutUrl)
       .pipe(catchError(this.handleError));
   }
   

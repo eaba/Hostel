@@ -1,4 +1,4 @@
 export class AuthObject {
-  role: string;
+  role?: string;
   token?: string;
 }
