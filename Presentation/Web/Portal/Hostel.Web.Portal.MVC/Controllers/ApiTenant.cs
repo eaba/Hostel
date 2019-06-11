@@ -9,7 +9,7 @@ namespace Hostel.Web.Portal.MVC.Controllers
     [Authorize("tenant")]
     [EnableCors("CorsPolicy")]
     [ApiController]
-    [Route("api")]
+    [Route("tenant")]
     [ValidateAntiForgeryToken]
     public class ApiTenant : ControllerBase
     {

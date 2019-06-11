@@ -10,9 +10,7 @@
     <None Remove="src\app\_models\AuthObject.ts" />
     <None Remove="src\app\_models\Role.ts" />
     <None Remove="src\app\_services\authorization.service.ts" />
-    <None Remove="src\app\_services\home.service.ts" />
     <None Remove="src\app\_services\owner.service.ts" />
-    <None Remove="src\app\_services\signalr.service.ts" />
     <None Remove="src\app\_services\tenant.service.ts" />
   </ItemGroup>
 
@@ -34,9 +32,7 @@
     <TypeScriptCompile Include="src\app\_models\AuthObject.ts" />
     <TypeScriptCompile Include="src\app\_models\Role.ts" />
     <TypeScriptCompile Include="src\app\_services\authorization.service.ts" />
-    <TypeScriptCompile Include="src\app\_services\home.service.ts" />
     <TypeScriptCompile Include="src\app\_services\owner.service.ts" />
-    <TypeScriptCompile Include="src\app\_services\signalr.service.ts" />
     <TypeScriptCompile Include="src\app\_services\tenant.service.ts" />
   </ItemGroup>
 
