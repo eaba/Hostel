@@ -63,7 +63,7 @@ namespace IdentityServer.Host.Actors
                     {
                         var userClaims = new List<Claim>();
                         var userRole = payload["Role"];
-                        userClaims.Add(new Claim(JwtClaimTypes.Role, userRole));
+                        userClaims.Add(new Claim("role", userRole));
                         userClaims.Add(new Claim("PreferredUserName", payload["Email"]));
                         var claim = await userManager.AddClaimsAsync(user, userClaims);
                         if (!claim.Succeeded)

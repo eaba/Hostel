@@ -23,3 +23,4 @@ https://www.oreilly.com/library/view/developing-reactive-microservices/978149197
 https://www.bouvet.no/bouvet-deler/utbrudd/a-simple-todo-application-a-comparison-on-traditional-vs-cqrs-es-architecture
 https://www.nexocode.com/blog/posts/cqrs-and-event-sourcing/
 https://rubikscode.net/2019/02/18/ultimate-guide-to-machine-learning-with-ml-net/
+https://devblogs.microsoft.com/premier-developer/angular-how-to-implement-role-based-security/

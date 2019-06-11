@@ -10,6 +10,7 @@ namespace Hostel.Web.Portal.MVC.Controllers
     [EnableCors("CorsPolicy")]
     [ApiController]
     [Route("api")]
+    [ValidateAntiForgeryToken]
     public class ApiTenant : ControllerBase
     {
         private readonly IBusControl _bus;

@@ -11,6 +11,7 @@ namespace Hostel.Web.Portal.MVC.Controllers
 {
     [Authorize]
     [Route("/")]
+    [ValidateAntiForgeryToken]
     public class HomeController : Controller
     {
         public IActionResult Index()

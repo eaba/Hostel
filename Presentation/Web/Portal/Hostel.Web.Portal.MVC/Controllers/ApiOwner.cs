@@ -8,6 +8,7 @@ namespace Hostel.Web.Portal.MVC.Controllers
     [EnableCors("CorsPolicy")]
     [ApiController]
     [Route("api")]
+    [ValidateAntiForgeryToken]
     public class ApiOwner : ControllerBase
     {
     }

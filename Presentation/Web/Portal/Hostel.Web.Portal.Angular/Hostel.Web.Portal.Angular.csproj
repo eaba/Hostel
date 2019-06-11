@@ -11,8 +11,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="src\app\components\tenant\" />
-    <Folder Include="src\app\components\owner\" />
+    <Folder Include="src\app\home\" />
+    <Folder Include="src\app\tenant\" />
+    <Folder Include="src\app\owner\" />
+    <Folder Include="src\app\_services\" />
+    <Folder Include="src\app\_models\" />
+    <Folder Include="src\app\_helpers\" />
+    <Folder Include="src\app\_guards\" />
   </ItemGroup>
 
 </Project>
