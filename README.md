@@ -1,4 +1,4 @@
-# Hostel(WIP)
+# Hostel(WIP - Will be completed in due course due to private projects)
 Smart Traditional Single Rooms Hostel using <b>Distributed Domain-Driven Design</b> and <b>Event-Sourcing</b>
 
 # Domain Description
