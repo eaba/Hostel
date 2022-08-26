@@ -11,7 +11,7 @@
   <ItemGroup>
     <PackageReference Include="masstransit" Version="5.5.1" />
     <PackageReference Include="MassTransit.rabbitmq" Version="5.5.1" />
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.10" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.22" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
   </ItemGroup>
 
