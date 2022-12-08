@@ -42,7 +42,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.4.0" />
-    <PackageReference Include="newtonsoft.json" Version="12.0.2" />
+    <PackageReference Include="newtonsoft.json" Version="13.0.2" />
     <PackageReference Include="System.IdentityModel.Tokens.jwt" Version="5.4.0" />
   </ItemGroup>
 
